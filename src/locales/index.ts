@@ -3,13 +3,17 @@ export const locales = {
     home: "首页",
     about: "关于",
     projects: "项目",
-    language: "English",
+    switchLanguage: "English",
+    lightMode: "lightMode",
+    darkMode: "darkMode",
   },
   en: {
     home: "Home",
     about: "About",
     projects: "Projects",
-    language: "中文",
+    switchLanguage: "中文",
+    lightMode: "lightMode",
+    darkMode: "darkMode",
   },
 };
 

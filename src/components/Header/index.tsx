@@ -1,10 +1,14 @@
 import { useState } from "react";
 import { useTheme } from "next-themes";
+import { useAtom } from "jotai";
+import { localeAtom } from "@/app/providers";
+import { locales } from "@/locales";
 import Link from "next/link";
 
-const Header: React.FC = () => {
+export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { theme, setTheme } = useTheme();
+  const [locale, setLocale] = useAtom(localeAtom);
 
   return (
     <header className="border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 transition-colors">
@@ -13,7 +17,7 @@ const Header: React.FC = () => {
           {/* Logo */}
           <div className="flex-shrink-0">
             <h1 className="text-xl font-bold text-gray-900 dark:text-white">
-              Logo
+              {locale === "zh" ? "标志" : "Logo"}
             </h1>
           </div>
 
@@ -23,14 +27,24 @@ const Header: React.FC = () => {
               href="/"
               className="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
             >
-              首页
+              {locales[locale]?.home}
             </Link>
             <Link
               href="/about"
               className="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
             >
-              关于
+              {locales[locale].about}
             </Link>
+
+            {/* Language Toggle */}
+            <button
+              onClick={() => setLocale(locale === "zh" ? "en" : "zh")}
+              className="px-3 py-1 rounded-md bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors"
+            >
+              {locales[locale].switchLanguage}
+            </button>
+
+            {/* Theme Toggle */}
             <button
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
               className="p-2 rounded-lg bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors"
@@ -87,19 +101,27 @@ const Header: React.FC = () => {
                 href="/"
                 className="block px-3 py-2 rounded-md text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
               >
-                首页
+                {locales[locale].home}
               </Link>
               <a
                 href="/about"
                 className="block px-3 py-2 rounded-md text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
               >
-                关于
+                {locales[locale].about}
               </a>
               <button
-                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                className="w-full text-left px-3 py-2 rounded-md text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
+                onClick={() => setLocale(locale === "zh" ? "en" : "zh")}
+                className="block w-full text-left px-3 py-2 rounded-md text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
               >
-                {theme === "dark" ? "切换到亮色模式" : "切换到暗色模式"}
+                {locales[locale].switchLanguage}
+              </button>
+              <button
+                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                className="block w-full text-left px-3 py-2 rounded-md text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
+              >
+                {theme === "dark"
+                  ? locales[locale].lightMode
+                  : locales[locale].darkMode}
               </button>
             </div>
           </div>
@@ -107,6 +129,4 @@ const Header: React.FC = () => {
       </div>
     </header>
   );
-};
-
-export default Header;
+}

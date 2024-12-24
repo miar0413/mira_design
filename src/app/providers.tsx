@@ -1,74 +1,68 @@
 "use client";
 
-import React, { createContext, useContext, useEffect, useState } from "react";
-import { atom, useAtom } from "jotai";
-import { Theme as RadixThemeProvider } from "@radix-ui/themes";
 import { ThemeProvider as NextThemeProvider } from "next-themes";
+import { atom, useAtom } from "jotai";
+import { atomWithStorage } from "jotai/utils";
+import { useEffect, useState } from "react";
+import type { LocaleType } from "@/locales";
 
-import "@radix-ui/themes/styles.css";
-
-type ThemeProviderProps = {
-  children: React.ReactNode;
+// 修复序列化问题
+const storage = {
+  getItem: (key: string): LocaleType => {
+    try {
+      const item = localStorage.getItem(key);
+      return item ? (item.replace(/['"]/g, '') as LocaleType) : "zh";
+    } catch {
+      return "zh";
+    }
+  },
+  setItem: (key: string, value: LocaleType) => {
+    try {
+      localStorage.setItem(key, value);
+    } catch (error) {
+      console.warn('Failed to save language preference:', error);
+    }
+  },
 };
 
-type ThemeContextType = {
-  isDark: boolean;
-  toggleDarkMode: () => void;
-  language: string;
-  setLanguage: (lang: string) => void;
-};
+export const localeAtom = atomWithStorage<LocaleType>("locale", "zh", storage);
 
-const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
-const isDarkAtom = atom(false);
-const languageAtom = atom("zh");
+// 创建一个派生原子来处理文档语言
+const documentLangAtom = atom(
+  (get) => get(localeAtom),
+  (get, set, newLocale: LocaleType) => {
+    set(localeAtom, newLocale);
+    if (typeof document !== "undefined") {
+      document.documentElement.lang = newLocale;
+    }
+  }
+);
 
-export function ThemeProvider({ children }: ThemeProviderProps) {
-  const [isDark, setIsDark] = useAtom(isDarkAtom);
+export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [mounted, setMounted] = useState(false);
-  const [language, setLanguage] = useAtom(languageAtom);
-
-  const toggleDarkMode = () => {
-    const newIsDark = !isDark;
-    setIsDark(newIsDark);
-    localStorage.setItem("isDark", String(newIsDark));
-  };
+  const [, setLocale] = useAtom(documentLangAtom);
 
   useEffect(() => {
-    const isDarkMode =
-      localStorage.getItem("isDark") === "true" ||
-      (!localStorage.getItem("isDark") &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches);
-
-    setIsDark(isDarkMode);
-    if (isDarkMode) {
-      document.documentElement.classList.add("dark");
-    }
-
-    const savedLanguage = localStorage.getItem("language");
-    if (savedLanguage) {
-      setLanguage(savedLanguage);
-    }
-
     setMounted(true);
-  }, [setIsDark, setLanguage]);
+    // 初始化时设置文档语言
+    const savedLocale = localStorage.getItem("locale") as LocaleType;
+    if (savedLocale) {
+      setLocale(savedLocale);
+    }
+  }, [setLocale]);
 
-  if (!mounted) return null;
+  if (!mounted) {
+    return null;
+  }
 
   return (
-    <ThemeContext.Provider
-      value={{ isDark, toggleDarkMode, language, setLanguage }}
+    <NextThemeProvider
+      attribute="class"
+      defaultTheme="system"
+      enableSystem
+      disableTransitionOnChange
     >
-      <NextThemeProvider attribute="class">
-        <RadixThemeProvider>{children}</RadixThemeProvider>
-      </NextThemeProvider>
-    </ThemeContext.Provider>
+      {children}
+    </NextThemeProvider>
   );
 }
-
-export const useTheme = () => {
-  const context = useContext(ThemeContext);
-  if (context === undefined) {
-    throw new Error("useTheme must be used within a ThemeProvider");
-  }
-  return context;
-};
