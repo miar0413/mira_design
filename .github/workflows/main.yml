@@ -16,7 +16,7 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: '16'  # 你可以根据项目的 Node.js 版本调整此版本
+        node-version: '22'  # 你可以根据项目的 Node.js 版本调整此版本
 
     - name: Install dependencies
       run: |
