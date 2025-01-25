@@ -3,7 +3,6 @@ import { join } from 'path'
 import { compileMDX } from 'next-mdx-remote/rsc'
 import { cache } from 'react'
 import { getReadingTime } from './readingTime'
-import { getToc } from './getToc'
 
 export interface Frontmatter {
   title: string

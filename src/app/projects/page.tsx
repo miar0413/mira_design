@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import { getAllMDXPosts } from '@/lib/mdx'
-import { Breadcrumb } from '@/components/Breadcrumb'
 
 export default async function ProjectsPage() {
     const posts = await getAllMDXPosts()

@@ -1,7 +1,6 @@
 import { notFound } from 'next/navigation'
 import { getMDXPost, getPostNavigation } from '@/lib/mdx'
 import { MDXPost as MDXPostComponent } from '@/components/MDXPost'
-import { use } from 'react'
 
 interface PageProps {
     params: {
