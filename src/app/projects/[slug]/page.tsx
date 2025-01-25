@@ -5,12 +5,13 @@ import { Breadcrumb } from '@/components/Breadcrumb'
 import { ReadingProgress } from '@/components/ReadingProgress'
 
 interface PageProps {
-    params: {
+    params: Promise<{
         slug: string
-    }
+    }>
 }
 
-export default async function ProjectPage({ params }: PageProps) {
+export default async function ProjectPage(props: PageProps) {
+    const params = await props.params;
     const post = await getMDXPost(params.slug)
 
     if (!post) {
