@@ -1,0 +1,33 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main  # 监听 main 分支的推送事件（你可以根据需要改为其他分支）
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2  # 获取代码
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16'  # 你可以根据项目的 Node.js 版本调整此版本
+
+    - name: Install dependencies
+      run: |
+        npm install
+
+    - name: Build Next.js project
+      run: |
+        npm run build  # 构建项目
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3  # 使用 GitHub Actions 部署到 GitHub Pages
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}  # GitHub token，用于身份验证
+        publish_dir: ./out  # `out` 是 Next.js 静态导出的默认目录
