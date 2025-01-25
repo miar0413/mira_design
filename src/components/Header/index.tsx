@@ -49,7 +49,7 @@ export default function Header() {
                 hover:bg-gray-100 dark:hover:bg-gray-800 
                 transition-colors"
             >
-              {locales[locale].about}
+              {locales[locale].projects}
             </Link>
 
             {/* Language Toggle */}
@@ -110,6 +110,16 @@ export default function Header() {
                 onClick={() => setIsMenuOpen(false)}
               >
                 {locales[locale].about}
+              </Link>
+              <Link
+                href="/projects"
+                className="block px-4 py-2 rounded-lg
+                  text-gray-700 dark:text-gray-300 
+                  hover:bg-gray-100 dark:hover:bg-gray-800 
+                  transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {locales[locale].projects}
               </Link>
               <button
                 onClick={() => {
