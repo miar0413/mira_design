@@ -23,6 +23,13 @@ const storage = {
       console.warn('Failed to save language preference:', error);
     }
   },
+  removeItem: (key: string) => {
+    try {
+      localStorage.removeItem(key);
+    } catch (error) {
+      console.warn('Failed to remove item:', error);
+    }
+  }
 };
 
 export const localeAtom = atomWithStorage<LocaleType>("locale", "zh", storage);
