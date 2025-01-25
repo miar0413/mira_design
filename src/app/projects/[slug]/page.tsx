@@ -3,8 +3,9 @@ import { getMDXPost, getPostNavigation } from '@/lib/mdx'
 import { MDXPost as MDXPostComponent } from '@/components/MDXPost'
 import { Breadcrumb } from '@/components/Breadcrumb'
 import { ReadingProgress } from '@/components/ReadingProgress'
-import { glob } from 'glob'
 import path from 'path'
+import fs from 'fs/promises'
+
 
 interface PageProps {
     params: Promise<{
@@ -14,12 +15,14 @@ interface PageProps {
 
 export async function generateStaticParams() {
     // 获取 projects 目录下所有的 .mdx 文件
-    const files = await glob('content/projects/*.mdx')
+    const projectsDir = path.join(process.cwd(), 'content/projects')
+    const files = await fs.readdir(projectsDir)
 
-    // 将文件路径转换为 slug 参数
-    return files.map((file: string) => ({
-        slug: path.basename(file, '.mdx')
-    }))
+    return files
+        .filter(file => file.endsWith('.mdx'))
+        .map(file => ({
+            slug: file.replace(/\.mdx$/, '')
+        }))
 }
 
 
