@@ -2,17 +2,27 @@ import { readFileSync, readdirSync } from 'fs'
 import { join } from 'path'
 import { compileMDX } from 'next-mdx-remote/rsc'
 import { cache } from 'react'
+import { getReadingTime } from './readingTime'
 
 export interface Frontmatter {
   title: string
   date: string
   slug: string
+  readingTime?: {
+    minutes: number
+    words: number
+  }
   [key: string]: any
 }
 
 export interface MDXPost {
   content: React.ReactElement
   frontmatter: Frontmatter
+}
+
+export interface PostNavigation {
+  prev: Frontmatter | null
+  next: Frontmatter | null
 }
 
 const CONTENTS_PATH = join(process.cwd(), 'contents')
@@ -28,6 +38,9 @@ export async function getMDXPost(slug: string): Promise<MDXPost | null> {
   try {
     const filePath = join(CONTENTS_PATH, `${slug}.mdx`)
     const source = readFileSync(filePath, 'utf-8')
+    
+    // 计算阅读时间
+    const readingTime = getReadingTime(source)
 
     const { content, frontmatter } = await compileMDX<Frontmatter>({
       source,
@@ -40,7 +53,8 @@ export async function getMDXPost(slug: string): Promise<MDXPost | null> {
       content,
       frontmatter: {
         ...frontmatter,
-        slug
+        slug,
+        readingTime
       }
     }
   } catch (error) {
@@ -63,4 +77,15 @@ export async function getAllMDXPosts(): Promise<Frontmatter[]> {
   }
 
   return posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+}
+
+// 获取相邻的文章
+export async function getPostNavigation(currentSlug: string): Promise<PostNavigation> {
+  const posts = await getAllMDXPosts()
+  const currentIndex = posts.findIndex(post => post.slug === currentSlug)
+
+  return {
+    prev: currentIndex > 0 ? posts[currentIndex - 1] : null,
+    next: currentIndex < posts.length - 1 ? posts[currentIndex + 1] : null
+  }
 } 
