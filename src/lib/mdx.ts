@@ -12,7 +12,6 @@ export interface Frontmatter {
     minutes: number
     words: number
   }
-  [key: string]: any
 }
 
 export interface MDXPost {
@@ -38,13 +37,13 @@ export async function getMDXPost(slug: string): Promise<MDXPost | null> {
   try {
     const filePath = join(CONTENTS_PATH, `${slug}.mdx`)
     const source = readFileSync(filePath, 'utf-8')
-    
+
     // 计算阅读时间
     const readingTime = getReadingTime(source)
 
     const { content, frontmatter } = await compileMDX<Frontmatter>({
       source,
-      options: { 
+      options: {
         parseFrontmatter: true,
       }
     })

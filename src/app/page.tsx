@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import { MacScrollbar } from "mac-scrollbar";
-import Link from "next/link";
 import { motion } from "framer-motion";
 import Footer from "@/components/Footer";
 import TitleSection from "@/components/TitleSection";
@@ -70,7 +69,6 @@ const Home: React.FC = () => {
               className="space-y-4 md:space-y-8 max-w-4xl"
             >
               <h1 className="text-4xl md:text-[80px] font-bold leading-tight md:leading-[90px]">
-                Hello, I'm YanMin,
                 <br />a product designer.
               </h1>
               <p className="text-2xl md:text-[50px] leading-normal md:leading-[60px] font-light opacity-90">

@@ -6,7 +6,7 @@ import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
 import { useEffect, useState } from 'react'
 
 export function ThemeToggle() {
-    const { theme, setTheme, resolvedTheme } = useTheme()
+    const { theme, setTheme } = useTheme()
 
     const [mounted, setMounted] = useState(false)
 

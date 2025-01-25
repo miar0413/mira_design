@@ -1,6 +1,8 @@
 import { notFound } from 'next/navigation'
 import { getMDXPost, getPostNavigation } from '@/lib/mdx'
 import { MDXPost as MDXPostComponent } from '@/components/MDXPost'
+import { Breadcrumb } from '@/components/Breadcrumb'
+import { ReadingProgress } from '@/components/ReadingProgress'
 
 interface PageProps {
     params: {
@@ -9,19 +11,22 @@ interface PageProps {
 }
 
 export default async function ProjectPage({ params }: PageProps) {
-    const { slug } = await params
-    const post = await getMDXPost(slug)
+    const post = await getMDXPost(params.slug)
 
     if (!post) {
         notFound()
     }
 
-    const navigation = await getPostNavigation(slug)
+    const navigation = await getPostNavigation(params.slug)
 
     return (
-        <MDXPostComponent
-            post={post}
-            navigation={navigation}
-        />
+        <>
+            <ReadingProgress />
+            <Breadcrumb />
+            <MDXPostComponent
+                post={post}
+                navigation={navigation}
+            />
+        </>
     )
 } 
