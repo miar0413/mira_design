@@ -1,5 +1,6 @@
 import { ThemeProvider } from '@/components/ThemeProvider'
 import "./globals.css";
+import Header from '@/components/Header'
 
 export default function RootLayout({
   children,
@@ -24,7 +25,10 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <Header />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   )

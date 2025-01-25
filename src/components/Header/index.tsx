@@ -1,9 +1,12 @@
+"use client";
 import { useState } from "react";
 import { useTheme } from "next-themes";
 import { useAtom } from "jotai";
 import { localeAtom } from "@/app/providers";
 import { locales } from "@/locales";
 import Link from "next/link";
+import { HamburgerMenuIcon, Cross1Icon } from "@radix-ui/react-icons";
+import { ThemeToggle } from "../ThemeToggle";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -11,27 +14,40 @@ export default function Header() {
   const [locale, setLocale] = useAtom(localeAtom);
 
   return (
-    <header className="border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 transition-colors">
+    <header className="sticky top-0 z-50 
+      border-b border-gray-200/80 dark:border-gray-800/80 
+      bg-white/80 dark:bg-gray-900/90 
+      backdrop-blur-sm 
+      transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <h1 className="text-xl font-bold text-gray-900 dark:text-white">
+            <Link href="/" className="text-xl font-bold 
+              bg-gradient-to-r from-gray-900 to-gray-600 dark:from-gray-100 dark:to-gray-400 
+              bg-clip-text text-transparent 
+              hover:opacity-80 transition-opacity">
               {locale === "zh" ? "标志" : "Logo"}
-            </h1>
+            </Link>
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav className="hidden md:flex items-center space-x-1">
             <Link
               href="/"
-              className="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
+              className="px-4 py-2 rounded-lg
+                text-gray-700 dark:text-gray-300 
+                hover:bg-gray-100 dark:hover:bg-gray-800 
+                transition-colors"
             >
               {locales[locale]?.home}
             </Link>
             <Link
-              href="/about"
-              className="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
+              href="/projects"
+              className="px-4 py-2 rounded-lg
+                text-gray-700 dark:text-gray-300 
+                hover:bg-gray-100 dark:hover:bg-gray-800 
+                transition-colors"
             >
               {locales[locale].about}
             </Link>
@@ -39,91 +55,87 @@ export default function Header() {
             {/* Language Toggle */}
             <button
               onClick={() => setLocale(locale === "zh" ? "en" : "zh")}
-              className="px-3 py-1 rounded-md bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors"
+              className="px-4 py-2 rounded-lg
+                text-gray-700 dark:text-gray-300 
+                hover:bg-gray-100 dark:hover:bg-gray-800 
+                transition-colors"
             >
-              {locales[locale].switchLanguage}
+              {locale === "zh" ? "EN" : "中"}
             </button>
 
             {/* Theme Toggle */}
-            <button
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="p-2 rounded-lg bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors"
-            >
-              {theme === "dark" ? "🌞" : "🌙"}
-            </button>
+            <ThemeToggle />
           </nav>
 
           {/* Mobile Menu Button */}
-          <div className="md:hidden">
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-gray-500 dark:text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
-            >
-              <span className="sr-only">Open menu</span>
-              {isMenuOpen ? (
-                <svg
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-              ) : (
-                <svg
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M4 6h16M4 12h16M4 18h16"
-                  />
-                </svg>
-              )}
-            </button>
-          </div>
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="md:hidden p-2 rounded-lg
+              text-gray-700 dark:text-gray-300 
+              hover:bg-gray-100 dark:hover:bg-gray-800 
+              transition-colors"
+            aria-label="Toggle menu"
+          >
+            {isMenuOpen ?
+              <Cross1Icon className="w-5 h-5" /> :
+              <HamburgerMenuIcon className="w-5 h-5" />
+            }
+          </button>
         </div>
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1">
+          <div className="md:hidden 
+            absolute top-16 left-0 right-0 
+            bg-white dark:bg-gray-900 
+            border-b border-gray-200 dark:border-gray-800
+            shadow-lg">
+            <nav className="px-2 pt-2 pb-3 space-y-1">
               <Link
                 href="/"
-                className="block px-3 py-2 rounded-md text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
+                className="block px-4 py-2 rounded-lg
+                  text-gray-700 dark:text-gray-300 
+                  hover:bg-gray-100 dark:hover:bg-gray-800 
+                  transition-colors"
+                onClick={() => setIsMenuOpen(false)}
               >
                 {locales[locale].home}
               </Link>
-              <a
+              <Link
                 href="/about"
-                className="block px-3 py-2 rounded-md text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
+                className="block px-4 py-2 rounded-lg
+                  text-gray-700 dark:text-gray-300 
+                  hover:bg-gray-100 dark:hover:bg-gray-800 
+                  transition-colors"
+                onClick={() => setIsMenuOpen(false)}
               >
                 {locales[locale].about}
-              </a>
+              </Link>
               <button
-                onClick={() => setLocale(locale === "zh" ? "en" : "zh")}
-                className="block w-full text-left px-3 py-2 rounded-md text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
+                onClick={() => {
+                  setLocale(locale === "zh" ? "en" : "zh");
+                  setIsMenuOpen(false);
+                }}
+                className="w-full text-left px-4 py-2 rounded-lg
+                  text-gray-700 dark:text-gray-300 
+                  hover:bg-gray-100 dark:hover:bg-gray-800 
+                  transition-colors"
               >
                 {locales[locale].switchLanguage}
               </button>
               <button
-                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                className="block w-full text-left px-3 py-2 rounded-md text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
+                onClick={() => {
+                  setTheme(theme === "dark" ? "light" : "dark");
+                  setIsMenuOpen(false);
+                }}
+                className="w-full text-left px-4 py-2 rounded-lg
+                  text-gray-700 dark:text-gray-300 
+                  hover:bg-gray-100 dark:hover:bg-gray-800 
+                  transition-colors"
               >
-                {theme === "dark"
-                  ? locales[locale].lightMode
-                  : locales[locale].darkMode}
+                {theme === "dark" ? locales[locale].lightMode : locales[locale].darkMode}
               </button>
-            </div>
+            </nav>
           </div>
         )}
       </div>
