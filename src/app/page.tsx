@@ -61,10 +61,10 @@ const Home: React.FC = () => {
       <div className="min-h-screen flex flex-col">
         <div className="flex-grow bg-[#0045F4] text-white flex flex-col h-[800px]">
           {/* 导航栏 */}
-          <nav className="p-6">
+          <nav className="p-6 z-[100]">
             <ul className="flex space-x-8">
               <li>
-                <Link href="/project" className="hover:opacity-80">
+                <Link href="/projects" className="hover:opacity-80">
                   Project
                 </Link>
               </li>

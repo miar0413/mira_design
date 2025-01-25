@@ -2,6 +2,7 @@ import type { MDXPost as TMDXPost } from '@/lib/mdx'
 import { PostNavigation } from './PostNavigation'
 import { ReadingProgress } from './ReadingProgress'
 import { ReadingTime } from './ReadingTime'
+import { ThemeToggle } from './ThemeToggle'
 
 interface MDXPostProps {
   post: TMDXPost
@@ -18,6 +19,9 @@ export function MDXPost({ post, navigation }: MDXPostProps) {
     <>
       <ReadingProgress />
       <div className="min-h-screen bg-white dark:bg-gray-900">
+        <div className="fixed top-4 right-4">
+          <ThemeToggle />
+        </div>
         <article className="max-w-3xl mx-auto px-6 py-12">
           <header className="mb-16 text-center">
             <h1 className="text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-600 dark:from-gray-100 dark:to-gray-400">

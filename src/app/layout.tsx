@@ -1,4 +1,4 @@
-import { ThemeProvider } from "./providers";
+import { ThemeProvider } from '@/components/ThemeProvider'
 import "./globals.css";
 
 export default function RootLayout({
@@ -7,9 +7,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="zh" suppressHydrationWarning>
+    <html lang="zh-CN" suppressHydrationWarning>
       <body>
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
