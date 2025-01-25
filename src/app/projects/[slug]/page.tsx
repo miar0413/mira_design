@@ -15,7 +15,7 @@ interface PageProps {
 
 export async function generateStaticParams() {
     // 获取 projects 目录下所有的 .mdx 文件
-    const projectsDir = path.join(process.cwd(), 'content/projects')
+    const projectsDir = path.join(process.cwd(), 'content')
     const files = await fs.readdir(projectsDir)
 
     return files
