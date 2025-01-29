@@ -19,7 +19,7 @@ interface PageProps {
 
 export async function generateStaticParams() {
     // 获取 projects 目录下所有的 .mdx 文件
-    const projectsDir = path.join(__dirname, '../../../content')
+    const projectsDir = path.join(__dirname, '../../../contents')
     const files = await fs.readdir(projectsDir)
 
     return files
@@ -43,7 +43,6 @@ export default async function ProjectPage(props: PageProps) {
     return (
         <>
             <ReadingProgress />
-            <Breadcrumb />
             <MDXPostComponent
                 post={post}
                 navigation={navigation}
