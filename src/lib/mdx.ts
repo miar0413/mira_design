@@ -24,7 +24,7 @@ export interface PostNavigation {
   next: Frontmatter | null
 }
 
-const CONTENTS_PATH = join(process.cwd(), 'contents')
+const CONTENTS_PATH = join(process.cwd(), 'src', 'contents')
 
 // 缓存获取所有 MDX 文件的函数
 export const getMDXFiles = cache(() => {

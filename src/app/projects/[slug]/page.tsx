@@ -5,10 +5,10 @@ import { Breadcrumb } from '@/components/Breadcrumb'
 import { ReadingProgress } from '@/components/ReadingProgress'
 import path from 'path'
 import fs from 'fs/promises'
-import { fileURLToPath } from 'url'
+import { promisify } from 'util';
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
+const readFile = promisify(fs.readFile);
 
 
 interface PageProps {
@@ -19,8 +19,8 @@ interface PageProps {
 
 export async function generateStaticParams() {
     // 获取 projects 目录下所有的 .mdx 文件
-    const projectsDir = path.join(__dirname, '../../../contents')
-    const files = await fs.readdir(projectsDir)
+    const docsDir = path.join(process.cwd(), 'src', 'contents');  // 使用 process.cwd() 来获取正确的路径
+    const files = await fs.readdir(docsDir);
 
     return files
         .filter(file => file.endsWith('.mdx'))
