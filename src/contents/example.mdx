@@ -29,8 +29,8 @@ class SingletonLogin {
   }
 }
 
-let obj1 = SingletonLogin.getInstance("CXK", "123");
-let obj2 = SingletonLogin.getInstance("CXK", "321");
+let obj1 = SingletonLogin.getInstance('CXK', '123');
+let obj2 = SingletonLogin.getInstance('CXK', '321');
 
 console.log(obj1 === obj2); // true
 console.log(obj1); // {name:CXK,password:123}
@@ -52,13 +52,13 @@ class User {
 class UserFactory {
   static createUser(name, auth) {
     //工厂内部封装了创建对象的逻辑:权限为admin时,auth传1,而使用者在外部创建对象时,不需要知道admin对应哪个字段
-    if (auth === "admin") new User(name, 1);
+    if (auth === 'admin') new User(name, 1);
     if (auth === user) new User(name, 2);
   }
 }
 
-const admin = UserFactory.createUser("admin");
-const user = UserFactory.createUser("user");
+const admin = UserFactory.createUser('admin');
+const user = UserFactory.createUser('user');
 ```
 
 ## 观察者模式
@@ -90,7 +90,7 @@ class Subject {
 
 var subject = new Subject(); //被观察者
 const update = () => {
-  console.log("被观察者发出通知");
+  console.log('被观察者发出通知');
 }; //收到广播时要执行的方法
 var ob1 = new Observer(update); //观察者1
 var ob2 = new Observer(update); //观察者2
@@ -105,7 +105,7 @@ subject.notify(); //发出广播,执行所有观察者的update方法
 
 ```js
 function info(target) {
-  target.prototype.name = "张三";
+  target.prototype.name = '张三';
   target.prototype.age = 10;
 }
 
@@ -123,7 +123,7 @@ man.name; // 张三
 ```js
 class Adaptee {
   test() {
-    return "旧接口";
+    return '旧接口';
   }
 }
 
@@ -145,7 +145,7 @@ console.log(target.test());
 
 ```js
 const person = {
-  name: "name",
+  name: 'name',
   phone: 10086,
   price: 1000000, //报价
 };
@@ -153,12 +153,12 @@ const person = {
 const agent = new Proxy(person, {
   get: function (target) {
     //拦截明星电话的请求,只提供经纪人电话
-    return "phone:10010";
+    return 'phone:10010';
   },
   set: function (target, key, value) {
-    if (key === "price") {
+    if (key === 'price') {
       //经纪人过滤资质
-      if (value < target.price) throw new Error("报价过低");
+      if (value < target.price) throw new Error('报价过低');
       target.price = value;
     }
   },
