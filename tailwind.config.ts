@@ -1,11 +1,11 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    './src/**/*.{js,ts,jsx,tsx,mdx}',
-  ],
+  content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
   darkMode: 'class',
   theme: {
     extend: {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       typography: (theme: any) => ({
         DEFAULT: {
           css: {
@@ -49,7 +49,7 @@ module.exports = {
             },
 
             // 代码块样式优化
-            'pre': {
+            pre: {
               backgroundColor: 'var(--tw-prose-pre-bg)',
               borderRadius: theme('borderRadius.lg'),
               padding: theme('spacing.4'),
@@ -68,7 +68,7 @@ module.exports = {
             },
 
             // 引用块样式
-            'blockquote': {
+            blockquote: {
               borderLeftWidth: '4px',
               borderLeftColor: 'var(--tw-prose-quote-borders)',
               backgroundColor: theme('colors.gray[50]'),
@@ -84,23 +84,23 @@ module.exports = {
               letterSpacing: '-0.025em',
               'scroll-margin-top': '6rem',
             },
-            'h1': {
+            h1: {
               fontSize: '2.25em',
               marginBottom: '1.5rem',
             },
-            'h2': {
+            h2: {
               fontSize: '1.875em',
               marginTop: '2.5rem',
               marginBottom: '1.25rem',
             },
-            'h3': {
+            h3: {
               fontSize: '1.5em',
               marginTop: '2rem',
               marginBottom: '1rem',
             },
 
             // 链接悬停效果
-            'a': {
+            a: {
               textDecoration: 'none',
               borderBottom: `1px solid ${theme('colors.blue[200]')}`,
               transition: 'all 0.2s ease',
@@ -112,7 +112,7 @@ module.exports = {
             // 列表样式优化
             'ul, ol': {
               paddingLeft: '1.5rem',
-              'li': {
+              li: {
                 marginTop: '0.5rem',
                 marginBottom: '0.5rem',
                 '&::marker': {
@@ -122,13 +122,13 @@ module.exports = {
             },
 
             // 图片样式
-            'img': {
+            img: {
               borderRadius: theme('borderRadius.lg'),
               boxShadow: theme('boxShadow.md'),
             },
 
             // 段落样式
-            'p': {
+            p: {
               marginTop: '1.25rem',
               marginBottom: '1.25rem',
               lineHeight: '1.75',
@@ -177,7 +177,7 @@ module.exports = {
             },
 
             // 代码块样式优化
-            'pre': {
+            pre: {
               backgroundColor: 'var(--tw-prose-pre-bg)',
               borderRadius: theme('borderRadius.lg'),
               padding: theme('spacing.4'),
@@ -195,7 +195,7 @@ module.exports = {
             },
 
             // 引用块样式
-            'blockquote': {
+            blockquote: {
               borderLeftWidth: '4px',
               borderLeftColor: 'var(--tw-prose-quote-borders)',
               backgroundColor: theme('colors.gray[800]/30'),
@@ -226,7 +226,5 @@ module.exports = {
       }),
     },
   },
-  plugins: [
-    require('@tailwindcss/typography'),
-  ],
-} 
+  plugins: [require('@tailwindcss/typography')],
+};

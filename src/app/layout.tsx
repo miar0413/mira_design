@@ -1,11 +1,15 @@
-import { ThemeProvider } from '@/components/ThemeProvider'
-import "./globals.css";
-import Header from '@/components/Header'
+// eslint-disable-next-line import/order
+import { ThemeProvider } from '@/components/ThemeProvider';
+
+import 'normalize.css/normalize.css';
+import './globals.css';
+
+import Header from '@/components/Header';
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
@@ -31,5 +35,5 @@ export default function RootLayout({
         </ThemeProvider>
       </body>
     </html>
-  )
+  );
 }

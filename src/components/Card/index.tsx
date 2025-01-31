@@ -1,5 +1,5 @@
-import React from "react";
-import Image from "next/image";
+import React from 'react';
+import Image from 'next/image';
 
 interface IProps {
   title: string;
@@ -10,34 +10,46 @@ interface IProps {
 
 const Card: React.FC<IProps> = ({ title, description, image, link }) => {
   return (
-    <div className="group bg-white dark:bg-gray-800 
+    <div
+      className="group bg-white dark:bg-gray-800 
       shadow-sm hover:shadow-lg 
       rounded-xl sm:rounded-2xl md:rounded-[24px]
       border border-gray-200 dark:border-gray-700
       w-full 
       transition-all duration-300 ease-in-out
       hover:-translate-y-1 hover:scale-[1.01]
-      overflow-hidden">
+      overflow-hidden"
+    >
       <div className="flex flex-col-reverse sm:flex-row items-start">
         {/* 文本内容区域 */}
         <div className="flex-1 p-4 sm:p-6 md:p-8">
-          <h2 className="text-lg sm:text-xl md:text-2xl 
+          <h2
+            className="text-lg sm:text-xl md:text-2xl 
             font-semibold 
             text-gray-900 dark:text-gray-100
             line-clamp-2 
             tracking-tight
-            mb-2 sm:mb-3">{title}</h2>
+            mb-2 sm:mb-3"
+          >
+            {title}
+          </h2>
 
-          <div className="border-b border-gray-200 dark:border-gray-700 
+          <div
+            className="border-b border-gray-200 dark:border-gray-700 
             w-12 sm:w-16 md:w-20 
             my-2 sm:my-3
-            opacity-60"></div>
+            opacity-60"
+          ></div>
 
-          <p className="text-gray-600 dark:text-gray-300 
+          <p
+            className="text-gray-600 dark:text-gray-300 
             text-sm sm:text-base 
             mb-3 sm:mb-4
             line-clamp-3 
-            leading-relaxed">{description}</p>
+            leading-relaxed"
+          >
+            {description}
+          </p>
 
           <a
             href={link}
@@ -55,17 +67,23 @@ const Card: React.FC<IProps> = ({ title, description, image, link }) => {
               group-hover:after:origin-left group-hover:after:scale-x-100"
           >
             View project
-            <span className="ml-1 inline-block
+            <span
+              className="ml-1 inline-block
               group-hover:translate-x-0.5 group-hover:-translate-y-0.5 
-              transition-transform duration-200">↗</span>
+              transition-transform duration-200"
+            >
+              ↗
+            </span>
           </a>
         </div>
 
         {/* 图片区域 */}
         {image && (
-          <div className="relative 
+          <div
+            className="relative 
             w-full sm:w-2/5 
-            aspect-[16/9] sm:aspect-[4/3] md:aspect-square">
+            aspect-[16/9] sm:aspect-[4/3] md:aspect-square"
+          >
             <Image
               src={image}
               alt={title}

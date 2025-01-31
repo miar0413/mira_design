@@ -1,57 +1,59 @@
-"use client";
-import React from "react";
-import { MacScrollbar } from "mac-scrollbar";
-import { motion } from "framer-motion";
-import Footer from "@/components/Footer";
-import TitleSection from "@/components/TitleSection";
-import Card from "@/components/Card";
-import project_cover from "../../public/project_cover.svg";
+'use client';
+import React from 'react';
+import { MacScrollbar } from 'mac-scrollbar';
+import { motion } from 'framer-motion';
+
+import Footer from '@/components/Footer';
+import TitleSection from '@/components/TitleSection';
+import Card from '@/components/Card';
+
+import project_cover from '../../public/project_cover.svg';
 
 const Home: React.FC = () => {
   const cards = [
     {
-      title: "ByteHi customer service upgrade",
+      title: 'ByteHi customer service upgrade',
       description:
-        "客户平台是TikTok统一的用户反馈处理平台，是提升用户体验的重要工具之一。",
+        '客户平台是TikTok统一的用户反馈处理平台，是提升用户体验的重要工具之一。',
       image: project_cover,
-      link: "#",
+      link: '#',
     },
     {
-      title: "ByteHi customer service upgrade",
+      title: 'ByteHi customer service upgrade',
       description:
-        "客户平台是TikTok统一的用户反馈处理平台，是提升用户体验的重要工具之一。",
+        '客户平台是TikTok统一的用户反馈处理平台，是提升用户体验的重要工具之一。',
       image: project_cover,
-      link: "#",
+      link: '#',
     },
   ];
   const card2 = [
     {
-      title: "ByteHi customer service upgrade",
+      title: 'ByteHi customer service upgrade',
       description:
-        "客户平台是TikTok统一的用户反馈处理平台，是提升用户体验的重要工具之一。",
+        '客户平台是TikTok统一的用户反馈处理平台，是提升用户体验的重要工具之一。',
       image: project_cover,
-      link: "#",
+      link: '#',
     },
     {
-      title: "ByteHi customer service upgrade",
+      title: 'ByteHi customer service upgrade',
       description:
-        "客户平台是TikTok统一的用户反馈处理平台，是提升用户体验的重要工具之一。",
+        '客户平台是TikTok统一的用户反馈处理平台，是提升用户体验的重要工具之一。',
       image: project_cover,
-      link: "#",
+      link: '#',
     },
     {
-      title: "ByteHi customer service upgrade",
+      title: 'ByteHi customer service upgrade',
       description:
-        "客户平台是TikTok统一的用户反馈处理平台，是提升用户体验的重要工具之一。",
+        '客户平台是TikTok统一的用户反馈处理平台，是提升用户体验的重要工具之一。',
       image: project_cover,
-      link: "#",
+      link: '#',
     },
     {
-      title: "ByteHi customer service upgrade",
+      title: 'ByteHi customer service upgrade',
       description:
-        "客户平台是TikTok统一的用户反馈处理平台，是提升用户体验的重要工具之一。",
+        '客户平台是TikTok统一的用户反馈处理平台，是提升用户体验的重要工具之一。',
       image: project_cover,
-      link: "#",
+      link: '#',
     },
   ];
 
@@ -84,9 +86,11 @@ const Home: React.FC = () => {
             transition={{
               duration: 2,
               repeat: Infinity,
-              ease: "easeInOut",
+              ease: 'easeInOut',
             }}
-            onClick={() => window.scrollTo({ top: window.innerHeight, behavior: "smooth" })}
+            onClick={() =>
+              window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })
+            }
           >
             <svg
               width="48"

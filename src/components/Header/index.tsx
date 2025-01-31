@@ -1,36 +1,29 @@
-"use client";
-import { useState } from "react";
-import { useTheme } from "next-themes";
-import { useAtom } from "jotai";
-import { localeAtom } from "@/app/providers";
-import { locales } from "@/locales";
-import Link from "next/link";
-import { HamburgerMenuIcon, Cross1Icon } from "@radix-ui/react-icons";
-import { ThemeToggle } from "../ThemeToggle";
+'use client';
+import { useState } from 'react';
+import { useAtom } from 'jotai';
+import Image from 'next/image';
+import Link from 'next/link';
+import { HamburgerMenuIcon, Cross1Icon } from '@radix-ui/react-icons';
+
+import { localeAtom } from '@/app/providers';
+import { locales } from '@/locales';
+
+import logo from '../../../public/logo.svg';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { theme, setTheme } = useTheme();
   const [locale, setLocale] = useAtom(localeAtom);
 
   return (
-    <header className="sticky top-0 z-50 
+    <header
+      className="sticky top-0 z-50 
       border-b border-gray-200/80 dark:border-gray-800/80 
       bg-white/80 dark:bg-gray-900/90 
       backdrop-blur-sm 
-      transition-colors">
+      transition-colors"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          {/* Logo */}
-          <div className="flex-shrink-0">
-            <Link href="/" className="text-xl font-bold 
-              bg-gradient-to-r from-gray-900 to-gray-600 dark:from-gray-100 dark:to-gray-400 
-              bg-clip-text text-transparent 
-              hover:opacity-80 transition-opacity">
-              {locale === "zh" ? "标志" : "Logo"}
-            </Link>
-          </div>
-
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-1">
             <Link
@@ -52,20 +45,42 @@ export default function Header() {
               {locales[locale].projects}
             </Link>
 
-            {/* Language Toggle */}
-            <button
-              onClick={() => setLocale(locale === "zh" ? "en" : "zh")}
+            <Link
+              href="/about"
               className="px-4 py-2 rounded-lg
                 text-gray-700 dark:text-gray-300 
                 hover:bg-gray-100 dark:hover:bg-gray-800 
                 transition-colors"
             >
-              {locale === "zh" ? "EN" : "中"}
-            </button>
+              {locales[locale].about}
+            </Link>
 
-            {/* Theme Toggle */}
-            <ThemeToggle />
+            {/* Language Toggle */}
+            {/* <button
+              onClick={() => setLocale(locale === 'zh' ? 'en' : 'zh')}
+              className="px-4 py-2 rounded-lg
+                text-gray-700 dark:text-gray-300 
+                hover:bg-gray-100 dark:hover:bg-gray-800 
+                transition-colors"
+            >
+              {locale === 'zh' ? 'EN' : '中'}
+            </button> */}
+
+            {/* <ThemeToggle /> */}
           </nav>
+
+          {/* Logo */}
+          <div className="flex-shrink-0">
+            <Link
+              href="/"
+              className="text-xl font-bold 
+              bg-gradient-to-r from-gray-900 to-gray-600 dark:from-gray-100 dark:to-gray-400 
+              bg-clip-text text-transparent 
+              hover:opacity-80 transition-opacity"
+            >
+              <Image src={logo} alt={''} />
+            </Link>
+          </div>
 
           {/* Mobile Menu Button */}
           <button
@@ -76,20 +91,23 @@ export default function Header() {
               transition-colors"
             aria-label="Toggle menu"
           >
-            {isMenuOpen ?
-              <Cross1Icon className="w-5 h-5" /> :
+            {isMenuOpen ? (
+              <Cross1Icon className="w-5 h-5" />
+            ) : (
               <HamburgerMenuIcon className="w-5 h-5" />
-            }
+            )}
           </button>
         </div>
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="md:hidden 
+          <div
+            className="md:hidden 
             absolute top-16 left-0 right-0 
             bg-white dark:bg-gray-900 
             border-b border-gray-200 dark:border-gray-800
-            shadow-lg">
+            shadow-lg"
+          >
             <nav className="px-2 pt-2 pb-3 space-y-1">
               <Link
                 href="/"
@@ -123,7 +141,7 @@ export default function Header() {
               </Link>
               <button
                 onClick={() => {
-                  setLocale(locale === "zh" ? "en" : "zh");
+                  setLocale(locale === 'zh' ? 'en' : 'zh');
                   setIsMenuOpen(false);
                 }}
                 className="w-full text-left px-4 py-2 rounded-lg
@@ -133,9 +151,9 @@ export default function Header() {
               >
                 {locales[locale].switchLanguage}
               </button>
-              <button
+              {/* <button
                 onClick={() => {
-                  setTheme(theme === "dark" ? "light" : "dark");
+                  setTheme(theme === 'dark' ? 'light' : 'dark');
                   setIsMenuOpen(false);
                 }}
                 className="w-full text-left px-4 py-2 rounded-lg
@@ -143,8 +161,10 @@ export default function Header() {
                   hover:bg-gray-100 dark:hover:bg-gray-800 
                   transition-colors"
               >
-                {theme === "dark" ? locales[locale].lightMode : locales[locale].darkMode}
-              </button>
+                {theme === 'dark'
+                  ? locales[locale].lightMode
+                  : locales[locale].darkMode}
+              </button> */}
             </nav>
           </div>
         )}

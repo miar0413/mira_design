@@ -1,48 +1,49 @@
-'use client'
+'use client';
 
-import { useEffect, useState } from 'react'
-import { cn } from '@/lib/utils'
-import { motion, AnimatePresence } from 'framer-motion'
-import { ChevronRightIcon } from '@radix-ui/react-icons'
+import { useEffect, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ChevronRightIcon } from '@radix-ui/react-icons';
+
+import { cn } from '@/lib/utils';
 
 interface TocItem {
-  id: string
-  title: string
-  level: number
+  id: string;
+  title: string;
+  level: number;
 }
 
 interface TableOfContentsProps {
-  items: TocItem[]
+  items: TocItem[];
 }
 
 export function TableOfContents({ items }: TableOfContentsProps) {
-  const [activeId, setActiveId] = useState<string>('')
-  const [isOpen, setIsOpen] = useState(true)
+  const [activeId, setActiveId] = useState<string>('');
+  const [isOpen, setIsOpen] = useState(true);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            setActiveId(entry.target.id)
+            setActiveId(entry.target.id);
           }
-        })
+        });
       },
       {
         rootMargin: '0% 0% -80% 0%',
         threshold: 1.0,
       }
-    )
+    );
 
     items.forEach(({ id }) => {
-      const element = document.getElementById(id)
+      const element = document.getElementById(id);
       if (element) {
-        observer.observe(element)
+        observer.observe(element);
       }
-    })
+    });
 
-    return () => observer.disconnect()
-  }, [items])
+    return () => observer.disconnect();
+  }, [items]);
 
   return (
     <nav className="fixed top-20 right-8 w-64 hidden xl:block">
@@ -86,10 +87,10 @@ export function TableOfContents({ items }: TableOfContentsProps) {
                           : 'text-gray-600 dark:text-gray-300'
                       )}
                       onClick={(e) => {
-                        e.preventDefault()
+                        e.preventDefault();
                         document.getElementById(item.id)?.scrollIntoView({
                           behavior: 'smooth',
-                        })
+                        });
                       }}
                     >
                       {item.title}
@@ -102,5 +103,5 @@ export function TableOfContents({ items }: TableOfContentsProps) {
         </AnimatePresence>
       </div>
     </nav>
-  )
-} 
+  );
+}

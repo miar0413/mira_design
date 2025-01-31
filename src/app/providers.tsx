@@ -1,19 +1,20 @@
-"use client";
+'use client';
 
-import { ThemeProvider as NextThemeProvider } from "next-themes";
-import { atom, useAtom } from "jotai";
-import { atomWithStorage } from "jotai/utils";
-import { useEffect, useState } from "react";
-import type { LocaleType } from "@/locales";
+import { ThemeProvider as NextThemeProvider } from 'next-themes';
+import { atom, useAtom } from 'jotai';
+import { atomWithStorage } from 'jotai/utils';
+import { useEffect, useState } from 'react';
+
+import type { LocaleType } from '@/locales';
 
 // 修复序列化问题
 const storage = {
   getItem: (key: string): LocaleType => {
     try {
       const item = localStorage.getItem(key);
-      return item ? (item.replace(/['"]/g, '') as LocaleType) : "zh";
+      return item ? (item.replace(/['"]/g, '') as LocaleType) : 'zh';
     } catch {
-      return "zh";
+      return 'zh';
     }
   },
   setItem: (key: string, value: LocaleType) => {
@@ -29,17 +30,17 @@ const storage = {
     } catch (error) {
       console.warn('Failed to remove item:', error);
     }
-  }
+  },
 };
 
-export const localeAtom = atomWithStorage<LocaleType>("locale", "zh", storage);
+export const localeAtom = atomWithStorage<LocaleType>('locale', 'zh', storage);
 
 // 创建一个派生原子来处理文档语言
 const documentLangAtom = atom(
   (get) => get(localeAtom),
   (get, set, newLocale: LocaleType) => {
     set(localeAtom, newLocale);
-    if (typeof document !== "undefined") {
+    if (typeof document !== 'undefined') {
       document.documentElement.lang = newLocale;
     }
   }
@@ -52,7 +53,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     setMounted(true);
     // 初始化时设置文档语言
-    const savedLocale = localStorage.getItem("locale") as LocaleType;
+    const savedLocale = localStorage.getItem('locale') as LocaleType;
     if (savedLocale) {
       setLocale(savedLocale);
     }
