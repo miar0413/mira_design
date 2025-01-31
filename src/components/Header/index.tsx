@@ -12,7 +12,7 @@ import logo from '../../../public/logo.svg';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [locale, setLocale] = useAtom(localeAtom);
+  const [locale] = useAtom(localeAtom);
 
   return (
     <header
@@ -54,19 +54,6 @@ export default function Header() {
             >
               {locales[locale].about}
             </Link>
-
-            {/* Language Toggle */}
-            {/* <button
-              onClick={() => setLocale(locale === 'zh' ? 'en' : 'zh')}
-              className="px-4 py-2 rounded-lg
-                text-gray-700 dark:text-gray-300 
-                hover:bg-gray-100 dark:hover:bg-gray-800 
-                transition-colors"
-            >
-              {locale === 'zh' ? 'EN' : '中'}
-            </button> */}
-
-            {/* <ThemeToggle /> */}
           </nav>
 
           {/* Logo */}
@@ -139,7 +126,7 @@ export default function Header() {
               >
                 {locales[locale].projects}
               </Link>
-              <button
+              {/* <button
                 onClick={() => {
                   setLocale(locale === 'zh' ? 'en' : 'zh');
                   setIsMenuOpen(false);
@@ -150,7 +137,7 @@ export default function Header() {
                   transition-colors"
               >
                 {locales[locale].switchLanguage}
-              </button>
+              </button> */}
               {/* <button
                 onClick={() => {
                   setTheme(theme === 'dark' ? 'light' : 'dark');
