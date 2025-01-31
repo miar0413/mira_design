@@ -70,7 +70,7 @@ export default function Header() {
           </nav>
 
           {/* Logo */}
-          <div className="flex-shrink-0">
+          <div className="flex-shrink-0 ">
             <Link
               href="/"
               className="text-xl font-bold 
@@ -78,7 +78,7 @@ export default function Header() {
               bg-clip-text text-transparent 
               hover:opacity-80 transition-opacity"
             >
-              <Image src={logo} alt={''} />
+              <Image className="bg-[#0045F4] rounded" src={logo} alt={''} />
             </Link>
           </div>
 

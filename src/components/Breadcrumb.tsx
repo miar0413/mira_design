@@ -10,22 +10,23 @@ export function Breadcrumb() {
 
   // 将路径转换为更友好的显示文本
   const getDisplayText = (text: string) => {
-    // 移除 URL 中的特殊字符和连字符
     const cleanText = text.replace(/[-_]/g, ' ');
-    // 首字母大写
     return cleanText.charAt(0).toUpperCase() + cleanText.slice(1);
   };
 
   return (
-    <nav aria-label="Breadcrumb" className="py-4 px-4 sm:px-6 lg:px-8">
-      <ol className="flex items-center space-x-2 text-sm">
+    <nav
+      aria-label="Breadcrumb"
+      className="max-w-3xl mx-auto !pl-0 py-4 px-4 sm:px-6 lg:px-8"
+    >
+      <ol className="flex items-center space-x-2 sm:space-x-3 lg:space-x-4 text-sm sm:text-base">
         <li className="flex items-center">
           <Link
             href="/"
             className="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 
-                            flex items-center transition-colors"
+                        flex items-center transition-colors"
           >
-            <HomeIcon className="w-4 h-4" />
+            <HomeIcon className="w-4 h-4 sm:w-5 sm:h-5" />
             <span className="sr-only">Home</span>
           </Link>
         </li>
@@ -36,7 +37,7 @@ export function Breadcrumb() {
           return (
             <li key={path} className="flex items-center">
               <ChevronRightIcon
-                className="w-4 h-4 text-gray-400 dark:text-gray-600"
+                className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 dark:text-gray-600"
                 aria-hidden="true"
               />
               {isLast ? (
@@ -47,8 +48,8 @@ export function Breadcrumb() {
                 <Link
                   href={href}
                   className="ml-2 text-gray-500 dark:text-gray-400 
-                                        hover:text-gray-700 dark:hover:text-gray-300 
-                                        transition-colors"
+                                hover:text-gray-700 dark:hover:text-gray-300 
+                                transition-colors"
                 >
                   {getDisplayText(path)}
                 </Link>

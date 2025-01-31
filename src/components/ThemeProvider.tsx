@@ -25,7 +25,7 @@ export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
     mediaQuery.addEventListener('change', handleChange);
 
     // 初始化时设置主题
-    handleChange();
+    // handleChange();
 
     return () => mediaQuery.removeEventListener('change', handleChange);
   }, []);
@@ -37,8 +37,7 @@ export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
   return (
     <NextThemeProvider
       attribute="class"
-      defaultTheme="system"
-      enableSystem
+      defaultTheme="light"
       disableTransitionOnChange
       {...props}
     >

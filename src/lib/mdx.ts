@@ -1,15 +1,17 @@
 import { readFileSync, readdirSync } from 'fs';
 import { join } from 'path';
 
-import { compileMDX } from 'next-mdx-remote/rsc';
 import { cache } from 'react';
+import { serialize } from 'next-mdx-remote/serialize';
+import matter from 'gray-matter';
+import { MDXRemoteSerializeResult } from 'next-mdx-remote';
 
 import { getReadingTime } from './readingTime';
 
 export interface Frontmatter {
-  title: string;
-  date: string;
-  slug: string;
+  title?: string;
+  date?: string;
+  slug?: string;
   readingTime?: {
     minutes: number;
     words: number;
@@ -17,7 +19,10 @@ export interface Frontmatter {
 }
 
 export interface MDXPost {
-  content: React.ReactElement;
+  mdxSource: MDXRemoteSerializeResult<
+    Record<string, unknown>,
+    Record<string, unknown>
+  >;
   frontmatter: Frontmatter;
 }
 
@@ -42,17 +47,14 @@ export async function getMDXPost(slug: string): Promise<MDXPost | null> {
     // 计算阅读时间
     const readingTime = getReadingTime(source);
 
-    const { content, frontmatter } = await compileMDX<Frontmatter>({
-      source,
-      options: {
-        parseFrontmatter: true,
-      },
-    });
+    const { content, data } = matter(source);
+
+    const mdxSource = await serialize(content);
 
     return {
-      content,
+      mdxSource,
       frontmatter: {
-        ...frontmatter,
+        ...data,
         slug,
         readingTime,
       },
@@ -77,7 +79,8 @@ export async function getAllMDXPosts(): Promise<Frontmatter[]> {
   }
 
   return posts.sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+    (a: Frontmatter, b: Frontmatter) =>
+      new Date(b?.date || '').getTime() - new Date(a?.date || '').getTime()
   );
 }
 

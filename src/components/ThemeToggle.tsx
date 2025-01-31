@@ -14,18 +14,18 @@ export function ThemeToggle() {
     setMounted(true);
   }, []);
 
-  useEffect(() => {
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+  // useEffect(() => {
+  //   const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
 
-    const handleChange = () => {
-      if (theme === 'system') {
-        document.documentElement.classList.toggle('dark', mediaQuery.matches);
-      }
-    };
+  //   const handleChange = () => {
+  //     if (theme === 'system') {
+  //       document.documentElement.classList.toggle('dark', mediaQuery.matches);
+  //     }
+  //   };
 
-    mediaQuery.addEventListener('change', handleChange);
-    return () => mediaQuery.removeEventListener('change', handleChange);
-  }, [theme]);
+  //   mediaQuery.addEventListener('change', handleChange);
+  //   return () => mediaQuery.removeEventListener('change', handleChange);
+  // }, [theme]);
 
   if (!mounted) {
     return (
