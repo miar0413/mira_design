@@ -20,7 +20,7 @@ export default async function ProjectsPage() {
               </Link>
             </h2>
             <time className="text-gray-500">
-              {new Date(post.date).toLocaleDateString('zh-CN')}
+              {new Date(post?.date || '').toLocaleDateString('zh-CN')}
             </time>
           </article>
         ))}
