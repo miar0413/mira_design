@@ -67,7 +67,6 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     <NextThemeProvider
       attribute="class"
       defaultTheme="system"
-      enableSystem
       disableTransitionOnChange
     >
       {children}
