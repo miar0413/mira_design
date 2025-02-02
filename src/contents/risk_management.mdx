@@ -1,0 +1,78 @@
+---
+title: Risk management platform for content reviewing
+slug: 2024-02-05-001
+date: 2024-02-05
+---
+
+<Image src="/risk/risk_01.png" alt="risk" className="mb-6 rounded-lg" />
+
+在 TikTok 的庞大内容生态中，风险管理至关重要。今天想和大家分享 TikTok 风险管理平台（RMP）的设计升级项目，聊聊我们是如何从发现问题到找到解决方案，最终实现平台蜕变的。
+
+## 一、追根溯源：RMP 旧貌与困境
+
+RMP 作为一站式风险管理平台，承担着保障 TikTok 内容安全的重任。在舆情风险出现时，它要完成从感知、评估、处理到复盘的一系列流程。但早期的 RMP，也就是 “Ticket Platform”，只是一个单线任务处理平台，接收风险工单后进行研判和处置。这种模式问题重重。
+
+<Image src="/risk/risk_02.png" alt="risk" className="rounded-lg my-3" />
+<Image src="/risk/risk_03.png" alt="risk" className="rounded-lg my-3" />
+
+从用户角度来看，不同角色面临不同困扰。研判者面对的工作模糊且复杂，缺乏明确指引；一线运营在风险处置时，效率低、效果差，团队协作也困难重重，工单转交、跨工单协作都存在阻碍。从产品层面分析，数据问题突出，业务场景覆盖率仅 30%，工单处理时效长达 24.9 小时，双周平均处理量也不理想，而且平台过于被动，缺乏主动监控和风险预测能力，无法形成业务闭环。
+
+## 二、谋定而后动：明确目标与方向
+
+面对这些问题，我们深知不能再延续旧模式。首先要明确 RMP 的发展方向，从业务需求出发，自上而下拆解目标。我们思考业务最关注的点，对应到产品上，就是要弥补当前的差距，为业务提供更强大的能力。
+
+<Image src="/risk/risk_04.png" alt="risk" className="rounded-lg my-3" />
+<Image src="/risk/risk_05.png" alt="risk" className="rounded-lg my-3" />
+
+在这个过程中，定义模糊的概念被清晰化，我们不再仅以 Ticket 为管理实体，而是通过聚合 Ticket 看到宏观风险数据，拆解到 Item 分析微观内容。同时，对风险相关实体进行盘点，像风险事件（Event）、工单（Ticket）、任务（Task）和审核内容（Item）等，明确它们的定义、产生消亡机制和属性，为后续平台架构升级奠定基础。
+<Image src="/risk/risk_06.png" alt="risk" className="rounded-lg my-3" />
+<Image src="/risk/risk_07.png" alt="risk" className="rounded-lg my-3" />
+
+## 三、精准施策：多维度升级策略
+<Image src="/risk/risk_08.png" alt="risk" className="rounded-lg my-3" />
+### （一）优化线上风险管理流程
+为了让 RMP 脱胎换骨，我们对风险工单处理流程进行优化，实现线上化转型。在页面布局上，摒弃旧版缺乏引导、扩展性差的设计。重新规划布局比例为 1:2，突出业务重点，增强任务引导，把风险状态、研判标签集中展示，还定义了通用操作区，让用户操作更便捷。
+<Image src="/risk/risk_09.png" alt="risk" className="rounded-lg my-3" />
+
+在风险评估环节，设计了风险评估工具。一方面，通过沟通了解到基于风险内容相似度系统可判断工单复发率，于是设计相似风险推荐，加入人工校准机制，反哺算法精确度；另一方面，将 Excel 工具与研判表单融合，实现研判自动化，选择风险发生区域、类型和标签就能自动推荐风险等级，研判效率从 5 分钟提升到 30 秒。
+<Image src="/risk/risk_10.png" alt="risk" className="rounded-lg my-3" />
+<Image src="/risk/risk_011.png" alt="risk" className="rounded-lg my-3" />
+
+针对处置环节，调研用户跨平台处置风险的流程后发现问题，进而减少跨平台操作。实现接收风险信息、内容相似度回扫、风险内容批量处置的一站式处理，还能自动预填处置结果，大大提高处置效率。同时，优化风险分析页面和内容回扫功能，减少平台跳转，让 RMP 提供从定位风险到处置的全流程服务。
+<Image src="/risk/risk_012.png" alt="risk" className="rounded-lg my-3" />
+<Image src="/risk/risk_013.png" alt="risk" className="rounded-lg my-3" />
+
+<Image src="/risk/risk_014.png" alt="risk" className="rounded-lg my-3" />
+<Image src="/risk/risk_015.png" alt="risk" className="rounded-lg my-3" />
+<Image src="/risk/risk_016.png" alt="risk" className="rounded-lg my-3" />
+<Image src="/risk/risk_017.png" alt="risk" className="rounded-lg my-3" />
+
+## （二）构建风险事件监控体系
+风险事件监控体系的搭建也是重点工作。以往，工单协作处理困难，风险复发难以监控，风险事件难以识别，缺乏宏观感知。我们通过创建子工单关联协作处理流程，同步处置结果，实现处理流程可视化，实时关注协作进度。
+<Image src="/risk/risk_018.png" alt="risk" className="rounded-lg my-3" />
+<Image src="/risk/risk_019.png" alt="risk" className="rounded-lg my-3" />
+<Image src="/risk/risk_020.png" alt="risk" className="rounded-lg my-3" />
+<Image src="/risk/risk_021.png" alt="risk" className="rounded-lg my-3" />
+
+基于风险内容相似性（ASR、OCR）聚合，设计通过相关性关联风险事件，按照风险相关性排序，不仅提升关联效率，还能通过监控用户采纳率优化模型。在事件详情页，展示事件描述、内容、响应进展、归因分析等信息，用 “risk score” 呈现事件风险趋势，帮助用户了解事件全貌，复盘优化形成闭环。针对 “事件中心” 功能的不足，进行优化设计，满足领导者和执行 POC 的需求，提升决策和跨团队支持效率。
+
+<Image src="/risk/risk_022.png" alt="risk" className="rounded-lg my-3" />
+<Image src="/risk/risk_023.png" alt="risk" className="rounded-lg my-3" />
+<Image src="/risk/risk_024.png" alt="risk" className="rounded-lg my-3" />
+
+## （三）全面提升用户体验
+
+随着项目推进，RMP 原有的架构问题逐渐暴露，架构效率低、扩展性不足、易学性差。为了解决这些问题，我们举办设计工作坊，邀请多部门人员参与。通过角色扮演和头脑风暴，深入了解用户问题，提出针对性策略。
+<Image src="/risk/risk_025.png" alt="risk" className="rounded-lg my-3" />
+<Image src="/risk/risk_026.png" alt="risk" className="rounded-lg my-3" />
+
+提升架构效率方面，新增 “workspace - home” 总览页面，按处理优先级展示工单，强化工单动态展示；缩短 PoC 查看团队工单池的路径，新增 “view” 捷径功能。提高扩展性与架构易见性上，引入 “团队空间” 概念，区分公共和定制化功能，优化一级导航聚类逻辑。为了提高易学性，新增介绍页、新手引导和新功能宣导模块，帮助新用户快速上手。
+
+<Image src="/risk/risk_027.png" alt="risk" className="rounded-lg my-3" />
+<Image src="/risk/risk_028.png" alt="risk" className="rounded-lg my-3" />
+<Image src="/risk/risk_029.png" alt="risk" className="rounded-lg my-3" />
+
+## 四、RMP 的华丽转身
+经过这一系列的努力，RMP 实现了华丽蜕变。在处理效率上，研判效率大幅提升，跨平台操作减少，风险处置更加及时高效。风险监控方面，能够更精准地识别和关联风险事件，有效监控复发情况，为平台安全提供更有力的保障。用户体验也得到极大改善，架构效率提升，用户查找工单、了解工作状态更便捷；扩展性增强，为未来功能拓展奠定良好基础；易学性提高，新用户能更快熟悉平台，新功能也能更好地发挥作用。
+
+这次 RMP 的升级项目，是对风险管理平台设计的一次深度探索。我们从问题出发，以用户需求和业务目标为导向，通过不断优化和创新，实现了平台的全面升级。未来，我们也将继续关注平台的发展，持续优化，为 TikTok 的内容安全保驾护航。

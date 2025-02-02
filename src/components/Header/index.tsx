@@ -1,14 +1,14 @@
 'use client';
 import { useState } from 'react';
 import { useAtom } from 'jotai';
-import Image from 'next/image';
+// import Image from 'next/image';
 import Link from 'next/link';
 import { HamburgerMenuIcon, Cross1Icon } from '@radix-ui/react-icons';
 
 import { localeAtom } from '@/app/providers';
 import { locales } from '@/locales';
 
-import logo from '../../../public/logo.svg';
+// import logo from '../../../public/logo.svg';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -56,7 +56,7 @@ export default function Header() {
             </Link>
           </nav>
 
-          {/* Logo */}
+          {/* Logo
           <div className="flex-shrink-0 ">
             <Link
               href="/"
@@ -67,7 +67,7 @@ export default function Header() {
             >
               <Image className="bg-[#0045F4] rounded" src={logo} alt={''} />
             </Link>
-          </div>
+          </div> */}
 
           {/* Mobile Menu Button */}
           <button
