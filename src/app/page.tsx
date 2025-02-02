@@ -12,55 +12,62 @@ import Card from '@/components/Card';
 import { locales } from '@/locales';
 import { localeAtom } from '@/app/providers';
 
-import project_cover from '../../public/project_cover.svg';
+import byte_hi_cover from '../../public/cover/byte_hi_cover.png';
+import risk_cover from '../../public/cover/risk_cover.png';
+import digital_cover from '../../public/cover/digital_cover.png';
+import life_cover from '../../public/cover/life_cover.png';
+import colink_cover from '../../public/cover/colink_cover.png';
+import vanke_cover from '../../public/cover/vanke_cover.png';
 import logo from '../../public/logo.svg';
 
 const Home: React.FC = () => {
   const [locale] = useAtom(localeAtom);
 
-  const cards = [
+  const cards1 = [
     {
-      title: 'ByteHi customer service upgrade',
+      title: 'ByteHi customer service experience upgrade',
       description:
-        '客户平台是TikTok统一的用户反馈处理平台，是提升用户体验的重要工具之一。',
-      image: project_cover,
-      link: '#',
+        'ByteHi是TikTok客服服务系统。在全渠道、多场景的客服解决方案上，为C端用户提供流畅的服务体验。',
+      image: byte_hi_cover,
+      link: '/projects/byte_hi',
     },
     {
-      title: 'ByteHi customer service upgrade',
+      title: 'Risk management platform for content reviewing',
       description:
-        '客户平台是TikTok统一的用户反馈处理平台，是提升用户体验的重要工具之一。',
-      image: project_cover,
-      link: '#',
+        'RMP通过风险监测技术保障TikTok上的内容质量安全，为风险响应团队提供高效应对风险的解决方案，以提升基础内容体验。',
+      image: risk_cover,
+      link: '/projects/risk_management',
     },
   ];
+
   const card2 = [
     {
-      title: 'ByteHi customer service upgrade',
+      title: 'Digital Innovation of future mobility & Cloud service app',
       description:
-        '客户平台是TikTok统一的用户反馈处理平台，是提升用户体验的重要工具之一。',
-      image: project_cover,
+        '在“未来数字体验”方向下结合本土市场，研究智慧出行场景，通过数字化和云服务全面重塑传统汽车产业，提供C2B创新服务模式。',
+      image: digital_cover,
+      link: '/projects/digital_innovation',
+    },
+    {
+      title: 'Life design for media & smart health community app',
+      description:
+        '将美的未来生活场景洞察数据用故事演绎的方式表达，并设计健康社区生活app，帮助人们与社区建立更紧密的关系。',
+      image: life_cover,
+      link: '/projects/life_design',
+    },
+
+    {
+      title: 'Digital experience in a collaborative office space',
+      description:
+        '提供智能办公场景解决方案，使ACTIVA产品系列作为灵动办公空间基底，接入办公空间及办公终端等办公云服务场景中。',
+      image: colink_cover,
       link: '#',
     },
     {
-      title: 'ByteHi customer service upgrade',
+      title: 'For Vanke’s Mehos home life service innovation',
       description:
-        '客户平台是TikTok统一的用户反馈处理平台，是提升用户体验的重要工具之一。',
-      image: project_cover,
-      link: '#',
-    },
-    {
-      title: 'ByteHi customer service upgrade',
-      description:
-        '客户平台是TikTok统一的用户反馈处理平台，是提升用户体验的重要工具之一。',
-      image: project_cover,
-      link: '#',
-    },
-    {
-      title: 'ByteHi customer service upgrade',
-      description:
-        '客户平台是TikTok统一的用户反馈处理平台，是提升用户体验的重要工具之一。',
-      image: project_cover,
+        'Mehos在客群购房全流程中提供的伴随式服务，包括灵感激发服务、居家定制选配服务、居家生活精选服务、居家无忧关怀服务等',
+      image: vanke_cover,
       link: '#',
     },
   ];
@@ -183,13 +190,36 @@ const Home: React.FC = () => {
         <div className="bg-white">
           <div className="max-w-7xl mx-auto">
             {/* Projects Sections */}
-            {[cards, card2].map((cardGroup, index) => (
+            {[cards1].map((cardGroup, index) => (
               <div key={index} className="mb-10 px-4 md:px-0">
                 <div className="flex items-center py-20 md:py-[200px] justify-center">
                   <TitleSection
                     keyWord="ToB"
-                    subWords="platform design"
-                    label="Find out about my works: read through my case studies, have a look at final designs and try out prototypes I've built."
+                    subWords="Platform design"
+                    label="Find out my UX project for TikTok's customer service & risk control team to improve the CSAT through series of research methods."
+                  />
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 max-w-7xl mx-auto">
+                  {cardGroup.map((card, cardIndex) => (
+                    <Card
+                      key={cardIndex}
+                      title={card.title}
+                      description={card.description}
+                      image={card.image}
+                      link={card.link}
+                    />
+                  ))}
+                </div>
+              </div>
+            ))}
+
+            {[card2].map((cardGroup, index) => (
+              <div key={index} className="mb-10 px-4 md:px-0">
+                <div className="flex items-center py-20 md:py-[200px] justify-center">
+                  <TitleSection
+                    keyWord="Service"
+                    subWords="Consulting project"
+                    label="Find out our service design projects that focus on providing digital experiences for traditional enterprises."
                   />
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 max-w-7xl mx-auto">
