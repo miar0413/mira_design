@@ -5,7 +5,7 @@ import type { MDXPost as TMDXPost } from '@/lib/mdx';
 import MDXcomponents from '@/app/mdx-components';
 
 import { PostNavigation } from './PostNavigation';
-import { ReadingProgress } from './ReadingProgress';
+// import { ReadingProgress } from './ReadingProgress';
 import { ReadingTime } from './ReadingTime';
 
 interface MDXPostProps {
