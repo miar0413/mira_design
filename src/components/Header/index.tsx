@@ -1,14 +1,11 @@
 'use client';
 import { useState } from 'react';
 import { useAtom } from 'jotai';
-// import Image from 'next/image';
 import Link from 'next/link';
 import { HamburgerMenuIcon, Cross1Icon } from '@radix-ui/react-icons';
 
 import { localeAtom } from '@/app/providers';
 import { locales } from '@/locales';
-
-// import logo from '../../../public/logo.svg';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
