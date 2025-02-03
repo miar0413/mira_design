@@ -10,7 +10,7 @@ interface IProps {
 
 const Card: React.FC<IProps> = ({ title, description, image, link }) => {
   return (
-    <div className="bg-white rounded-3xl borderborder-gray-200 ">
+    <div className="bg-white rounded-3xl border border-gray-200 ">
       <div className="flex flex-col">
         {/* 文本内容区域 */}
         <div className="px-8 pt-8">
