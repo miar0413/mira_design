@@ -12,59 +12,31 @@ export default function Header() {
   const [locale] = useAtom(localeAtom);
 
   return (
-    <header
-      className="sticky top-0 z-50 
-      border-b border-gray-200/80 dark:border-gray-800/80 
-      bg-white/80 dark:bg-gray-900/90 
-      backdrop-blur-sm 
-      transition-colors"
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <header className="sticky top-0 z-50 border-b backdrop-blur-lg bg-white/80 border-gray-200/50 shadow-sm">
+      <div className="max-w-7xl mx-auto">
         <div className="flex justify-between items-center h-16">
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-1">
             <Link
               href="/"
-              className="px-4 py-2 rounded-lg
-                text-gray-700 dark:text-gray-300 
-                hover:bg-gray-100 dark:hover:bg-gray-800 
-                transition-colors"
+              className="px-4 py-2 rounded-lg text-gray-700  hover:bg-slate-400 font-medium"
             >
               {locales[locale]?.home}
             </Link>
             <Link
               href="/projects"
-              className="px-4 py-2 rounded-lg
-                text-gray-700 dark:text-gray-300 
-                hover:bg-gray-100 dark:hover:bg-gray-800 
-                transition-colors"
+              className="px-4 py-2 rounded-lg text-gray-700 hover:bg-slate-400 font-medium"
             >
               {locales[locale].projects}
             </Link>
 
             <Link
               href="/about"
-              className="px-4 py-2 rounded-lg
-                text-gray-700 dark:text-gray-300 
-                hover:bg-gray-100 dark:hover:bg-gray-800 
-                transition-colors"
+              className="px-4 py-2 rounded-lg text-gray-700 hover:bg-slate-400 font-medium"
             >
               {locales[locale].about}
             </Link>
           </nav>
-
-          {/* Logo
-          <div className="flex-shrink-0 ">
-            <Link
-              href="/"
-              className="text-xl font-bold 
-              bg-gradient-to-r from-gray-900 to-gray-600 dark:from-gray-100 dark:to-gray-400 
-              bg-clip-text text-transparent 
-              hover:opacity-80 transition-opacity"
-            >
-              <Image className="bg-[#0045F4] rounded" src={logo} alt={''} />
-            </Link>
-          </div> */}
 
           {/* Mobile Menu Button */}
           <button

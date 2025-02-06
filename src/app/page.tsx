@@ -7,10 +7,11 @@ import { useAtom } from 'jotai';
 import Image from 'next/image';
 
 import Footer from '@/components/Footer';
-import TitleSection from '@/components/TitleSection';
 import Card from '@/components/Card';
 import { locales } from '@/locales';
 import { localeAtom } from '@/app/providers';
+import SmallCard from '@/components/SmallCard';
+import TitleCard from '@/components/TitleCard';
 
 import byte_hi_cover from '../../public/cover/byte_hi_cover.png';
 import risk_cover from '../../public/cover/risk_cover.png';
@@ -18,6 +19,18 @@ import digital_cover from '../../public/cover/digital_cover.png';
 import life_cover from '../../public/cover/life_cover.png';
 import colink_cover from '../../public/cover/colink_cover.png';
 import vanke_cover from '../../public/cover/vanke_cover.png';
+import qiao_cover from '../../public/cover/qiao_cover.png';
+import yike_cover from '../../public/cover/yike_cover.png';
+import cover_01 from '../../public/cover/cover_01.png';
+import cover_02 from '../../public/cover/cover_02.png';
+import cover_03 from '../../public/cover/cover_03.png';
+import cover_04 from '../../public/cover/cover_04.png';
+import cover_05 from '../../public/cover/cover_05.png';
+import cover_06 from '../../public/cover/cover_06.png';
+import tob from '../../public/cover/tob.svg';
+import service from '../../public/cover/service.svg';
+import install from '../../public/cover/install.svg';
+import other from '../../public/cover/other.svg';
 import logo from '../../public/logo.svg';
 
 const Home: React.FC = () => {
@@ -69,6 +82,56 @@ const Home: React.FC = () => {
         'Mehos在客群购房全流程中提供的伴随式服务，包括灵感激发服务、居家定制选配服务、居家生活精选服务、居家无忧关怀服务等',
       image: vanke_cover,
       link: '#',
+    },
+  ];
+
+  const card3 = [
+    {
+      title: 'QiaoQiao intelligent bot for chinese learning App',
+      description:
+        '华侨大学-侨侨中华文化传播智能机器人，通过提供知识性的服务和华大线上汉语学习课程，来满足海外侨胞的学习诉求。',
+      image: qiao_cover,
+      link: '/projects/digital_innovation',
+    },
+    {
+      title: 'Yiker, an Private Guidance of Beauty&Fashion app',
+      description:
+        'Yiker像是私人衣橱管家平台，通过快速预约直播，AR私厨管理购买，线下线上结合，为人们提供私人指导服务和衣橱管理服务。',
+      image: yike_cover,
+      link: '/projects/life_design',
+    },
+  ];
+
+  const smallCards = [
+    {
+      label: 'The filtered home',
+      image: cover_01,
+      link: '/projects/byte_hi',
+    },
+    {
+      label: '2028 ordinary kitchen',
+      image: cover_02,
+      link: '/projects/byte_hi',
+    },
+    {
+      label: 'The green fitness',
+      image: cover_03,
+      link: '/projects/byte_hi',
+    },
+    {
+      label: 'Unfunctional Dream',
+      image: cover_04,
+      link: '/projects/byte_hi',
+    },
+    {
+      label: 'Time synchronization',
+      image: cover_05,
+      link: '/projects/byte_hi',
+    },
+    {
+      label: 'Generative art lab',
+      image: cover_06,
+      link: '/projects/byte_hi',
     },
   ];
 
@@ -187,64 +250,61 @@ const Home: React.FC = () => {
             <div className="bg-[url(../../public/thinking.svg)] h-[300px] md:h-[530px] bg-cover bg-center"></div>
           </div>
         </div>
-        <div className="bg-white">
+        <div className="bg-white mb-[240px]">
           <div className="max-w-7xl mx-auto">
-            {/* Projects Sections */}
-            {[cards1].map((cardGroup, index) => (
-              <div key={index} className="mb-10 px-4 md:px-0">
-                <div className="flex items-center py-20 md:py-[200px] justify-center">
-                  <TitleSection
-                    keyWord="ToB"
-                    subWords="Platform design"
-                    label="Find out my UX project for TikTok's customer service & risk control team to improve the CSAT through series of research methods."
-                  />
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 max-w-7xl mx-auto">
-                  {cardGroup.map((card, cardIndex) => (
-                    <Card
-                      key={cardIndex}
-                      title={card.title}
-                      description={card.description}
-                      image={card.image}
-                      link={card.link}
-                    />
-                  ))}
-                </div>
-              </div>
-            ))}
-
-            {[card2].map((cardGroup, index) => (
-              <div key={index} className="mb-10 px-4 md:px-0">
-                <div className="flex items-center py-20 md:py-[200px] justify-center">
-                  <TitleSection
-                    keyWord="Service"
-                    subWords="Consulting project"
-                    label="Find out our service design projects that focus on providing digital experiences for traditional enterprises."
-                  />
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 max-w-7xl mx-auto">
-                  {cardGroup.map((card, cardIndex) => (
-                    <Card
-                      key={cardIndex}
-                      title={card.title}
-                      description={card.description}
-                      image={card.image}
-                      link={card.link}
-                    />
-                  ))}
-                </div>
-              </div>
-            ))}
-
-            {/* Additional Sections */}
-            <div className="mb-10 px-4 md:px-0">
-              <div className="flex items-center py-20 md:py-[200px] justify-center">
-                <TitleSection
-                  keyWord="ToB"
-                  subWords="platform design"
-                  label="Find out about my works: read through my case studies, have a look at final designs and try out prototypes I've built."
+            <TitleCard image={tob} />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 max-w-7xl mx-auto">
+              {cards1.map((card, cardIndex) => (
+                <Card
+                  key={cardIndex}
+                  title={card.title}
+                  description={card.description}
+                  image={card.image}
+                  link={card.link}
                 />
-              </div>
+              ))}
+            </div>
+            <TitleCard image={service} />
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 max-w-7xl mx-auto">
+              {card2.map((card, cardIndex) => (
+                <Card
+                  key={cardIndex}
+                  title={card.title}
+                  description={card.description}
+                  image={card.image}
+                  link={card.link}
+                />
+              ))}
+            </div>
+
+            <TitleCard image={install} />
+
+            <div className="flex items-center gap-6 justify-center flex-wrap">
+              {smallCards.map((item, index) => {
+                return (
+                  <SmallCard
+                    key={`${item.link}_${index}`}
+                    label={item.label}
+                    image={item.image}
+                    link={item.link}
+                  />
+                );
+              })}
+            </div>
+
+            <TitleCard image={other} />
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 max-w-7xl mx-auto">
+              {card3.map((card, cardIndex) => (
+                <Card
+                  key={cardIndex}
+                  title={card.title}
+                  description={card.description}
+                  image={card.image}
+                  link={card.link}
+                />
+              ))}
             </div>
           </div>
         </div>
