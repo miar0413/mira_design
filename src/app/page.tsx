@@ -13,7 +13,7 @@ import { localeAtom } from '@/app/providers';
 import SmallCard from '@/components/SmallCard';
 import TitleCard from '@/components/TitleCard';
 
-import byte_hi_cover from '../../public/cover/byte_hi_cover.png';
+import byte_hi_cover from '../../public/cover/Bytehi_cover.png';
 import risk_cover from '../../public/cover/risk_cover.png';
 import digital_cover from '../../public/cover/digital_cover.png';
 import life_cover from '../../public/cover/life_cover.png';
