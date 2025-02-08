@@ -16,7 +16,7 @@ import TitleCard from '@/components/TitleCard';
 import byte_hi_cover from '../../public/cover/Bytehi_cover.png';
 import risk_cover from '../../public/cover/risk_cover.png';
 import digital_cover from '../../public/cover/digital_cover.png';
-import life_cover from '../../public/cover/life_cover.png';
+import life_cover from '../../public/cover/life_cover.gif';
 import colink_cover from '../../public/cover/colink_cover.png';
 import vanke_cover from '../../public/cover/vanke_cover.png';
 import qiao_cover from '../../public/cover/qiao_cover.png';
