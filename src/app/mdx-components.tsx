@@ -24,7 +24,7 @@ const MDXcomponents = {
     />
   ),
   p: (props: React.HTMLProps<HTMLParagraphElement>) => (
-    <p className="text-base font-normal indent-8 text-[#1f2329]" {...props} />
+    <p className="text-base font-normal text-[#1f2329]" {...props} />
   ),
 };
 
