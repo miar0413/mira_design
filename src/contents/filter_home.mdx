@@ -1,13 +1,13 @@
 ---
 title: The Filtered Home
 slug: 2024-02-05-003
-When: December 2019
+When: December.2019
 Role: Interaction designer
 Duration: 4 Months 
-Tool: Arduino, TouchOSC, mapmad, final cut pro
+Tool: Arduino, TouchOSC, Mapmad, Final cut pro
 
 ---
-<iframe width="1920" height="1080" src="https://www.youtube.com/embed/Ey2CQztJBpc?si=XjkDrTa77lPWnBy3" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="800" src="https://www.youtube.com/embed/Ey2CQztJBpc?si=XjkDrTa77lPWnBy3" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ## Project Intro
 近年来推动行业新一轮发展浪潮的互联网企业普片认为：智能家居是家电联网，并且能够自动组成一个系统。为了拉近用户体验智能家居的机会，智能家居的实现从初期昂贵的全屋集成系统演变成现在更低成本的connected gadgets, 来计算不同环境中人的状态，具有用户习惯的学习功能。与此同时，由于网络信息的过载和多样，很多社交媒体也都采用了各种各样的算法来为用户推送更加个性化的新闻，让新闻更加符合每个人的口味。例如，Spotify就采取协同过滤算法来决定用户的听音乐偏好。
@@ -15,7 +15,7 @@ Tool: Arduino, TouchOSC, mapmad, final cut pro
 “The filter bubble”是左翼政治与互联网活动家Eli Pariser在2011年同名著作中创造的一个词，指的是互联网用户受网络内容算法编辑的影响，其信息环境越来越个人化的现象。
 ‘Filter bubble’ is a term created by left-wing political and internet activist Eli Pariser in his eponymous book in 2011. It refers to the phenomenon that internet users are affected by the editing of network content algorithms and their information environment is becoming more and more personalised.
 
-<Image src="/filter_home/filter_1.png" alt="视频模拟" className="mb-6 rounded-lg" />
+<Image src="/filter_home/filter_1.png" alt="视频模拟" className="my-6 rounded-lg" />
 
 智能家居和过滤泡沫看上去是分别两个领域的东西，但我们会发现它们有相似的特征，同样以人工智能出发，为用户提供个性化建议。多元化的生态圈结构与全新的市场格局相互交织、碰撞的中心智能家居服务需求开始凸显（兰复裁，2018）。回顾智能家居市场的变化与发展，我们需要重新审视smart home的应用落地点和创新方向。我这个项目开展的初衷是如何打破这个网络泡沫，但后来我发现，与其要把它打破，不如把它视为一面了解我们的镜子，并告诉还不十分懂我们的 ‘智能家助手’。 
 <br />
@@ -26,11 +26,11 @@ The majority of artificial intelligence comes from big data. The current intelli
 
 通过进一步的研究和实践，我希望找到智能家居中的空白并促进它们的在线和离线联系。同时，我希望我们能打破一些过滤泡沫，用户通过改变生活方式来探索更多的未知数。该项目探讨了过滤器泡沫对智能家居的侵蚀。如果这些改变我们在线行为的算法开始影响我们的家庭生活，那该怎么办？
 Through further research and practice, I wish to find the gaps in smart home and promote online and offline connections. At the same time, I hope we will break some filter bubbles and users explore more unknowns through the change of lifestyle. This project explores the encroachment of the filter bubble into the smart home. What if the algorithms that shape our online behaviour start to shape our domestic life?
-<Image src="/filter_home/filter_2.png" alt="视频模拟" className="mb-6 rounded-lg" />
-<Image src="/filter_home/filter_3.png" alt="filter_home" className="mb-6 rounded-lg" />
-<Image src="/filter_home/filter_4.png" alt="filter_home" className="mb-6 rounded-lg" />
-<Image src="/filter_home/filter_5.png" alt="filter_home" className="mb-6 rounded-lg" />
-<Image src="/filter_home/filter_6.png" alt="filter_home" className="mb-6 rounded-lg" />
+<Image src="/filter_home/filter_2.png" alt="视频模拟" className="my-6 rounded-lg" />
+<Image src="/filter_home/filter_3.png" alt="filter_home" className="my-6 rounded-lg" />
+<Image src="/filter_home/filter_4.png" alt="filter_home" className="my-6 rounded-lg" />
+<Image src="/filter_home/filter_5.png" alt="filter_home" className="my-6 rounded-lg" />
+<Image src="/filter_home/filter_6.png" alt="filter_home" className="my-6 rounded-lg" />
 <br />
 
 ## Prototype
@@ -38,16 +38,16 @@ Through further research and practice, I wish to find the gaps in smart home and
 最初的想法是重置冰箱打开时恢复照明的效果，因此我上下排列了LED灯带，希望通过传感器实现。冰箱分为上下两层或两层。
 
 The initial idea is to restore the effect of lighting when turned on in the refrigerator, so I arranged the LED light belt up and down, and I hope to achieve it through sensor. And the refrigerator is divided into two or two parts of the upper and lower layers.
-<Image src="/filter_home/filter_7.png"  className="mb-6 rounded-lg" />
-<Image src="/filter_home/filter_8.png"  className="mb-6 rounded-lg" />
+<Image src="/filter_home/filter_7.png"  className="my-6 rounded-lg" />
+<Image src="/filter_home/filter_8.png"  className="my-6 rounded-lg" />
 <br />
 
 借助此TouchOSC平台，我可以轻松控制LCD。但是缺点是颜色，关键功能和形状受到限制。经过三个版本的改进，最终版本才确定上方的菜单栏。有五个类别，政治职位，搜索引擎，社交媒体，流媒体和活动。我将其归类的原因是基于先前的结论。考虑到不同平台上的滤泡之间的差异。
 With this TouchOSC platform, I can easily control the LCD. But the shortcoming is the colour, the key function and the shape is limited.After three versions of the improvement, the final version is determined.
 
 The menu bar above is five categories, political positions, search engines, social media, streaming media and activities. The reason I categorise this is through the conclusions previously. Taking into account the differences between filter bubble on different platforms.
-<Image src="/filter_home/filter_9.png"  className="mb-6 rounded-lg" />
-<Image src="/filter_home/filter_10.png"  className="mb-6 rounded-lg" />
-<Image src="/filter_home/filter_11.png"  className="mb-6 rounded-lg" />
+<Image src="/filter_home/filter_9.png"  className="my-6 rounded-lg" />
+<Image src="/filter_home/filter_10.png"  className="my-6 rounded-lg" />
+<Image src="/filter_home/filter_11.png"  className="my-6 rounded-lg" />
 <br />
 <iframe src='//player.bilibili.com/player.html?bvid=BV15L4y1e7Jz&cid=388265987&p=1&share_source=copy_web' scrolling='no' border='0' frameborder='no' framespacing='0' allowfullscreen='true'></iframe>
