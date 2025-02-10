@@ -6,7 +6,6 @@ import Link from 'next/link';
 
 import { getAllMDXPosts, getMDXPost, getPostNavigation } from '@/lib/mdx';
 import { MDXPost as MDXPostComponent } from '@/components/MDXPost';
-import { ReadingProgress } from '@/components/ReadingProgress';
 import Header from '@/components/Header';
 
 interface PageProps {

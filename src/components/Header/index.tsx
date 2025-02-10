@@ -24,7 +24,7 @@ export default function Header() {
               {locales[locale]?.home}
             </Link>
             <Link
-              href="/projects"
+              href="/projects/byte_hi"
               className="px-4 py-2 rounded-lg text-gray-700 hover:bg-slate-400 font-medium"
             >
               {locales[locale].projects}

@@ -4,6 +4,8 @@ import { MDXRemote } from 'next-mdx-remote';
 import type { MDXPost as TMDXPost } from '@/lib/mdx';
 import MDXcomponents from '@/app/mdx-components';
 
+import { PostNavigation } from './PostNavigation';
+
 interface MDXPostProps {
   post: TMDXPost;
   navigation: {
@@ -12,7 +14,7 @@ interface MDXPostProps {
   };
 }
 
-export function MDXPost({ post }: MDXPostProps) {
+export function MDXPost({ post, navigation }: MDXPostProps) {
   const { mdxSource } = post;
 
   return (
@@ -21,6 +23,9 @@ export function MDXPost({ post }: MDXPostProps) {
         <article className="max-w-4xl box-border">
           <MDXRemote {...mdxSource} components={MDXcomponents} />
         </article>
+        <footer className="mt-16 pt-8 border-gray-200 dark:border-gray-800">
+          <PostNavigation prev={navigation.prev} next={navigation.next} />
+        </footer>
       </div>
     </>
   );
