@@ -16,7 +16,7 @@ export default function Header() {
       <div className="max-w-7xl mx-auto">
         <div className="flex justify-between items-center h-16">
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-1">
+          <nav className="flex items-center space-x-1">
             <Link
               href="/"
               className="px-4 py-2 rounded-lg text-gray-700  hover:bg-slate-400 font-medium"
@@ -95,32 +95,6 @@ export default function Header() {
               >
                 {locales[locale].projects}
               </Link>
-              {/* <button
-                onClick={() => {
-                  setLocale(locale === 'zh' ? 'en' : 'zh');
-                  setIsMenuOpen(false);
-                }}
-                className="w-full text-left px-4 py-2 rounded-lg
-                  text-gray-700 dark:text-gray-300 
-                  hover:bg-gray-100 dark:hover:bg-gray-800 
-                  transition-colors"
-              >
-                {locales[locale].switchLanguage}
-              </button> */}
-              {/* <button
-                onClick={() => {
-                  setTheme(theme === 'dark' ? 'light' : 'dark');
-                  setIsMenuOpen(false);
-                }}
-                className="w-full text-left px-4 py-2 rounded-lg
-                  text-gray-700 dark:text-gray-300 
-                  hover:bg-gray-100 dark:hover:bg-gray-800 
-                  transition-colors"
-              >
-                {theme === 'dark'
-                  ? locales[locale].lightMode
-                  : locales[locale].darkMode}
-              </button> */}
             </nav>
           </div>
         )}

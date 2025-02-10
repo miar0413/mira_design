@@ -3,22 +3,7 @@
 import React from 'react';
 import Image, { ImageProps } from 'next/image';
 
-const CustomOrderedList = (props: React.HTMLProps<HTMLOListElement>) => {
-  return (
-    <ol className="list-decimal pl-6 space-y-2 sm:space-y-3 md:space-y-4 text-gray-800 dark:text-gray-100">
-      {props.children}
-    </ol>
-  );
-};
-
 // 自定义列表项渲染组件
-const CustomListItem = (props: React.HTMLProps<HTMLLIElement>) => {
-  return (
-    <li className="text-sm sm:text-base md:text-lg leading-relaxed">
-      {props.children}
-    </li>
-  );
-};
 
 const MDXcomponents = {
   h1: (props: React.HTMLProps<HTMLHeadingElement>) => (
@@ -30,21 +15,48 @@ const MDXcomponents = {
   h3: (props: React.HTMLProps<HTMLHeadingElement>) => (
     <h3 className="text-xl font-medium my-3 text-[#1f2329]" {...props} />
   ),
-  Image: (props: ImageProps) => (
-    <Image
-      width={768}
-      height={300}
-      placeholder="blur"
-      blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/wcAAgAB/1h8ZAAAAABJRU5ErkJggg=="
-      {...props}
-      alt={props?.alt || ''}
-    />
+  h4: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
+    <h4 className="text-xl font-semibold mt-6 mb-4" {...props} />
   ),
+  Image: (props: ImageProps) => {
+    return (
+      <Image
+        width={768}
+        height={300}
+        placeholder="blur"
+        blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/wcAAgAB/1h8ZAAAAABJRU5ErkJggg=="
+        {...props}
+        alt={props?.alt || ''}
+      />
+    );
+  },
   p: (props: React.HTMLProps<HTMLParagraphElement>) => (
     <p className="text-base font-normal text-[#1f2329]" {...props} />
   ),
-  ol: CustomOrderedList,
-  li: CustomListItem,
+  ul: (props: React.HTMLProps<HTMLUListElement>) => (
+    <ul className="list-disc pl-5" {...props} />
+  ),
+  ol: (props: React.HTMLAttributes<HTMLOListElement>) => {
+    return <ol className="list-decimal pl-5" {...props} />;
+  },
+  li: (props: React.HTMLProps<HTMLLIElement>) => {
+    return <li className="" {...props} />;
+  },
+  blockquote: (props: React.BlockquoteHTMLAttributes<HTMLQuoteElement>) => (
+    <blockquote
+      className="pl-4 border-l-4 border-gray-200 my-4 italic text-gray-300"
+      {...props}
+    />
+  ),
+  code: (props: React.HTMLAttributes<HTMLElement>) => (
+    <code className="bg-gray-600 rounded p-1" {...props} />
+  ),
+  pre: (props: React.HTMLAttributes<HTMLPreElement>) => (
+    <pre className="bg-gray-600 rounded p-4 overflow-x-auto" {...props} />
+  ),
+  strong: (props: React.HTMLAttributes<HTMLElement>) => {
+    return <strong className="text-red-600" {...props} />;
+  },
 };
 
 export default MDXcomponents;

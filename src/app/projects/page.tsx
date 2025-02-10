@@ -22,9 +22,12 @@ export default async function ProjectsPage() {
                   {post.title}
                 </Link>
               </h2>
-              <time className="text-gray-500">
-                {new Date(post?.date || '').toLocaleDateString('zh-CN')}
-              </time>
+              <div className="flex gap-3 text-gray-500">
+                <time>{post?.date}</time>
+                <span>{post?.duration}</span>
+                <span>{post?.role}</span>
+                <span>{post?.tool}</span>
+              </div>
             </article>
           ))}
         </div>

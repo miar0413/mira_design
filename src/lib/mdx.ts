@@ -12,6 +12,9 @@ export interface Frontmatter {
   title?: string;
   date?: string;
   slug?: string;
+  duration?: string;
+  role?: string;
+  tool?: string;
   readingTime?: {
     minutes: number;
     words: number;
@@ -73,6 +76,7 @@ export async function getAllMDXPosts(): Promise<Frontmatter[]> {
   for (const file of files) {
     const slug = file.replace('.mdx', '');
     const post = await getMDXPost(slug);
+
     if (post) {
       posts.push(post.frontmatter);
     }

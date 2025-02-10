@@ -2,8 +2,9 @@ import path from 'path';
 import fs from 'fs/promises';
 
 import { notFound } from 'next/navigation';
+import Link from 'next/link';
 
-import { getMDXPost, getPostNavigation } from '@/lib/mdx';
+import { getAllMDXPosts, getMDXPost, getPostNavigation } from '@/lib/mdx';
 import { MDXPost as MDXPostComponent } from '@/components/MDXPost';
 import { ReadingProgress } from '@/components/ReadingProgress';
 import Header from '@/components/Header';
@@ -30,6 +31,8 @@ export default async function ProjectPage(props: PageProps) {
   const params = await props.params;
   const post = await getMDXPost(params.slug);
 
+  const posts = await getAllMDXPosts();
+
   if (!post) {
     notFound();
   }
@@ -38,9 +41,26 @@ export default async function ProjectPage(props: PageProps) {
 
   return (
     <>
-      <ReadingProgress />
       <Header />
-      <MDXPostComponent post={post} navigation={navigation} />
+      <div className="flex mx-auto max-w-7xl">
+        <div className="max-w-64 box-border">
+          {posts.map((post) => (
+            <article key={post.slug} className="border-b pb-6">
+              <span className="font-bold my-2">
+                <Link
+                  href={`/projects/${post.slug}`}
+                  className="hover:text-blue-500"
+                >
+                  {post.title}
+                </Link>
+              </span>
+            </article>
+          ))}
+        </div>
+        <div className="flex-1">
+          <MDXPostComponent post={post} navigation={navigation} />
+        </div>
+      </div>
     </>
   );
 }
