@@ -1,10 +1,10 @@
-import Image, { StaticImageData } from 'next/image';
+import Image from 'next/image';
 import React from 'react';
 import Link from 'next/link';
 
 interface IProps {
   label: string;
-  image: StaticImageData;
+  image: string;
   link: string;
 }
 

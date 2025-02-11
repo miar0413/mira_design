@@ -19,15 +19,16 @@ const MDXcomponents = {
     <h4 className="text-xl font-semibold mt-6 mb-4" {...props} />
   ),
   Image: (props: ImageProps) => {
+    const srcArr = (props?.src as string)?.split(',');
+
     return (
-      <Image
-        width={768}
-        height={300}
-        placeholder="blur"
-        blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/wcAAgAB/1h8ZAAAAABJRU5ErkJggg=="
-        {...props}
-        alt={props?.alt || ''}
-      />
+      <div className="flex items-center justify-center">
+        {srcArr.map((i: string) => {
+          return (
+            <Image key={i} {...props} alt={props?.alt || ''} fill src={i} />
+          );
+        })}
+      </div>
     );
   },
   p: (props: React.HTMLProps<HTMLParagraphElement>) => (

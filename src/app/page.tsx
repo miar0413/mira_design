@@ -13,26 +13,6 @@ import { localeAtom } from '@/app/providers';
 import SmallCard from '@/components/SmallCard';
 import TitleCard from '@/components/TitleCard';
 
-import byte_hi_cover from '../../public/cover/Bytehi_cover.png';
-import risk_cover from '../../public/cover/risk_cover.png';
-import digital_cover from '../../public/cover/digital_cover.png';
-import life_cover from '../../public/cover/life_cover.gif';
-import colink_cover from '../../public/cover/colink_cover.png';
-import vanke_cover from '../../public/cover/vanke_cover.png';
-import qiao_cover from '../../public/cover/qiao_cover.png';
-import yike_cover from '../../public/cover/yike_cover.png';
-import cover_01 from '../../public/cover/cover_01.png';
-import cover_02 from '../../public/cover/cover_02.png';
-import cover_03 from '../../public/cover/cover_03.png';
-import cover_04 from '../../public/cover/cover_04.jpg';
-import cover_05 from '../../public/cover/cover_05.jpeg';
-import cover_06 from '../../public/cover/cover_06.png';
-import tob from '../../public/cover/tob.svg';
-import service from '../../public/cover/service.svg';
-import install from '../../public/cover/install.svg';
-import other from '../../public/cover/other.svg';
-import logo from '../../public/logo.svg';
-
 const Home: React.FC = () => {
   const [locale] = useAtom(localeAtom);
 
@@ -41,14 +21,14 @@ const Home: React.FC = () => {
       title: 'ByteHi customer service experience upgrade',
       description:
         'ByteHi是TikTok客服服务系统。在全渠道、多场景的客服解决方案上，为C端用户提供流畅的服务体验。',
-      image: byte_hi_cover,
+      image: '/cover/Bytehi_cover.png',
       link: '/projects/byte_hi',
     },
     {
       title: 'Risk management platform for content reviewing',
       description:
         'RMP通过风险监测技术保障TikTok上的内容质量安全，为风险响应团队提供高效应对风险的解决方案，以提升基础内容体验。',
-      image: risk_cover,
+      image: '/cover/risk_cover.png',
       link: '/projects/risk_management',
     },
   ];
@@ -58,14 +38,14 @@ const Home: React.FC = () => {
       title: 'Digital Innovation of future mobility & Cloud service app',
       description:
         '在“未来数字体验”方向下结合本土市场，研究智慧出行场景，通过数字化和云服务全面重塑传统汽车产业，提供C2B创新服务模式。',
-      image: digital_cover,
+      image: '/cover/digital_cover.png',
       link: '/projects/digital_innovation',
     },
     {
       title: 'Life design for media & smart health community app',
       description:
         '将美的未来生活场景洞察数据用故事演绎的方式表达，并设计健康社区生活app，帮助人们与社区建立更紧密的关系。',
-      image: life_cover,
+      image: '/cover/life_cover.gif',
       link: '/projects/life_design',
     },
 
@@ -73,14 +53,14 @@ const Home: React.FC = () => {
       title: 'Digital experience in a collaborative office space',
       description:
         '提供智能办公场景解决方案，使ACTIVA产品系列作为灵动办公空间基底，接入办公空间及办公终端等办公云服务场景中。',
-      image: colink_cover,
+      image: '/cover/colink_cover.png',
       link: '#',
     },
     {
       title: 'For Vanke’s Mehos home life service innovation',
       description:
         'Mehos在客群购房全流程中提供的伴随式服务，包括灵感激发服务、居家定制选配服务、居家生活精选服务、居家无忧关怀服务等',
-      image: vanke_cover,
+      image: '/cover/vanke_cover.png',
       link: '#',
     },
   ];
@@ -90,14 +70,14 @@ const Home: React.FC = () => {
       title: 'QiaoQiao intelligent bot for chinese learning App',
       description:
         '华侨大学-侨侨中华文化传播智能机器人，通过提供知识性的服务和华大线上汉语学习课程，来满足海外侨胞的学习诉求。',
-      image: qiao_cover,
+      image: '/cover/qiao_cover.png',
       link: '/projects/digital_innovation',
     },
     {
       title: 'Yiker, an Private Guidance of Beauty&Fashion app',
       description:
         'Yiker像是私人衣橱管家平台，通过快速预约直播，AR私厨管理购买，线下线上结合，为人们提供私人指导服务和衣橱管理服务。',
-      image: yike_cover,
+      image: '/cover/yike_cover.png',
       link: '/projects/life_design',
     },
   ];
@@ -105,32 +85,32 @@ const Home: React.FC = () => {
   const smallCards = [
     {
       label: 'The filtered home',
-      image: cover_01,
+      image: '/cover/cover_01.png',
       link: '/projects/byte_hi',
     },
     {
       label: '2028 ordinary kitchen',
-      image: cover_02,
+      image: '/cover/cover_02.png',
       link: '/projects/byte_hi',
     },
     {
       label: 'The green fitness',
-      image: cover_03,
+      image: '/cover/cover_03.png',
       link: '/projects/byte_hi',
     },
     {
       label: 'Unfunctional Dream',
-      image: cover_04,
+      image: '/cover/cover_04.jpg',
       link: '/projects/byte_hi',
     },
     {
       label: 'Time synchronization',
-      image: cover_05,
+      image: '/cover/cover_05.jpeg',
       link: '/projects/byte_hi',
     },
     {
       label: 'Generative art lab',
-      image: cover_06,
+      image: '/cover/cover_06.png',
       link: '/projects/byte_hi',
     },
   ];
@@ -173,7 +153,12 @@ const Home: React.FC = () => {
                         href="/"
                         className="px-4 py-2 rounded-lg  text-white hover:bg-[#0062d6] font-medium"
                       >
-                        <Image src={logo} alt={''} />
+                        <Image
+                          width={32}
+                          height={32}
+                          src={'/logo.svg'}
+                          alt={''}
+                        />
                       </Link>
                     </div>
                   </div>
@@ -244,12 +229,12 @@ const Home: React.FC = () => {
         </div>
         <div className="bg-[#eeeeee]">
           <div className="max-w-7xl mx-auto z-20">
-            <div className="bg-[url(../../public/thinking.svg)] h-[300px] bg-cover bg-center"></div>
+            <div className="bg-[url(/thinking.svg)] h-[530px] bg-cover bg-center"></div>
           </div>
         </div>
         <div className="bg-white mb-[240px]">
           <div className="max-w-7xl mx-auto">
-            <TitleCard image={tob} />
+            <TitleCard image={'/cover/tob.svg'} />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 max-w-7xl mx-auto">
               {cards1.map((card, cardIndex) => (
                 <Card
@@ -261,7 +246,7 @@ const Home: React.FC = () => {
                 />
               ))}
             </div>
-            <TitleCard image={service} />
+            <TitleCard image={'/cover/service.svg'} />
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 max-w-7xl mx-auto">
               {card2.map((card, cardIndex) => (
@@ -275,7 +260,7 @@ const Home: React.FC = () => {
               ))}
             </div>
 
-            <TitleCard image={install} />
+            <TitleCard image={'/cover/install.svg'} />
 
             <div className="flex items-center gap-6 justify-center flex-wrap">
               {smallCards.map((item, index) => {
@@ -290,7 +275,7 @@ const Home: React.FC = () => {
               })}
             </div>
 
-            <TitleCard image={other} />
+            <TitleCard image={'/cover/other.svg'} />
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 max-w-7xl mx-auto">
               {card3.map((card, cardIndex) => (
