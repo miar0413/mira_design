@@ -39,13 +39,7 @@ export default async function ProjectPage(props: PageProps) {
 
   return (
     <>
-      <Header />
       <div className="flex mx-auto max-w-7xl">
-        <div className="max-w-64 box-border">
-          {navList.map((item) => {
-            return <div key={item.title}>{item.title}</div>;
-          })}
-        </div>
         <div className="flex-1">
           <MDXPostComponent post={post} navigation={navigation} />
         </div>

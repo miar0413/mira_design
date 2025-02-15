@@ -10,18 +10,15 @@ interface PostNavigationProps {
 
 export function PostNavigation({ prev, next }: PostNavigationProps) {
   return (
-    <nav className="flex justify-between mt-8 pt-8 border-t">
+    <nav className="flex justify-between mt-8 py-8 border-t font-Quark px-8">
       {prev ? (
         <Link
           href={`/projects/${prev.slug}`}
-          className="group flex items-center gap-2 hover:text-blue-500"
+          className="group flex items-center gap-2 text-right hover:text-[#c4c4c4]"
         >
-          <ChevronLeftIcon className="w-4 h-4" />
+          <ChevronLeftIcon className="w-6 h-6" />
           <div>
-            <div className="text-sm text-gray-500">上一篇</div>
-            <div className="font-medium group-hover:text-blue-500">
-              {prev.title}
-            </div>
+            <div className="text-2xl">Previous</div>
           </div>
         </Link>
       ) : (
@@ -31,15 +28,12 @@ export function PostNavigation({ prev, next }: PostNavigationProps) {
       {next ? (
         <Link
           href={`/projects/${next.slug}`}
-          className="group flex items-center gap-2 text-right hover:text-blue-500"
+          className="group flex items-center gap-2 text-right hover:text-[#c4c4c4]"
         >
           <div>
-            <div className="text-sm text-gray-500">下一篇</div>
-            <div className="font-medium group-hover:text-blue-500">
-              {next.title}
-            </div>
+            <div className="text-2xl">Next</div>
           </div>
-          <ChevronRightIcon className="w-4 h-4" />
+          <ChevronRightIcon className="w-6 h-6" />
         </Link>
       ) : (
         <div />

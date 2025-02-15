@@ -24,7 +24,14 @@ const MDXcomponents = {
       <div className="flex items-center justify-center">
         {srcArr.map((i: string) => {
           return (
-            <Image key={i} {...props} alt={props?.alt || ''} fill src={i} />
+            <Image
+              key={i}
+              {...props}
+              alt={props?.alt || ''}
+              width={1280}
+              height={300}
+              src={i}
+            />
           );
         })}
       </div>

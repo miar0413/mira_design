@@ -119,7 +119,7 @@ const Home: React.FC = () => {
   ];
 
   return (
-    <div className="mac-scrollbar mac-scrollbar-x mac-scrollbar-y scrollbar-hidden !relative">
+    <div className="mac-scrollbar mac-scrollbar-x mac-scrollbar-y scrollbar-hidden">
       <div className="top-0 bottom-0 left-0 right-0 opacity-30 z-[-1] flex items-center justify-center fixed">
         <Image
           src={'/cross_bg.svg'}

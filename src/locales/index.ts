@@ -8,7 +8,7 @@ export const locales = {
     darkMode: '深色模式',
     aboutMe: {
       hello: 'Hello! 👋',
-      nameEN: 'My name is Yan Min - you can call me Mira for short!',
+      nameEN: 'My name is Yan Min- you can call me Mira for short!',
       introductionZH:
         '我是闫敏，毕业于伦敦艺术大学交互设计硕士专业，作为一名拥有超过四年丰富经验的 UX 设计师。',
       introduction1:
