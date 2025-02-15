@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useAtom } from 'jotai';
 import Link from 'next/link';
 import { HamburgerMenuIcon, Cross1Icon } from '@radix-ui/react-icons';
+import Image from 'next/image';
 
 import { localeAtom } from '@/app/providers';
 import { locales } from '@/locales';
@@ -12,11 +13,17 @@ export default function Header() {
   const [locale] = useAtom(localeAtom);
 
   return (
-    <header className="sticky top-0 z-50 border-b backdrop-blur-lg bg-white/80 border-gray-200/50 shadow-sm">
-      <div className="max-w-7xl mx-auto">
-        <div className="flex justify-between items-center h-16">
+    <header className="opacity-100">
+      <div className="max-w-7xl mx-auto box-border px-8">
+        <div className="flex justify-between items-center">
           {/* Desktop Navigation */}
           <nav className="flex items-center space-x-1">
+            <Link
+              href="/"
+              className="px-4 py-2 rounded-lg text-black font-medium"
+            >
+              <Image width={32} height={32} src={'/logo.svg'} alt={''} />
+            </Link>
             <Link
               href="/"
               className="px-4 py-2 rounded-lg text-gray-700  hover:bg-slate-400 font-medium"

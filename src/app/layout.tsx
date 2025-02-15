@@ -1,5 +1,3 @@
-import { ThemeProvider } from '@/components/ThemeProvider';
-
 import 'normalize.css/normalize.css';
 import './globals.css';
 
@@ -10,9 +8,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body>
-        <ThemeProvider>{children}</ThemeProvider>
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

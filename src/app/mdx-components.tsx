@@ -20,7 +20,6 @@ const MDXcomponents = {
   ),
   Image: (props: ImageProps) => {
     const srcArr = (props?.src as string)?.split(',');
-
     return (
       <div className="flex items-center justify-center">
         {srcArr.map((i: string) => {

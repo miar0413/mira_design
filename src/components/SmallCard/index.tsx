@@ -15,8 +15,8 @@ const SmallCard: React.FC<IProps> = ({ label, image, link }) => {
         <Image
           src={image}
           alt={''}
-          height={358}
-          width={358}
+          height={333}
+          width={333}
           priority
           className="rounded-xl"
         />

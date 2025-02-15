@@ -5,9 +5,36 @@
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-rgb: 255, 255, 255;
+  --black: black;
+  --white: white;
+  --20-shade-of-grey: #eeeeee;
+  --30-shade-of-grey: #d9d9d9;
+  --50-shade-of-grey: #626262;
+  --40-shade-of-grey: #c4c4c4;
+  --close-to-black: #222;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: rgb(var(--background-rgb));
+  background-color: var(--20-shade-of-grey);
+  color: var(--black);
+  font-size: 16px;
+  line-height: 1.6em;
+}
+
+@font-face {
+  font-family: 'Quark';
+  src:
+    url('/fonts/quark/Quark-Bold.otf') format('opentype'),
+    url('/fonts/quark/Quark-Light.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: auto;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: url('/fonts/regular/Lato-Regular-15.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
