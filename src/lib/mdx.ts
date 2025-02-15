@@ -15,6 +15,7 @@ export interface Frontmatter {
   duration?: string;
   role?: string;
   tool?: string;
+  bg?: string;
   readingTime?: {
     minutes: number;
     words: number;

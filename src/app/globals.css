@@ -38,3 +38,19 @@ body {
   font-style: normal;
   font-display: swap;
 }
+
+.bg-custom-bg1 {
+  background-color: #eeeeee;
+}
+
+.bg-custom-bg2 {
+  background-color: #d0ecef;
+}
+
+.bg-custom-bg3 {
+  background-color: #efefef;
+}
+
+.bg-custom-bg4 {
+  background-color: #eaecee;
+}

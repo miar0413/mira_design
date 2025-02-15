@@ -1,13 +1,14 @@
 import path from 'path';
 import fs from 'fs/promises';
 
+import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import { ArrowLeftIcon } from '@radix-ui/react-icons';
 
 import { getMDXPost, getPostNavigation } from '@/lib/mdx';
 import { MDXPost as MDXPostComponent } from '@/components/MDXPost';
 import Header from '@/components/Header';
-import { navList } from '@/app/const';
 
 interface PageProps {
   params: Promise<{
@@ -38,12 +39,30 @@ export default async function ProjectPage(props: PageProps) {
   const navigation = await getPostNavigation(params.slug);
 
   return (
-    <>
-      <div className="flex mx-auto max-w-7xl">
-        <div className="flex-1">
-          <MDXPostComponent post={post} navigation={navigation} />
+    <div className="mac-scrollbar mac-scrollbar-x mac-scrollbar-y scrollbar-hidden">
+      <div className="top-0 bottom-0 left-0 right-0 opacity-30 z-[-1] flex items-center justify-center fixed">
+        <Image
+          src={'/cross_bg.svg'}
+          width="1250"
+          height={900}
+          alt="bg"
+          className="w-full h-full"
+        />
+      </div>
+      <Header />
+      <div className={`bg-${post.frontmatter.bg}`}>
+        <div className="flex mx-auto max-w-7xl box-border px-[60px] pt-[60px] gap-8 bg">
+          <div className="flex justify-center hover:text-[#c4c4c4] cursor-pointer">
+            <Link href="/" className="flex gap-1 font-bold font-Quark">
+              <ArrowLeftIcon width={24} height={24} />
+              Back
+            </Link>
+          </div>
+          <div className="flex-1">
+            <MDXPostComponent post={post} navigation={navigation} />
+          </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

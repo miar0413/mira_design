@@ -7,62 +7,68 @@ import Image, { ImageProps } from 'next/image';
 
 const MDXcomponents = {
   h1: (props: React.HTMLProps<HTMLHeadingElement>) => (
-    <h1 className="text-4xl font-medium my-5 text-[#1f2329]" {...props} />
+    <h1 className="font-Quark mb-8 text-[50px]" {...props} />
   ),
   h2: (props: React.HTMLProps<HTMLHeadingElement>) => (
-    <h2 className="text-2xl font-medium my-4 text-[#1f2329]" {...props} />
+    <h2 className="font-bold font-Quark" {...props} />
   ),
   h3: (props: React.HTMLProps<HTMLHeadingElement>) => (
-    <h3 className="text-xl font-medium my-3 text-[#1f2329]" {...props} />
+    <h3 className="font-bold font-Quark" {...props} />
   ),
   h4: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
-    <h4 className="text-xl font-semibold mt-6 mb-4" {...props} />
+    <h4 className="font-bold font-Quark" {...props} />
   ),
   Image: (props: ImageProps) => {
     const srcArr = (props?.src as string)?.split(',');
     return (
-      <div className="flex items-center justify-center">
+      <div className="flex items-center justify-center gap-4">
         {srcArr.map((i: string) => {
           return (
-            <Image
-              key={i}
-              {...props}
-              alt={props?.alt || ''}
-              width={1280}
-              height={300}
-              src={i}
-            />
+            <div key={i}>
+              <Image
+                {...props}
+                alt={props?.alt || ''}
+                width={1280}
+                height={300}
+                src={i}
+              />
+              {props?.alt ? (
+                <div className="flex justify-center text-[16px] text-[#6e6e6e] font-Lato mt-[-24px] text-center">
+                  {props?.alt}
+                </div>
+              ) : null}
+            </div>
           );
         })}
       </div>
     );
   },
   p: (props: React.HTMLProps<HTMLParagraphElement>) => (
-    <p className="text-base font-normal text-[#1f2329]" {...props} />
+    <p className="font-Lato text-[#3333333] text-[18px]" {...props} />
   ),
   ul: (props: React.HTMLProps<HTMLUListElement>) => (
-    <ul className="list-disc pl-5" {...props} />
+    <ul className="list-disc pl-4 text-[18px]" {...props} />
   ),
   ol: (props: React.HTMLAttributes<HTMLOListElement>) => {
-    return <ol className="list-decimal pl-5" {...props} />;
+    return <ol className="list-decimal pl-4 text-[18px]" {...props} />;
   },
   li: (props: React.HTMLProps<HTMLLIElement>) => {
-    return <li className="" {...props} />;
+    return <li className="text-[18px]" {...props} />;
   },
   blockquote: (props: React.BlockquoteHTMLAttributes<HTMLQuoteElement>) => (
     <blockquote
-      className="pl-4 border-l-4 border-gray-200 my-4 italic text-gray-300"
+      className="pl-4 border-l-[#c0c0c0] text-[#6e6e6e] not-italic font-Lato"
       {...props}
     />
   ),
   code: (props: React.HTMLAttributes<HTMLElement>) => (
-    <code className="bg-gray-600 rounded p-1" {...props} />
+    <code className="text-[18px]" {...props} />
   ),
   pre: (props: React.HTMLAttributes<HTMLPreElement>) => (
-    <pre className="bg-gray-600 rounded p-4 overflow-x-auto" {...props} />
+    <pre className="text-[18px]" {...props} />
   ),
   strong: (props: React.HTMLAttributes<HTMLElement>) => {
-    return <strong className="text-red-600" {...props} />;
+    return <strong className="text-[18px]" {...props} />;
   },
 };
 

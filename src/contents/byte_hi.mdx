@@ -1,20 +1,12 @@
----
-title: ByteHi Customer Service Experience Upgrade
-slug: 2024-02-05-001
-date: 2023.12-2024.12
-role: Product designer
-duration: 1 year 
-method: 用户研究,数据分析,UX&UI设计
----
-
-<Image src="/byte_hi/byte_hi.001.png" alt="byte_hi" className="mb-6 rounded-lg" />
-
 # ByteHi Customer Service Experience Upgrade
+
+<Image src="/byte_hi/byte_hi.001.png" alt="" className="mb-6 rounded-lg" />
+
 
 ## 从C端痛点出发，重塑 TikTok 客服系统设计
 在 TikTok 的庞大用户生态中，客服体验是影响用户满意度的关键因素。这次设计项目聚焦于 TikTok 客服管理系统，旨在解决现存问题，提升用户与客服的双向体验。下面和大家分享一下这个项目的思考过程与成果。
 ByteHi 解决TK的全球用户在使用产品过程中遇到的反馈问题，有多渠道，多场景等特点。我们拥有全球分布的1500+客服坐席利用坐席工作台通过「快」「慢」两种服务方式解决用户问题。同时客服运营团队通过体验管理平台，收集反馈问题，通过风险研判和问题上报流程帮助用户解决IN APP产品的体验问题。此外，通过运营系统设计，帮助客服运营，在控制人力成本增加的前提下，提升客服解决问题效率和质量。
-<br />
+
 ## 直面问题，深入剖析客服现状
 在项目启动前，我们通过对 2000 份问卷的分析，发现 TikTok 客服整体满意度仅 43%。
 **用户主要的不满集中在三个方面：**
@@ -23,71 +15,73 @@ ByteHi 解决TK的全球用户在使用产品过程中遇到的反馈问题，�
 3. 回复慢，31% 的用户对此抱怨
 深入调研还发现，离线留言的沟通方式效率低下，80% 的用户反馈找不到服务入口，同时客服服务水平参差不齐，话术不清晰、非本地化等问题突出。
 从客服运营角度来看，也面临诸多挑战。客服协作效率低，不同客服在服务质量、覆盖率和人效上缺乏共识，反馈流转机制不完善。此外，缺乏合理的客诉分级，难以集中资源解决高优问题。
-<br />
-## 明确方向，确立设计目标
+
+##  <span className="bg-red-300"> 明确方向，确立设计目标 </span>
 基于这些问题，我们确定了核心设计目标：让用户能更及时地获得 TikTok 服务支持，更自然地与客服沟通。这意味着要对 C 端客服体验进行全面升级，从优化咨询渠道、前置服务入口到集中查询问题回复。
 我通过梳理BC体验链路，发现B端客服系统将会在哪些环节扮演哪些角色，需要提供哪些服务和功能，我们从用户咨询-等待人工客服-人工客服响应等阶段绘制了bc体验链路，来洞察B端设计的机会点。
-<br />
+
+
 **发现:**
 1. 在用户咨询阶段：主要由于智能客服不智能，从而导致澄清话术不专业，bot难连续识别用户意图。
 2. 等待人工客服阶段：客服协作阻力大，工单转交效率低，客服协作链路长，技能组长难发现问题，及时干预。
 3. 人工客服响应阶段：客服回复慢，多语言找回复文案等体验差，IM工作台缺少提效工具。
-<br />
+
 **与此同时，B端明确设计目标，包括:**
 1. 搭建更好用的Bot配置平台，提升Bot解决率和满意度。 
 2. 搭建新工单坐席工作台，让协作更顺畅，提升回复率。
 3. 探索AI客服工具，全面提升客服处理时长和满意度
-<br />
+
 ## B 端设计策略与方案
 ### 策略一：打造智能 Bot 客服
 搭建更易用的 Bot 配置平台是提升客服效率的重要一步。我们发现运营线下维护知识库效率低且出错率高，于是搭建线上化知识库，统一知识和标签的生产标准与管理，并增加人工翻译标准操作流程（SOP）。在设计上，摒弃常规树状选择器，采用过滤展示提高批量操作效率；编辑答案时加入多语种实时预览功能，提升用户操作和阅读效率；针对相似问题，增加搜索和自动定位功能。通过这些改进，Bot 有效转人工率从 51.5% 提升到 81.2%，Bot 满意度从 42.5% 提升到 58.85%，还实现了 20 多种语言回复和 80% pv 的 bot 回复人工翻译，为多语言客服服务提供了有力支持。
-<br />
+
 ### 策略二：优化人工客服协作
 为解决人工客服协作问题，我们建立了更通用、灵活、便捷的反馈处理平台-新工单中心。从设计角度，我们详细描绘了工单全生命流程，涵盖接单、监控指标、工单状态管理等关键环节。针对标签体系不统一的问题，提出共享标签的概念，融入团队和业务分配中，方便业务间数据统计和协作。通过这些举措，转交工单的处理时长从30 分钟缩短到 1 分钟，24 小时人工首响率从 80.4% 提升到 92.5%，平均处理时长从78.5 小时缩短到 48 小时，人工满意度从 55.25% 提升到 58.8% 。
-<br />
+
 ### 策略三：关注客服体验细节
 除了上述核心设计，我们还关注到客服日常工作中的痛点，进行了一系列针对性优化。在工作台设计上，打造人性化首页，展示业务指标、跟进未完工作、定制日程表，给予客服贴心关怀，收到 120 条积极反馈，有效提升了客服对工作的掌控感。针对多语种难题，实现自动翻译反馈原声、常用语回复和搜索自动翻译语种，降低小语种客服培训成本和处理难度，小语种回复时间从 5 分钟缩短到 3 分钟。优化工单挂起功能，增加声音和界面提示，创建子工单连接下游平台，提高处理效率。为技能组长设计更清晰的监控界面，增加按技能组维度的统计面板，方便调配人力资源。
-<br />
+
 ### 策略四：引入AI辅助工具
 在AI工具探索方面，我们尝试了多种创新功能。比如，话术推荐功能以单点形式嵌入回复框，默认填充打招呼话术并自动翻译，还提供【AI换一换】操作，提升推荐话术的多样性和实用性，客服采纳率从 54.5% 提升到 73.1%。SOP解决方案根据反馈标签自动推荐标准操作流程，优化客服工作流程，降低思考成本。会话完结时自动创建工单并AI 预填表单，缩短客服操作路径，提升完结工单时效。这些AI工具的应用，使平均处理时长进一步缩短到 26.2H，IM2分钟首响率提升到 90.2%。
-<br />
+
 ## 客服效能提升，全面支持TikTok业务增长
 通过这次全面的设计升级，TikTok 客服管理系统取得了显著成果。在智能客服体验方面，知识库上线时间从 1 天缩短到 1 小时，Bot 各项指标大幅提升，多语言回复能力增强。人工客服协作效率显著提高，工单处理时长、首响率和满意度等关键指标都有明显改善。借助 AI 工具，客服工作效率进一步提升，平均处理时长大幅缩短，AI 推荐准确度和客服采纳率显著提高。这些成果不仅提升了客服的工作体验和效率，更重要的是，反哺了 C 端用户，有效解决了用户反馈慢的问题，为 TikTok 的用户体验提升提供了坚实保障。
 这次项目让我们深刻认识到，从用户痛点出发，以设计为驱动，结合技术创新，能够为客服系统带来质的飞跃。未来，我们将继续探索更多优化空间，不断提升用户与客服的体验。
-<br />
+
 ## 过程演示：ByteHi客服系统设计
-<Image src="/byte_hi/byte_hi.002.png" alt="byte_hi" className="my-6 rounded-lg" />
-<Image src="/byte_hi/byte_hi.003.png" alt="byte_hi" className="my-6 rounded-lg" />
-<Image src="/byte_hi/byte_hi.004.png" alt="byte_hi" className="my-6 rounded-lg" />
-<Image src="/byte_hi/byte_hi.005.png" alt="byte_hi" className="my-6 rounded-lg" />
-<Image src="/byte_hi/byte_hi.006.png" alt="byte_hi" className="my-6 rounded-lg" />
-<Image src="/byte_hi/byte_hi.007.png" alt="byte_hi" className="my-6 rounded-lg" />
-<Image src="/byte_hi/byte_hi.008.png" alt="byte_hi" className="my-6 rounded-lg" />
-<Image src="/byte_hi/byte_hi.009.png" alt="byte_hi" className="my-6 rounded-lg" />
-<Image src="/byte_hi/byte_hi.010.png" alt="byte_hi" className="my-6 rounded-lg" />
-<Image src="/byte_hi/byte_hi.011.png" alt="byte_hi" className="my-6 rounded-lg" />
-<Image src="/byte_hi/byte_hi.013.png" alt="byte_hi" className="my-6 rounded-lg" />
-<Image src="/byte_hi/byte_hi.014.png" alt="byte_hi" className="my-6 rounded-lg" />
-<Image src="/byte_hi/byte_hi.015.png" alt="byte_hi" className="my-6 rounded-lg" />
-<Image src="/byte_hi/byte_hi.016.png" alt="byte_hi" className="my-6 rounded-lg" />
-<Image src="/byte_hi/byte_hi.017.png" alt="byte_hi" className="my-6 rounded-lg" />
-<Image src="/byte_hi/byte_hi.018.png" alt="byte_hi" className="my-6 rounded-lg" />
-<Image src="/byte_hi/byte_hi.019.png" alt="byte_hi" className="my-6 rounded-lg" />
-<Image src="/byte_hi/byte_hi.020.png" alt="byte_hi" className="my-6 rounded-lg" />
-<Image src="/byte_hi/byte_hi.021.png" alt="byte_hi" className="my-6 rounded-lg" />
-<Image src="/byte_hi/byte_hi.022.png" alt="byte_hi" className="my-6 rounded-lg" />
-<Image src="/byte_hi/byte_hi.023.png" alt="byte_hi" className="my-6 rounded-lg" />
-<Image src="/byte_hi/byte_hi.024.png" alt="byte_hi" className="my-6 rounded-lg" />
-<Image src="/byte_hi/byte_hi.025.png" alt="byte_hi" className="my-6 rounded-lg" />
-<Image src="/byte_hi/byte_hi.026.png" alt="byte_hi" className="my-6 rounded-lg" />
-<Image src="/byte_hi/byte_hi.027.png" alt="byte_hi" className="my-6 rounded-lg" />
-<Image src="/byte_hi/byte_hi.029.png" alt="byte_hi" className="my-6 rounded-lg" />
-<Image src="/byte_hi/byte_hi.030.png" alt="byte_hi" className="my-6 rounded-lg" />
-<Image src="/byte_hi/byte_hi.031.png" alt="byte_hi" className="my-6 rounded-lg" />
-<Image src="/byte_hi/byte_hi.032.png" alt="byte_hi" className="my-6 rounded-lg" />
-<Image src="/byte_hi/byte_hi.033.png" alt="byte_hi" className="my-6 rounded-lg" />
-<Image src="/byte_hi/byte_hi.034.png" alt="byte_hi" className="my-6 rounded-lg" />
-<Image src="/byte_hi/byte_hi.035.png" alt="byte_hi" className="my-6 rounded-lg" />
-<Image src="/byte_hi/byte_hi.036.png" alt="byte_hi" className="my-6 rounded-lg" />
-<Image src="/byte_hi/byte_hi.037.png" alt="byte_hi" className="my-6 rounded-lg" />
-<Image src="/byte_hi/byte_hi.038.png" alt="byte_hi" className="my-6 rounded-lg" />
+
+<Image src="/byte_hi/byte_hi.002.png" alt=" 以设计为驱动，结合技术创新以设计为驱动，结合技术创新以设计为驱动，结合技术创新以设计为驱动，结合技术创新以设计为驱动，结合技术创新以设计为驱动，结合技术创新以设计为驱动，结合技术创新" className="rounded-lg" />
+<Image src="/byte_hi/byte_hi.003.png" alt="" className="rounded-lg" />
+<Image src="/byte_hi/byte_hi.004.png" alt="" className="rounded-lg" />
+<Image src="/byte_hi/byte_hi.005.png" alt="" className="rounded-lg" />
+<Image src="/byte_hi/byte_hi.006.png" alt="" className="rounded-lg" />
+<Image src="/byte_hi/byte_hi.007.png" alt="" className="rounded-lg" />
+<Image src="/byte_hi/byte_hi.008.png" alt="" className="rounded-lg" />
+<Image src="/byte_hi/byte_hi.009.png" alt="" className="rounded-lg" />
+<Image src="/byte_hi/byte_hi.010.png" alt="" className="rounded-lg" />
+<Image src="/byte_hi/byte_hi.011.png" alt="" className="rounded-lg" />
+<Image src="/byte_hi/byte_hi.013.png" alt="" className="rounded-lg" />
+<Image src="/byte_hi/byte_hi.014.png" alt="" className="rounded-lg" />
+<Image src="/byte_hi/byte_hi.015.png" alt="" className="rounded-lg" />
+<Image src="/byte_hi/byte_hi.016.png" alt="" className="rounded-lg" />
+<Image src="/byte_hi/byte_hi.017.png" alt="" className="rounded-lg" />
+<Image src="/byte_hi/byte_hi.018.png" alt="" className="rounded-lg" />
+<Image src="/byte_hi/byte_hi.019.png" alt="" className="rounded-lg" />
+<Image src="/byte_hi/byte_hi.020.png" alt="" className="rounded-lg" />
+<Image src="/byte_hi/byte_hi.021.png" alt="" className="rounded-lg" />
+<Image src="/byte_hi/byte_hi.022.png" alt="" className="rounded-lg" />
+<Image src="/byte_hi/byte_hi.023.png" alt="" className="rounded-lg" />
+<Image src="/byte_hi/byte_hi.024.png" alt="" className="rounded-lg" />
+<Image src="/byte_hi/byte_hi.025.png" alt="" className="rounded-lg" />
+<Image src="/byte_hi/byte_hi.026.png" alt="" className="rounded-lg" />
+<Image src="/byte_hi/byte_hi.027.png" alt="" className="rounded-lg" />
+<Image src="/byte_hi/byte_hi.029.png" alt="" className="rounded-lg" />
+<Image src="/byte_hi/byte_hi.030.png" alt="" className="rounded-lg" />
+<Image src="/byte_hi/byte_hi.031.png" alt="" className="rounded-lg" />
+<Image src="/byte_hi/byte_hi.032.png" alt="" className="rounded-lg" />
+<Image src="/byte_hi/byte_hi.033.png" alt="" className="rounded-lg" />
+<Image src="/byte_hi/byte_hi.034.png" alt="" className="rounded-lg" />
+<Image src="/byte_hi/byte_hi.035.png" alt="" className="rounded-lg" />
+<Image src="/byte_hi/byte_hi.036.png" alt="" className="rounded-lg" />
+<Image src="/byte_hi/byte_hi.037.png" alt="" className="rounded-lg" />
+<Image src="/byte_hi/byte_hi.038.png" alt="" className="rounded-lg" />

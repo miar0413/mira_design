@@ -17,7 +17,13 @@ module.exports = {
         upright: 'upright', // 字符正立
         sideways: 'sideways', // 字符侧立
       },
+      colors: {
+        'custom-bg': '#FF5733', // 自定义背景颜色
+      },
     },
   },
-  plugins: [require('@hyeon/mac-scrollbar')],
+  plugins: [
+    require('@hyeon/mac-scrollbar'),
+    require('@tailwindcss/typography'),
+  ],
 };
