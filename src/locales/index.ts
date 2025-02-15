@@ -1,8 +1,8 @@
 export const locales = {
   zh: {
-    home: '首页',
-    about: '关于我',
-    projects: '项目',
+    home: 'HOME',
+    about: 'ABOUT',
+    projects: 'PROJECT',
     switchLanguage: 'English',
     lightMode: '浅色模式',
     darkMode: '深色模式',

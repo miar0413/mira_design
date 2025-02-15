@@ -14,34 +14,34 @@ export default function Header() {
 
   return (
     <header className="opacity-100">
-      <div className="max-w-7xl mx-auto box-border px-8">
-        <div className="flex justify-between items-center">
+      <div className="max-w-7xl mx-auto box-border">
+        <div className="flex justify-between h-20">
           {/* Desktop Navigation */}
-          <nav className="flex items-center space-x-1">
-            <Link
-              href="/"
-              className="px-4 py-2 rounded-lg text-black font-medium"
-            >
+          <nav className="flex items-center space-x-12 text-[16px] font-Quark mt-8">
+            <Link href="/" className="py-2 rounded-lg text-black font-medium">
               <Image width={32} height={32} src={'/logo.svg'} alt={''} />
             </Link>
             <Link
               href="/"
-              className="px-4 py-2 rounded-lg text-gray-700  hover:bg-slate-400 font-medium"
+              className="py-2 rounded-lg font-medium relative group hover:text-[#c4c4c4]"
             >
-              {locales[locale]?.home}
+              <div className="">{locales[locale]?.home}</div>
+              <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-black group-hover:w-full transition-all duration-300"></span>
             </Link>
             <Link
               href="/projects/byte_hi"
-              className="px-4 py-2 rounded-lg text-gray-700 hover:bg-slate-400 font-medium"
+              className="py-2 rounded-lg font-medium relative group hover:text-[#c4c4c4]"
             >
               {locales[locale].projects}
+              <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-black group-hover:w-full transition-all duration-300"></span>
             </Link>
 
             <Link
               href="/about"
-              className="px-4 py-2 rounded-lg text-gray-700 hover:bg-slate-400 font-medium"
+              className="py-2 rounded-lg font-medium relative group hover:text-[#c4c4c4]"
             >
               {locales[locale].about}
+              <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-black group-hover:w-full transition-all duration-300"></span>
             </Link>
           </nav>
 
@@ -61,7 +61,6 @@ export default function Header() {
             )}
           </button>
         </div>
-
         {/* Mobile Menu */}
         {isMenuOpen && (
           <div

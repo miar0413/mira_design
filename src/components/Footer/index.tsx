@@ -1,6 +1,12 @@
 import React from 'react';
 import { EnvelopeClosedIcon, InstagramLogoIcon } from '@radix-ui/react-icons';
 import Image from 'next/image';
+import {
+  AlertDialog,
+  AlertDialogTrigger,
+  AlertDialogContent,
+  AlertDialogAction,
+} from '@radix-ui/react-alert-dialog';
 
 import Tooltip from '../Tooltip';
 
@@ -25,8 +31,9 @@ const Footer: React.FC = () => {
               />
             </a>
           </Tooltip>
-          <Tooltip content={`Send Email To ${EmailStr}`}>
-            <a href={`mailto:${EmailStr}`}>
+
+          <AlertDialog>
+            <AlertDialogTrigger asChild>
               <Image
                 className="cursor-pointer"
                 src="/wechat.svg"
@@ -34,10 +41,31 @@ const Footer: React.FC = () => {
                 width={32}
                 alt=""
               />
-            </a>
-          </Tooltip>
-          <Tooltip content={`Send Email To ${EmailStr}`}>
-            <a href={`mailto:${EmailStr}`}>
+            </AlertDialogTrigger>
+            <AlertDialogContent className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white p-6 rounded-lg shadow-lg">
+              <Image
+                className="cursor-pointer rounded"
+                src="/wechat_qr_code.JPG"
+                height={320}
+                width={320}
+                alt=""
+              />
+              <div className="flex justify-end gap-4 mt-4">
+                <AlertDialogAction asChild>
+                  <button className="font-Quark font-bold text-lg hover:bg-gray-200 px-3 py-1 rounded">
+                    确认
+                  </button>
+                </AlertDialogAction>
+              </div>
+            </AlertDialogContent>
+          </AlertDialog>
+
+          <Tooltip content={`Instagram`}>
+            <a
+              href={'https://www.instagram.com/_mira_ym/profilecard'}
+              target="_blank"
+              rel="noreferrer"
+            >
               <InstagramLogoIcon
                 className="cursor-pointer"
                 width={32}
