@@ -50,7 +50,7 @@ export default async function ProjectPage(props: PageProps) {
         />
       </div>
       <Header />
-      <div className={`bg-${post.frontmatter.bg}`}>
+      <div className={`bg-${post?.frontmatter?.bg || ''}`}>
         <div className="flex mx-auto max-w-7xl box-border px-[60px] pt-[60px] gap-8 bg">
           <div className="flex justify-center hover:text-[#c4c4c4] cursor-pointer">
             <Link href="/" className="flex gap-1 font-bold font-Quark">

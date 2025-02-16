@@ -19,28 +19,8 @@ const MDXcomponents = {
     <h4 className="font-bold font-Quark" {...props} />
   ),
   Image: (props: ImageProps) => {
-    const srcArr = (props?.src as string)?.split(',');
     return (
-      <div className="flex items-center justify-center gap-4">
-        {srcArr.map((i: string) => {
-          return (
-            <div key={i}>
-              <Image
-                {...props}
-                alt={props?.alt || ''}
-                width={1280}
-                height={300}
-                src={i}
-              />
-              {props?.alt ? (
-                <div className="flex justify-center text-[16px] text-[#6e6e6e] font-Lato mt-[-24px] text-center">
-                  {props?.alt}
-                </div>
-              ) : null}
-            </div>
-          );
-        })}
-      </div>
+      <Image {...props} alt={props?.alt || ''} width={1280} height={300} />
     );
   },
   p: (props: React.HTMLProps<HTMLParagraphElement>) => (
