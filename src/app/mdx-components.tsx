@@ -42,7 +42,11 @@ const MDXcomponents = {
     />
   ),
   code: (props: React.HTMLAttributes<HTMLElement>) => (
-    <code className="text-[18px]" {...props} />
+    //标签样式
+    <code
+      className="text-[16px] font-Lato after:content-none before:contain-none bg-[#efefef] px-2 py-1 rounded-lg text-[#4a4a4a]"
+      {...props}
+    />
   ),
   pre: (props: React.HTMLAttributes<HTMLPreElement>) => (
     <pre className="text-[18px]" {...props} />
