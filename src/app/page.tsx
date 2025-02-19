@@ -27,17 +27,17 @@ const Home: React.FC = () => {
     {
       label: 'Unfunctional Dream',
       image: '/cover/cover_04.jpg',
-      link: '/projects/byte_hi',
+      link: '/projects/unfunctional_dream',
     },
     {
       label: 'Time synchronization',
       image: '/cover/cover_05.jpeg',
-      link: '/projects/byte_hi',
+      link: '/projects/time_synchronization',
     },
     {
       label: 'Generative art lab',
       image: '/cover/cover_06.png',
-      link: '/projects/byte_hi',
+      link: '/projects/generative_art',
     },
   ];
 
@@ -83,14 +83,14 @@ const Home: React.FC = () => {
           description:
             '提供智能办公场景解决方案，使ACTIVA产品系列作为灵动办公空间基底，接入办公空间及办公终端等办公云服务场景中。',
           image: '/cover/colink_cover.png',
-          link: '#',
+          link: '/projects/office_design',
         },
         {
           title: 'For Vanke’s Mehos home life service innovation',
           description:
             'Mehos在客群购房全流程中提供的伴随式服务，包括灵感激发服务、居家定制选配服务、居家生活精选服务、居家无忧关怀服务等',
           image: '/cover/vanke_cover.png',
-          link: '#',
+          link: '/projects/mehos_design',
         },
       ],
     },
@@ -105,14 +105,14 @@ const Home: React.FC = () => {
           description:
             '华侨大学-侨侨中华文化传播智能机器人，通过提供知识性的服务和华大线上汉语学习课程，来满足海外侨胞的学习诉求。',
           image: '/cover/qiao_cover.png',
-          link: '/projects/digital_innovation',
+          link: '/projects/qiaoqiao',
         },
         {
           title: 'Yiker, an Private Guidance of Beauty&Fashion app',
           description:
             'Yiker像是私人衣橱管家平台，通过快速预约直播，AR私厨管理购买，线下线上结合，为人们提供私人指导服务和衣橱管理服务。',
           image: '/cover/yike_cover.png',
-          link: '/projects/life_design',
+          link: '/projects/yiker',
         },
       ],
     },
