@@ -22,7 +22,7 @@ const Home: React.FC = () => {
     {
       label: 'The green fitness',
       image: '/cover/cover_03.png',
-      link: '/projects/byte_hi',
+      link: '/projects/green_fitness',
     },
     {
       label: 'Unfunctional Dream',
