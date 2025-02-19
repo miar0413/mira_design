@@ -12,12 +12,12 @@ const Home: React.FC = () => {
     {
       label: 'The filtered home',
       image: '/cover/cover_01.png',
-      link: '/projects/byte_hi',
+      link: '/projects/filter_home',
     },
     {
       label: '2028 ordinary kitchen',
       image: '/cover/cover_02.png',
-      link: '/projects/byte_hi',
+      link: '/projects/ordinary_kitchen',
     },
     {
       label: 'The green fitness',
