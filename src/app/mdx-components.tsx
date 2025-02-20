@@ -61,6 +61,19 @@ const MDXcomponents = {
   strong: (props: React.HTMLAttributes<HTMLElement>) => {
     return <strong className="text-[16px]" {...props} />;
   },
+  ScrollView: (
+    props: React.HTMLAttributes<HTMLDivElement> & { content: string }
+  ) => {
+    return (
+      <div className="flex justify-center">
+        <div className="text-nowrap whitespace-nowrap inline-flex bg-[#e3ff0f] !text-[#292828] !text-[22px] overflow-hidden max-w-[880px] min-w-[880px] relative">
+          <div className="inline-block animate-scrollText font-Lato">
+            <span className="whitespace-nowrap">{props.content}</span>
+          </div>
+        </div>
+      </div>
+    );
+  },
 };
 
 export default MDXcomponents;

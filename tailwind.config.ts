@@ -20,6 +20,15 @@ module.exports = {
       colors: {
         'custom-bg': '#FF5733', // 自定义背景颜色
       },
+      keyframes: {
+        scrollText: {
+          '0%': { transform: 'translateX(0%)' },
+          '100%': { transform: 'translateX(calc(-100% + 800px))' },
+        },
+      },
+      animation: {
+        scrollText: 'scrollText 14s linear infinite',
+      },
     },
   },
   plugins: [
