@@ -20,20 +20,27 @@ const MDXcomponents = {
   ),
   Image: (props: ImageProps) => {
     return (
-      <Image {...props} alt={props?.alt || ''} width={1280} height={300} />
+      <div>
+        <Image width={1280} height={300} {...props} alt={props?.alt || ''} />
+        {props?.alt ? (
+          <div className="text-center text-[14px] mt-[-20px] text-[#6F6F6F]">
+            {props?.alt || ''}
+          </div>
+        ) : null}
+      </div>
     );
   },
   p: (props: React.HTMLProps<HTMLParagraphElement>) => (
-    <p className="font-Lato text-[#3333333] text-[18px]" {...props} />
+    <p className="font-Lato text-[#3333333] text-[16px]" {...props} />
   ),
   ul: (props: React.HTMLProps<HTMLUListElement>) => (
-    <ul className="list-disc pl-4 text-[18px]" {...props} />
+    <ul className="list-disc pl-4 text-[16px]" {...props} />
   ),
   ol: (props: React.HTMLAttributes<HTMLOListElement>) => {
-    return <ol className="list-decimal pl-4 text-[18px]" {...props} />;
+    return <ol className="list-decimal pl-4 text-[16px]" {...props} />;
   },
   li: (props: React.HTMLProps<HTMLLIElement>) => {
-    return <li className="text-[18px]" {...props} />;
+    return <li className="text-[16px]" {...props} />;
   },
   blockquote: (props: React.BlockquoteHTMLAttributes<HTMLQuoteElement>) => (
     <blockquote
@@ -44,15 +51,15 @@ const MDXcomponents = {
   code: (props: React.HTMLAttributes<HTMLElement>) => (
     //标签样式
     <code
-      className="text-[16px] font-Lato after:content-none before:contain-none bg-[#efefef] px-2 py-1 rounded-lg text-[#4a4a4a]"
+      className="text-[16px] font-Lato after:content-none before:contain-none bg-[#E0DFDF] px-2 py-1 rounded-lg text-[#242424]"
       {...props}
     />
   ),
   pre: (props: React.HTMLAttributes<HTMLPreElement>) => (
-    <pre className="text-[18px]" {...props} />
+    <pre className="text-[16px]" {...props} />
   ),
   strong: (props: React.HTMLAttributes<HTMLElement>) => {
-    return <strong className="text-[18px]" {...props} />;
+    return <strong className="text-[16px]" {...props} />;
   },
 };
 
