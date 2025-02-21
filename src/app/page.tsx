@@ -119,7 +119,7 @@ const Home: React.FC = () => {
   ];
 
   return (
-    <div className="mac-scrollbar mac-scrollbar-x mac-scrollbar-y scrollbar-hidden">
+    <div className="mac-scrollbar mac-scrollbar-x mac-scrollbar-y h-screen">
       <div className="top-0 bottom-0 left-0 right-0 opacity-30 z-[-1] flex items-center justify-center fixed">
         <Image
           src={'/cross_bg.svg'}
@@ -133,11 +133,11 @@ const Home: React.FC = () => {
       <div className="max-w-7xl mx-auto pl-[60px] box-border">
         {/* 主要内容 */}
         <div className="mt-[100px] mb-[140px]">
-          <div className="text-[80px] leading-[80px] font-bold font-Quark">
+          <div className="text-[80px] leading-[80px] font-bold font-Quark transform transition-all opacity-0 animate-fade-in">
             <div>Hello, I'm YanMin</div>
             <div>a product designer.</div>
           </div>
-          <div className="mt-5 text-[50px] leading-[60px] text-[#606062] font-normal font-Lato">
+          <div className="mt-5 text-[50px] leading-[60px] text-[#606062] font-normal font-Lato transform transition-all opacity-0 animate-fade-in">
             <div>I create data-driven solutions that</div>
             <div>elevate human experiences.</div>
           </div>
@@ -148,10 +148,10 @@ const Home: React.FC = () => {
           <CardList listData={listData} />
         </div>
         <div className="max-w-7xl mx-auto mt-32">
-          <div className="flex gap-[80px]">
-            <div className="w-[100px] pl-8">
-              <div className="sticky top-[150px]">
-                <div className="rotate-90 origin-left">
+          <div className="flex gap-[60px]">
+            <div className="w-[100px]">
+              <div className="sticky top-0 z-[10]">
+                <div className="rotate-90 origin-left bg-[#eeeeee] w-fit">
                   <div className="text-[70px] font-Quark text-[#d6d6d6]">
                     <div className="transform leading-[80px] text-nowrap">
                       Installation art

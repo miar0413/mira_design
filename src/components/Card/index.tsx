@@ -56,9 +56,9 @@ const CardList: React.FC<{ listData: IListProps[] }> = ({ listData }) => {
   return listData.map((item) => {
     return (
       <div className="flex gap-[80px]" key={item.title}>
-        <div className="w-[100px] pl-8">
-          <div className="sticky top-[150px]">
-            <div className="rotate-90 origin-left">
+        <div className="w-[100px]">
+          <div className="sticky top-0 z-[10]">
+            <div className="rotate-90 origin-left bg-[#eeeeee] w-fit">
               <div className="text-[70px] font-Quark text-[#d6d6d6]">
                 <div className="transform leading-[80px] text-nowrap">
                   {item.title}

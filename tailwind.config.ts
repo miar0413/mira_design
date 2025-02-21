@@ -25,9 +25,32 @@ module.exports = {
           '0%': { transform: 'translateX(0%)' },
           '100%': { transform: 'translateX(calc(-100% + 800px))' },
         },
+        fadeIn: {
+          '0%': {
+            transform: 'translate3d(0px, 0px, 0px) scale3d(0.9, 0.9, 1)',
+            opacity: 0,
+          },
+          '100%': {
+            transform:
+              'translate3d(0px, 0px, 0px) scale3d(1.04168, 1.04168, 1)',
+            opacity: 1,
+          },
+        },
+        zoomIn: {
+          '0%': {
+            transform: 'translate3d(0px, 0px, 0px) scale3d(1, 1, 1)',
+            opacity: 0,
+          },
+          '100%': {
+            transform: 'translate3d(0px, 0px, 0px) scale3d(1.1, 1.1, 1)',
+            opacity: 1,
+          },
+        },
       },
       animation: {
         scrollText: 'scrollText 14s linear infinite',
+        'fade-in': 'fadeIn 0.5s ease-out forwards',
+        'zoom-in': 'zoomIn 0.6s ease-out forwards',
       },
     },
   },

@@ -18,7 +18,7 @@ const SmallCard: React.FC<IProps> = ({ label, image, link }) => {
           height={333}
           width={333}
           priority
-          className="rounded-xl"
+          className="rounded"
         />
 
         <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-all duration-300"></div>
