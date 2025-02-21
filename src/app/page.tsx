@@ -10,6 +10,11 @@ import CardList from '@/components/Card';
 const Home: React.FC = () => {
   const smallCards = [
     {
+      label: 'Generative art lab',
+      image: '/cover/cover_06.png',
+      link: '/projects/generative_art',
+    },
+    {
       label: 'The filtered home',
       image: '/cover/cover_01.png',
       link: '/projects/filter_home',
@@ -33,11 +38,6 @@ const Home: React.FC = () => {
       label: 'Time synchronization',
       image: '/cover/cover_05.jpeg',
       link: '/projects/time_synchronization',
-    },
-    {
-      label: 'Generative art lab',
-      image: '/cover/cover_06.png',
-      link: '/projects/generative_art',
     },
   ];
 
