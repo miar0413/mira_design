@@ -14,7 +14,7 @@ const EmailStr = 'miradesign0413@gmail.com';
 
 const Footer: React.FC = () => {
   return (
-    <footer className="max-w-7xl px-8 mx-auto flex items-center justify-between box-border font-Quark py-11 text-[24px] leading-6">
+    <footer className="max-w-7xl px-8 mx-auto flex items-center justify-between box-border font-Quark py-11 text-[20px] leading-6">
       <div className="flex justify-between items-center">
         <div className="">
           {`Copyright © ${new Date().getFullYear()} YanMin. All rights reserved.`}
@@ -26,8 +26,8 @@ const Footer: React.FC = () => {
             <a href={`mailto:${EmailStr}`}>
               <EnvelopeClosedIcon
                 className="cursor-pointer"
-                width={32}
-                height={32}
+                width={30}
+                height={30}
               />
             </a>
           </Tooltip>
@@ -37,8 +37,8 @@ const Footer: React.FC = () => {
               <Image
                 className="cursor-pointer"
                 src="/wechat.svg"
-                height={32}
-                width={32}
+                height={30}
+                width={30}
                 alt=""
               />
             </AlertDialogTrigger>

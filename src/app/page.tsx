@@ -48,14 +48,14 @@ const Home: React.FC = () => {
         {
           title: 'ByteHi customer service upgrade',
           description:
-            'ByteHi是TikTok客服服务系统。在全渠道、多场景的客服解决方案上，为C端用户提供流畅的服务体验。',
+            'ByteHi is the customer service system for TikTok. It provides a seamless service experience for users through multi-scenario customer service solutions.',
           image: '/cover/Bytehi_cover.png',
           link: '/projects/byte_hi',
         },
         {
           title: 'Risk management platform for content reviewing',
           description:
-            'RMP通过风险监测技术保障TikTok上的内容质量安全，为风险响应团队提供高效应对风险的解决方案，以提升基础内容体验。',
+            'RMP ensures the quality and safety of content on TikTok through risk monitoring technology, and provides efficient solutions for the risk response team to effeciently address risks.',
           image: '/cover/risk_cover.png',
           link: '/projects/risk_management',
         },
@@ -67,28 +67,28 @@ const Home: React.FC = () => {
         {
           title: 'Digital Innovation of future mobility & Cloud service app',
           description:
-            '在“未来数字体验”方向下结合本土市场，研究智慧出行场景，通过数字化和云服务全面重塑传统汽车产业，提供C2B创新服务模式。',
+            'The project focuses on smart mobility scenarios in the local market and offers an innovative C2B service model to reshape the traditional automotive industry through digitalization and cloud services.',
           image: '/cover/digital_cover.png',
           link: '/projects/digital_innovation',
         },
         {
           title: 'Life design for media & smart health community app',
           description:
-            '将美的未来生活场景洞察数据用故事演绎的方式表达，并设计健康社区生活app，帮助人们与社区建立更紧密的关系。',
+            'The project expresses insights into future living scenarios of Midea through storytelling, and designs a app to help people build closer relationships with their communities.',
           image: '/cover/life_cover.gif',
           link: '/projects/life_design',
         },
         {
           title: 'Digital experience in a collaborative office space',
           description:
-            '提供智能办公场景解决方案，使ACTIVA产品系列作为灵动办公空间基底，接入办公空间及办公终端等办公云服务场景中。',
+            'The project provides smart office scenario solutions based on the ACTIVA product for flexible office spaces with cloud service scenarios',
           image: '/cover/colink_cover.png',
           link: '/projects/office_design',
         },
         {
           title: 'For Vanke’s Mehos home life service innovation',
           description:
-            'Mehos在客群购房全流程中提供的伴随式服务，包括灵感激发服务、居家定制选配服务、居家生活精选服务、居家无忧关怀服务等',
+            'Mehos offers a range of companion services throughout the entire home-purchasing process for its customers, including inspiration, customized home selection, curated home life, and worry-free home care-six services.',
           image: '/cover/vanke_cover.png',
           link: '/projects/mehos_design',
         },
@@ -103,14 +103,14 @@ const Home: React.FC = () => {
         {
           title: 'QiaoQiao intelligent bot for chinese learning App',
           description:
-            '华侨大学-侨侨中华文化传播智能机器人，通过提供知识性的服务和华大线上汉语学习课程，来满足海外侨胞的学习诉求。',
+            '"Qiaoqiao" Intelligent Robot provides knowledge-based services and online Chinese language courses from Huaqiao University to meet the learning needs of overseas Chinese.',
           image: '/cover/qiao_cover.png',
           link: '/projects/qiaoqiao',
         },
         {
           title: 'Yiker, an Private Guidance of Beauty&Fashion app',
           description:
-            'Yiker像是私人衣橱管家平台，通过快速预约直播，AR私厨管理购买，线下线上结合，为人们提供私人指导服务和衣橱管理服务。',
+            'Yiker is a personal wardrobe management platform. It offers personalized guidance and wardrobe management services by combining offline and online approaches using of live streaming and AR tech.',
           image: '/cover/yike_cover.png',
           link: '/projects/yiker',
         },
@@ -132,7 +132,7 @@ const Home: React.FC = () => {
       <Header />
       <div className="max-w-7xl mx-auto pl-[60px] box-border">
         {/* 主要内容 */}
-        <div className="mt-[60px] mb-[140px]">
+        <div className="mt-[100px] mb-[140px]">
           <div className="text-[80px] leading-[80px] font-bold font-Quark">
             <div>Hello, I'm YanMin</div>
             <div>a product designer.</div>
@@ -175,7 +175,7 @@ const Home: React.FC = () => {
           </div>
         </div>
 
-        <div className="flex flex-col gap-y-32 mt-32 mb-[60px]">
+        <div className="flex flex-col gap-y-32 mt-40 mb-[60px]">
           <CardList listData={otherListData} />
         </div>
       </div>
