@@ -15,7 +15,7 @@ export default function Header(props: { isDetailPage?: boolean }) {
   const [locale] = useAtom(localeAtom);
 
   const headClassname = props?.isDetailPage
-    ? 'opacity-100 sticky top-0 z-[10] bg-opacity-10 backdrop-filter backdrop-blur-lg shadow-lg'
+    ? 'opacity-100 sticky top-0 z-[10] bg-opacity-10 backdrop-filter backdrop-blur-lg'
     : 'opacity-100';
 
   return (
