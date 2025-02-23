@@ -6,8 +6,9 @@ import { serialize } from 'next-mdx-remote/serialize';
 import matter from 'gray-matter';
 import { MDXRemoteSerializeResult } from 'next-mdx-remote';
 
-import { getReadingTime } from './readingTime';
 import { flatList, NavItem } from '@/app/const';
+
+import { getReadingTime } from './readingTime';
 
 export interface Frontmatter {
   title?: string;

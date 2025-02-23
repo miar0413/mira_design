@@ -1,8 +1,5 @@
 import React from 'react';
-import { CaretDownIcon } from '@radix-ui/react-icons';
-import * as NavigationMenu from '@radix-ui/react-dropdown-menu';
 import Link from 'next/link';
-
 import { HoverCard } from '@radix-ui/themes';
 
 import { navList } from '@/app/const';

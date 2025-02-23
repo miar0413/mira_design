@@ -11,7 +11,7 @@ interface PostNavigationProps {
 export function PostNavigation({ prev, next }: PostNavigationProps) {
   return (
     <nav className="flex justify-between mt-8 py-8 border-t font-Quark px-8">
-      {prev?.link? (
+      {prev?.link ? (
         <Link
           href={prev.link}
           className="group flex items-center gap-2 text-right hover:text-[#c4c4c4]"
