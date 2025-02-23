@@ -7,6 +7,7 @@ import matter from 'gray-matter';
 import { MDXRemoteSerializeResult } from 'next-mdx-remote';
 
 import { getReadingTime } from './readingTime';
+import { flatList } from '@/app/const';
 
 export interface Frontmatter {
   title?: string;
@@ -93,8 +94,10 @@ export async function getAllMDXPosts(): Promise<Frontmatter[]> {
 export async function getPostNavigation(
   currentSlug: string
 ): Promise<PostNavigation> {
-  const posts = await getAllMDXPosts();
-  const currentIndex = posts.findIndex((post) => post.slug === currentSlug);
+  const posts = flatList;
+  const currentIndex = posts.findIndex((post) =>
+    post.link?.includes(currentSlug)
+  );
 
   return {
     prev: currentIndex > 0 ? posts[currentIndex - 1] : null,

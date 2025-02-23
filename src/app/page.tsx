@@ -43,7 +43,7 @@ const Home: React.FC = () => {
 
   const listData = [
     {
-      title: 'Latest  To B Projects',
+      title: 'Latest ToB Projects',
       list: [
         {
           title: 'ByteHi customer service upgrade',
@@ -62,17 +62,17 @@ const Home: React.FC = () => {
       ],
     },
     {
-      title: 'Service Consulting Project ',
+      title: 'Service Consulting Project',
       list: [
         {
-          title: 'Digital Innovation of future mobility & Cloud service app',
+          title: 'Digital Innovation of future mobility & Cloud service App',
           description:
             'The project focuses on smart mobility scenarios in the local market and offers an innovative C2B service model to reshape the traditional automotive industry through digitalization and cloud services.',
           image: '/cover/digital_cover.png',
           link: '/projects/digital_innovation',
         },
         {
-          title: 'Life design for media & smart health community app',
+          title: 'Life design for media & smart health community App',
           description:
             'The project expresses insights into future living scenarios of Midea through storytelling, and designs a app to help people build closer relationships with their communities.',
           image: '/cover/life_cover.gif',
