@@ -8,12 +8,18 @@ import Image from 'next/image';
 import { localeAtom } from '@/app/providers';
 import { locales } from '@/locales';
 
-export default function Header() {
+import NavList from '../NavList';
+
+export default function Header(props: { isDetailPage?: boolean }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [locale] = useAtom(localeAtom);
 
+  const headClassname = props?.isDetailPage
+    ? 'opacity-100 sticky top-0 z-[10] bg-opacity-10 backdrop-filter backdrop-blur-lg shadow-lg'
+    : 'opacity-100';
+
   return (
-    <header className="opacity-100">
+    <header className={headClassname}>
       <div className="max-w-7xl mx-auto box-border">
         <div className="flex justify-between h-20">
           {/* Desktop Navigation */}
@@ -28,13 +34,9 @@ export default function Header() {
               <div className="">{locales[locale]?.home}</div>
               <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-black group-hover:w-full transition-all duration-300"></span>
             </Link>
-            <Link
-              href="/projects/byte_hi"
-              className="py-2 rounded-lg font-medium relative group hover:text-[#c4c4c4]"
-            >
-              {locales[locale].projects}
-              <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-black group-hover:w-full transition-all duration-300"></span>
-            </Link>
+            <div className="">
+              <NavList label={locales[locale].projects} />
+            </div>
 
             <Link
               href="/about"

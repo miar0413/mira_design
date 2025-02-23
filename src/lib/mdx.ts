@@ -7,7 +7,7 @@ import matter from 'gray-matter';
 import { MDXRemoteSerializeResult } from 'next-mdx-remote';
 
 import { getReadingTime } from './readingTime';
-import { flatList } from '@/app/const';
+import { flatList, NavItem } from '@/app/const';
 
 export interface Frontmatter {
   title?: string;
@@ -32,8 +32,8 @@ export interface MDXPost {
 }
 
 export interface PostNavigation {
-  prev: Frontmatter | null;
-  next: Frontmatter | null;
+  prev: NavItem | null;
+  next: NavItem | null;
 }
 
 const CONTENTS_PATH = join(process.cwd(), 'src', 'contents');

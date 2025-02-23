@@ -3,14 +3,15 @@ import { MDXRemote } from 'next-mdx-remote';
 
 import type { MDXPost as TMDXPost } from '@/lib/mdx';
 import MDXcomponents from '@/app/mdx-components';
+import { NavItem } from '@/app/const';
 
 import { PostNavigation } from './PostNavigation';
 
 interface MDXPostProps {
   post: TMDXPost;
   navigation: {
-    prev: TMDXPost['frontmatter'] | null;
-    next: TMDXPost['frontmatter'] | null;
+    prev: NavItem | null;
+    next: NavItem | null;
   };
 }
 

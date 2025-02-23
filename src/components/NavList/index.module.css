@@ -1,0 +1,10 @@
+.CaretDown {
+  position: relative;
+  color: var(--violet-10);
+  top: 1px;
+  transition: transform 250ms ease;
+}
+
+[data-state='open'] > .CaretDown {
+  transform: rotate(-180deg);
+}

@@ -39,7 +39,7 @@ export default async function ProjectPage(props: PageProps) {
   const navigation = await getPostNavigation(params.slug);
 
   return (
-    <div className="mac-scrollbar mac-scrollbar-x mac-scrollbar-y scrollbar-hidden">
+    <div className="mac-scrollbar mac-scrollbar-x mac-scrollbar-y h-screen">
       <div className="top-0 bottom-0 left-0 right-0 opacity-30 z-[-1] flex items-center justify-center fixed">
         <Image
           src={'/cross_bg.svg'}
@@ -49,7 +49,7 @@ export default async function ProjectPage(props: PageProps) {
           className="w-full h-full"
         />
       </div>
-      <Header />
+      <Header isDetailPage={true} />
       <div className={`bg-${post?.frontmatter?.bg || ''}`}>
         <div className="flex mx-auto max-w-7xl box-border px-[60px] pt-[60px] gap-8 bg">
           <div className="flex justify-center hover:text-[#c4c4c4] cursor-pointer">
