@@ -43,7 +43,7 @@ const Home: React.FC = () => {
 
   const listData = [
     {
-      title: 'Latest ToB Projects',
+      title: 'ToB',
       list: [
         {
           title: 'ByteHi customer service upgrade',
@@ -62,7 +62,7 @@ const Home: React.FC = () => {
       ],
     },
     {
-      title: 'Service Consulting Project',
+      title: 'Service Consulting',
       list: [
         {
           title: 'Digital Innovation of future mobility & Cloud service App',
@@ -98,7 +98,7 @@ const Home: React.FC = () => {
 
   const otherListData = [
     {
-      title: 'Other projects',
+      title: 'Others',
       list: [
         {
           title: 'QiaoQiao intelligent bot for chinese learning App',
@@ -150,11 +150,11 @@ const Home: React.FC = () => {
         <div className="max-w-7xl mx-auto mt-32">
           <div className="flex gap-[60px]">
             <div className="w-[100px]">
-              <div className="sticky top-0 z-[10]">
+              <div className="sticky top-0 z-[10] h-[300px]">
                 <div className="rotate-90 origin-left bg-[#eeeeee] w-fit">
                   <div className="text-[70px] font-Quark text-[#d6d6d6]">
                     <div className="transform leading-[80px] text-nowrap">
-                      Installation art
+                      Installation
                     </div>
                   </div>
                 </div>
