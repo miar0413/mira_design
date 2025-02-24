@@ -44,7 +44,7 @@ export const Card: React.FC<IProps> = (project) => {
           src={project.image || ''}
           width={700}
           height={450}
-          className="rounded"
+          className="rounded lazy-img"
           alt={project.image || ''}
         />
       </div>

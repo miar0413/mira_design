@@ -54,3 +54,24 @@ body {
 .bg-custom-bg4 {
   background-color: #e5ebed;
 }
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@scroll-timeline img-timeline {
+  source: auto;
+  orientation: vertical;
+}
+
+.lazy-img {
+  animation: fadeIn 1s ease-out;
+  animation-timeline: img-timeline;
+}
