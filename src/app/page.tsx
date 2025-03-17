@@ -11,33 +11,33 @@ const Home: React.FC = () => {
   const smallCards = [
     {
       label: 'Generative art lab',
-      image: '/cover/cover_06.png',
+      image: 'cover/cover_06.gif',
       link: '/projects/generative_art',
     },
     {
       label: 'The filtered home',
-      image: '/cover/cover_01.png',
+      image: '/cover/cover_01.gif',
       link: '/projects/filter_home',
     },
     {
       label: '2028 ordinary kitchen',
-      image: '/cover/cover_02.png',
+      image: '/cover/cover_02.gif',
       link: '/projects/ordinary_kitchen',
     },
     {
       label: 'The green fitness',
-      image: '/cover/cover_03.png',
+      image: '/cover/cover_03.gif',
       link: '/projects/green_fitness',
+    },
+    {
+      label: 'Time synchronization',
+      image: '/cover/cover_05.gif',
+      link: '/projects/time_synchronization',
     },
     {
       label: 'Unfunctional Dream',
       image: '/cover/cover_04.jpg',
       link: '/projects/unfunctional_dream',
-    },
-    {
-      label: 'Time synchronization',
-      image: '/cover/cover_05.jpeg',
-      link: '/projects/time_synchronization',
     },
   ];
 
