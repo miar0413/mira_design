@@ -32,7 +32,8 @@
     "normalize.css": "^8.0.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "tailwind-merge": "^2.6.0"
+    "tailwind-merge": "^2.6.0",
+    "three": "^0.184.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

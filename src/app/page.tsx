@@ -1,185 +1,368 @@
 'use client';
-import React from 'react';
+
+import React, { useRef, useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
+import { ArrowDownIcon, ArrowTopRightIcon } from '@radix-ui/react-icons';
+import {
+  AnimatePresence,
+  motion,
+  useMotionValue,
+  useReducedMotion,
+  useSpring,
+  useTransform,
+} from 'framer-motion';
 
 import Footer from '@/components/Footer';
-import SmallCard from '@/components/SmallCard';
 import Header from '@/components/Header';
-import CardList from '@/components/Card';
+import HeroShaderBackground from '@/components/HeroShaderBackground';
+
+import styles from './page.module.css';
+
+type ShowcaseProject = {
+  title: string;
+  category: string;
+  summary: string;
+  image: string;
+  link: string;
+  tags: string[];
+};
+
+const featuredProjects: ShowcaseProject[] = [
+  {
+    title: 'BYTEHI CUSTOMER SERVICE UPGRADE',
+    category: 'SERVICE PLATFORM',
+    summary:
+      'Redesigned a dense enterprise system into a calmer service workflow with clearer signals and stronger operational readability.',
+    image: '/cover/Bytehi_cover.png',
+    link: '/projects/byte_hi',
+    tags: ['workflow redesign', 'support tooling', 'data clarity'],
+  },
+  {
+    title: 'RISK MANAGEMENT PLATFORM FOR CONTENT REVIEWING',
+    category: 'RISK OPERATIONS',
+    summary:
+      'Built a more legible response surface for moderation teams dealing with high-volume, high-pressure content decisions.',
+    image: '/cover/risk_cover.png',
+    link: '/projects/risk_management',
+    tags: ['risk response', 'signal hierarchy', 'decision support'],
+  },
+  {
+    title: 'DIGITAL INNOVATION FOR FUTURE MOBILITY AND CLOUD SERVICES',
+    category: 'SERVICE CONSULTING',
+    summary:
+      'Created a future-facing mobility concept blending digital product thinking, cloud services, and scenario-led design.',
+    image: '/cover/digital_cover.png',
+    link: '/projects/digital_innovation',
+    tags: ['mobility future', 'cloud ecosystem', 'scenario design'],
+  },
+  {
+    title: 'LIFE DESIGN FOR MEDIA AND SMART HEALTH COMMUNITIES',
+    category: 'SPECULATIVE PRODUCT',
+    summary:
+      'Explored a softer, community-oriented digital service through storytelling, connected care, and lifestyle systems.',
+    image: '/cover/life_cover.gif',
+    link: '/projects/life_design',
+    tags: ['storytelling UX', 'community care', 'lifestyle systems'],
+  },
+];
+
+const archiveProjects: ShowcaseProject[] = [
+  {
+    title: 'GENERATIVE ART LAB',
+    category: 'VISUAL EXPERIMENTS',
+    summary: 'Motion-led visual studies and poster systems.',
+    image: '/cover/cover_06.gif',
+    link: '/projects/generative_art',
+    tags: ['motion', 'posters'],
+  },
+  {
+    title: 'THE FILTERED HOME',
+    category: 'FUTURE LIVING',
+    summary: 'Speculative domestic interfaces and home rituals.',
+    image: '/cover/cover_01.gif',
+    link: '/projects/filter_home',
+    tags: ['home futures', 'domestic systems'],
+  },
+  {
+    title: '2028 ORDINARY KITCHEN',
+    category: 'CONCEPT STORY',
+    summary: 'A narrative system around kitchen, intimacy, and routine.',
+    image: '/cover/cover_02.gif',
+    link: '/projects/ordinary_kitchen',
+    tags: ['kitchen future', 'ritual design'],
+  },
+  {
+    title: 'THE GREEN FITNESS',
+    category: 'WELLNESS CONCEPT',
+    summary: 'Habit loops, wellbeing, and sustainable behaviour.',
+    image: '/cover/cover_03.gif',
+    link: '/projects/green_fitness',
+    tags: ['wellness', 'habit design'],
+  },
+  {
+    title: 'TIME SYNCHRONIZATION',
+    category: 'INTERACTION STUDY',
+    summary: 'Shared timing, coordination, and system rhythm.',
+    image: '/cover/cover_05.gif',
+    link: '/projects/time_synchronization',
+    tags: ['coordination', 'time systems'],
+  },
+  {
+    title: 'UNFUNCTIONAL DREAM',
+    category: 'ART DIRECTION',
+    summary: 'Image-led storytelling around emotional objects.',
+    image: '/cover/cover_04.jpg',
+    link: '/projects/unfunctional_dream',
+    tags: ['visual language', 'atmosphere'],
+  },
+];
 
 const Home: React.FC = () => {
-  const smallCards = [
-    {
-      label: 'Generative art lab',
-      image: 'cover/cover_06.gif',
-      link: '/projects/generative_art',
-    },
-    {
-      label: 'The filtered home',
-      image: '/cover/cover_01.gif',
-      link: '/projects/filter_home',
-    },
-    {
-      label: '2028 ordinary kitchen',
-      image: '/cover/cover_02.gif',
-      link: '/projects/ordinary_kitchen',
-    },
-    {
-      label: 'The green fitness',
-      image: '/cover/cover_03.gif',
-      link: '/projects/green_fitness',
-    },
-    {
-      label: 'Time synchronization',
-      image: '/cover/cover_05.gif',
-      link: '/projects/time_synchronization',
-    },
-    {
-      label: 'Unfunctional Dream',
-      image: '/cover/cover_04.jpg',
-      link: '/projects/unfunctional_dream',
-    },
-  ];
+  const [activeIndex, setActiveIndex] = useState(0);
+  const previewRef = useRef<HTMLDivElement | null>(null);
+  const shouldReduceMotion = useReducedMotion();
 
-  const listData = [
-    {
-      title: 'ToB',
-      list: [
-        {
-          title: 'ByteHi customer service upgrade',
-          description:
-            'ByteHi is the customer service system for TikTok. It provides a seamless service experience for users through multi-scenario customer service solutions.',
-          image: '/cover/Bytehi_cover.png',
-          link: '/projects/byte_hi',
-        },
-        {
-          title: 'Risk management platform for content reviewing',
-          description:
-            'RMP ensures the quality and safety of content on TikTok through risk monitoring technology, and provides efficient solutions for the risk response team to effeciently address risks.',
-          image: '/cover/risk_cover.png',
-          link: '/projects/risk_management',
-        },
-      ],
-    },
-    {
-      title: 'Service Consulting',
-      list: [
-        {
-          title: 'Digital Innovation of future mobility & Cloud service App',
-          description:
-            'The project focuses on smart mobility scenarios in the local market and offers an innovative C2B service model to reshape the traditional automotive industry through digitalization and cloud services.',
-          image: '/cover/digital_cover.png',
-          link: '/projects/digital_innovation',
-        },
-        {
-          title: 'Life design for media & smart health community App',
-          description:
-            'The project expresses insights into future living scenarios of Midea through storytelling, and designs a app to help people build closer relationships with their communities.',
-          image: '/cover/life_cover.gif',
-          link: '/projects/life_design',
-        },
-        {
-          title: 'Digital experience in a collaborative office space',
-          description:
-            'The project provides smart office scenario solutions based on the ACTIVA product for flexible office spaces with cloud service scenarios',
-          image: '/cover/colink_cover.png',
-          link: '/projects/office_design',
-        },
-        {
-          title: 'For Vanke’s Mehos home life service innovation',
-          description:
-            'Mehos offers a range of companion services throughout the entire home-purchasing process for its customers, including inspiration, customized home selection, curated home life, and worry-free home care-six services.',
-          image: '/cover/vanke_cover.png',
-          link: '/projects/mehos_design',
-        },
-      ],
-    },
-  ];
+  const previewX = useMotionValue(0);
+  const previewY = useMotionValue(0);
+  const previewSmoothX = useSpring(previewX, {
+    stiffness: 160,
+    damping: 20,
+    mass: 0.28,
+  });
+  const previewSmoothY = useSpring(previewY, {
+    stiffness: 160,
+    damping: 20,
+    mass: 0.28,
+  });
 
-  const otherListData = [
-    {
-      title: 'Others',
-      list: [
-        {
-          title: 'QiaoQiao intelligent bot for chinese learning App',
-          description:
-            '"Qiaoqiao" Intelligent Robot provides knowledge-based services and online Chinese language courses from Huaqiao University to meet the learning needs of overseas Chinese.',
-          image: '/cover/qiao_cover.png',
-          link: '/projects/qiaoqiao',
-        },
-        {
-          title: 'Yiker, an Private Guidance of Beauty&Fashion app',
-          description:
-            'Yiker is a personal wardrobe management platform. It offers personalized guidance and wardrobe management services by combining offline and online approaches using of live streaming and AR tech.',
-          image: '/cover/yike_cover.png',
-          link: '/projects/yiker',
-        },
-      ],
-    },
-  ];
+  const previewRotateX = useTransform(previewSmoothY, [-1, 1], [5, -5]);
+  const previewRotateY = useTransform(previewSmoothX, [-1, 1], [-7, 7]);
+  const previewShiftX = useTransform(previewSmoothX, [-1, 1], [-18, 18]);
+  const previewShiftY = useTransform(previewSmoothY, [-1, 1], [-10, 10]);
+
+  const activeProject = featuredProjects[activeIndex];
+
+  const updatePreviewPointer = (
+    event: React.MouseEvent<HTMLDivElement>,
+    element: HTMLDivElement | null
+  ) => {
+    if (shouldReduceMotion || !element) {
+      return;
+    }
+
+    const rect = element.getBoundingClientRect();
+    const x = (event.clientX - rect.left) / rect.width;
+    const y = (event.clientY - rect.top) / rect.height;
+
+    previewX.set(x * 2 - 1);
+    previewY.set(y * 2 - 1);
+  };
 
   return (
-    <div className="mac-scrollbar mac-scrollbar-x mac-scrollbar-y h-screen">
-      <div className="top-0 bottom-0 left-0 right-0 opacity-30 z-[-1] flex items-center justify-center fixed">
-        <Image
-          src={'/cross_bg.svg'}
-          width="1250"
-          height={900}
-          alt="bg"
-          className="w-full h-full"
-        />
-      </div>
-      <Header />
-      <div className="max-w-7xl mx-auto pl-[60px] box-border">
-        {/* 主要内容 */}
-        <div className="mt-[100px] mb-[140px]">
-          <div className="text-[80px] leading-[80px] font-bold font-Quark transform transition-all opacity-0 animate-fade-in">
-            <div>Hello, I'm YanMin</div>
-            <div>a product designer.</div>
-          </div>
-          <div className="mt-5 text-[50px] leading-[60px] text-[#606062] font-normal font-Lato transform transition-all opacity-0 animate-fade-in">
-            <div>I create data-driven solutions that</div>
-            <div>elevate human experiences.</div>
-          </div>
+    <div className={styles.pageShell}>
+      <div className={styles.noiseOverlay} aria-hidden />
+
+      <section className={styles.heroSection}>
+        <Header theme="dark" />
+
+        <div className={styles.heroScene}>
+          <HeroShaderBackground
+            className={styles.heroCanvas}
+            reducedMotion={shouldReduceMotion}
+          />
+          <div className={styles.heroVignette} />
         </div>
-      </div>
-      <div className="max-w-7xl mx-auto pl-[60px] box-border">
-        <div className="flex flex-col gap-y-32 mb-10">
-          <CardList listData={listData} />
-        </div>
-        <div className="max-w-7xl mx-auto mt-32">
-          <div className="flex gap-[60px]">
-            <div className="w-[100px]">
-              <div className="sticky top-0 z-[10] h-[300px]">
-                <div className="rotate-90 origin-left bg-[#eeeeee] w-fit">
-                  <div className="text-[70px] font-Quark text-[#d6d6d6]">
-                    <div className="transform leading-[80px] text-nowrap">
-                      Installation
-                    </div>
-                  </div>
-                </div>
+
+        <div className={styles.heroContent}>
+          <motion.div
+            initial={shouldReduceMotion ? false : { opacity: 0, y: 36 }}
+            animate={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
+            transition={{ duration: 0.85, ease: 'easeOut' }}
+            className={styles.heroTitleWrap}
+          >
+            <div className={styles.srOnly}>Mira Design</div>
+            <h1 className={styles.srOnly}>
+              Designing clarity
+              <br />
+              for complex
+              <br />
+              digital systems
+            </h1>
+          </motion.div>
+
+          <div className={styles.heroMeta}>
+            <div>
+              <div className={styles.metaLabel}>Based in Shanghai</div>
+              <div className={styles.metaText}>
+                Product designer with service and platform focus
               </div>
             </div>
-            <div className="flex items-center gap-4 justify-center flex-wrap">
-              {smallCards.map((item, index) => {
+            <div>
+              <div className={styles.metaLabel}>Current practice</div>
+              <div className={styles.metaText}>
+                Enterprise UX, operational interfaces, future-living concepts
+              </div>
+            </div>
+            <div>
+              <div className={styles.metaLabel}>Approach</div>
+              <div className={styles.metaText}>
+                Editorial restraint, interaction rhythm, strong information
+                hierarchy
+              </div>
+            </div>
+          </div>
+
+          <Link href="#recent-work" className={styles.scrollLink}>
+            <span>Scroll down</span>
+            <ArrowDownIcon width={16} height={16} />
+          </Link>
+        </div>
+      </section>
+
+      <main className={styles.mainShell}>
+        <section id="recent-work" className={styles.workSection}>
+          <div className={styles.sectionHead}>
+            <div className={styles.sectionLabel}>Recent work</div>
+            <Link href="/projects" className={styles.sectionLink}>
+              Discover all projects <ArrowTopRightIcon width={14} height={14} />
+            </Link>
+          </div>
+
+          <div className={styles.workGrid}>
+            <div className={styles.workList}>
+              {featuredProjects.map((project, index) => {
+                const isActive = index === activeIndex;
+
                 return (
-                  <SmallCard
-                    key={`${item.link}_${index}`}
-                    label={item.label}
-                    image={item.image}
-                    link={item.link}
-                  />
+                  <Link
+                    key={project.link}
+                    href={project.link}
+                    onMouseEnter={() => setActiveIndex(index)}
+                    onFocus={() => setActiveIndex(index)}
+                    className={`${styles.workItem} ${isActive ? styles.workItemActive : ''}`}
+                  >
+                    <div className={styles.workItemCategory}>
+                      {project.category}
+                    </div>
+                    <h2 className={styles.workItemTitle}>{project.title}</h2>
+                    <p className={styles.workItemSummary}>{project.summary}</p>
+                    <div className={styles.workItemTags}>
+                      {project.tags.map((tag) => (
+                        <span key={tag}>{tag}</span>
+                      ))}
+                    </div>
+                  </Link>
                 );
               })}
             </div>
-          </div>
-        </div>
 
-        <div className="flex flex-col gap-y-32 mt-40 mb-[60px]">
-          <CardList listData={otherListData} />
-        </div>
-      </div>
-      <Footer />
+            <div className={styles.previewColumn}>
+              <motion.div
+                ref={previewRef}
+                onMouseMove={(event) =>
+                  updatePreviewPointer(event, previewRef.current)
+                }
+                onMouseLeave={() => {
+                  previewX.set(0);
+                  previewY.set(0);
+                }}
+                className={styles.previewFrame}
+                style={
+                  shouldReduceMotion
+                    ? undefined
+                    : { rotateX: previewRotateX, rotateY: previewRotateY }
+                }
+              >
+                <div className={styles.previewGlow} />
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={activeProject.link}
+                    initial={
+                      shouldReduceMotion
+                        ? false
+                        : { opacity: 0, scale: 0.96, y: 16 }
+                    }
+                    animate={
+                      shouldReduceMotion
+                        ? undefined
+                        : { opacity: 1, scale: 1, y: 0 }
+                    }
+                    exit={
+                      shouldReduceMotion
+                        ? undefined
+                        : { opacity: 0, scale: 1.02, y: -12 }
+                    }
+                    transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                    className={styles.previewInner}
+                    style={
+                      shouldReduceMotion
+                        ? undefined
+                        : { x: previewShiftX, y: previewShiftY }
+                    }
+                  >
+                    <Image
+                      src={activeProject.image}
+                      alt={activeProject.title}
+                      fill
+                      priority
+                      sizes="(max-width: 1200px) 45vw, 560px"
+                      className={styles.previewImage}
+                    />
+                  </motion.div>
+                </AnimatePresence>
+
+                <div className={styles.previewCaption}>
+                  <div className={styles.previewCategory}>
+                    {activeProject.category}
+                  </div>
+                  <div className={styles.previewTitle}>
+                    {activeProject.title}
+                  </div>
+                  <Link
+                    href={activeProject.link}
+                    className={styles.previewLink}
+                  >
+                    View case study <ArrowTopRightIcon width={16} height={16} />
+                  </Link>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        <section className={styles.archiveSection}>
+          <div className={styles.sectionHead}>
+            <div className={styles.sectionLabel}>Discover more</div>
+          </div>
+
+          <div className={styles.archiveGrid}>
+            {archiveProjects.map((project, index) => (
+              <Link
+                key={project.link}
+                href={project.link}
+                className={styles.archiveCard}
+              >
+                <div className={styles.archiveImageWrap}>
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    width={900}
+                    height={680}
+                    className={styles.archiveImage}
+                    priority={index < 2}
+                  />
+                </div>
+                <div className={styles.archiveCategory}>{project.category}</div>
+                <h3 className={styles.archiveTitle}>{project.title}</h3>
+                <p className={styles.archiveSummary}>{project.summary}</p>
+              </Link>
+            ))}
+          </div>
+        </section>
+      </main>
+
+      <Footer theme="dark" />
     </div>
   );
 };

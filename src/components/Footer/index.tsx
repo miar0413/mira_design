@@ -12,11 +12,21 @@ import Tooltip from '../Tooltip';
 
 const EmailStr = 'miradesign0413@gmail.com';
 
-const Footer: React.FC = () => {
+const Footer: React.FC<{ theme?: 'light' | 'dark' }> = ({
+  theme = 'light',
+}) => {
+  const isDark = theme === 'dark';
+
   return (
-    <footer className="max-w-7xl px-8 mx-auto flex items-center justify-between box-border font-Quark py-11 text-[20px] leading-6">
-      <div className="flex justify-between items-center">
-        <div className="">
+    <footer
+      className={`relative z-10 mx-auto flex max-w-[1440px] flex-col gap-8 px-6 py-11 text-[18px] leading-6 md:flex-row md:items-center md:justify-between md:px-10 ${
+        isDark
+          ? 'border-t border-white/10 text-white/78'
+          : 'border-t border-black/10'
+      }`}
+    >
+      <div className="flex items-center justify-between font-Quark">
+        <div>
           {`Copyright © ${new Date().getFullYear()} YanMin. All rights reserved.`}
         </div>
       </div>
@@ -40,6 +50,7 @@ const Footer: React.FC = () => {
                 height={30}
                 width={30}
                 alt=""
+                style={{ width: 30, height: 30 }}
               />
             </AlertDialogTrigger>
             <AlertDialogContent className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white p-6 rounded-lg shadow-lg">
