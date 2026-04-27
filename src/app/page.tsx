@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowDownIcon, ArrowTopRightIcon } from '@radix-ui/react-icons';
@@ -120,6 +120,7 @@ const archiveProjects: ShowcaseProject[] = [
 
 const Home: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [showIntro, setShowIntro] = useState(true);
   const previewRef = useRef<HTMLDivElement | null>(null);
   const shouldReduceMotion = useReducedMotion();
 
@@ -143,6 +144,29 @@ const Home: React.FC = () => {
 
   const activeProject = featuredProjects[activeIndex];
 
+  useEffect(() => {
+    if (shouldReduceMotion) {
+      setShowIntro(false);
+      return;
+    }
+
+    const introTimer = window.setTimeout(() => {
+      setShowIntro(false);
+    }, 1900);
+
+    return () => {
+      window.clearTimeout(introTimer);
+    };
+  }, [shouldReduceMotion]);
+
+  useEffect(() => {
+    document.body.style.overflow = showIntro ? 'hidden' : '';
+
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [showIntro]);
+
   const updatePreviewPointer = (
     event: React.MouseEvent<HTMLDivElement>,
     element: HTMLDivElement | null
@@ -161,73 +185,123 @@ const Home: React.FC = () => {
 
   return (
     <div className={styles.pageShell}>
+      <AnimatePresence>
+        {showIntro ? (
+          <motion.div
+            key="intro"
+            className={styles.introOverlay}
+            initial={{ opacity: 1 }}
+            animate={{ opacity: 1 }}
+            exit={{
+              opacity: 0,
+              transition: { duration: 0.8, ease: [0.4, 0, 0.2, 1] },
+            }}
+          >
+            <div className={styles.introNoise} aria-hidden />
+            <motion.div
+              className={styles.introMark}
+              initial={{ opacity: 0, y: 12, scale: 0.985 }}
+              animate={{
+                opacity: 1,
+                y: 0,
+                scale: 1,
+                transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
+              }}
+              exit={{
+                opacity: 0,
+                y: -10,
+                scale: 0.985,
+                transition: { duration: 0.55, ease: [0.4, 0, 0.2, 1] },
+              }}
+            >
+              <span className={styles.introBrand}>mira</span>
+              <span className={styles.introDivider} aria-hidden />
+              <span className={styles.introCity}>shanghai</span>
+            </motion.div>
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
+
       <div className={styles.noiseOverlay} aria-hidden />
 
-      <section className={styles.heroSection}>
-        <Header theme="dark" />
+      <motion.div
+        initial={shouldReduceMotion ? false : { opacity: 0, scale: 1.015 }}
+        animate={{
+          opacity: showIntro ? 0 : 1,
+          scale: showIntro ? 1.015 : 1,
+        }}
+        transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+      >
+        <section className={styles.heroSection}>
+          <Header theme="dark" />
 
-        <div className={styles.heroScene}>
-          <HeroShaderBackground
-            className={styles.heroCanvas}
-            reducedMotion={shouldReduceMotion}
-          />
-          <div className={styles.heroVignette} />
-        </div>
-
-        <div className={styles.heroContent}>
-          <motion.div
-            initial={shouldReduceMotion ? false : { opacity: 0, y: 36 }}
-            animate={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
-            transition={{ duration: 0.85, ease: 'easeOut' }}
-            className={styles.heroTitleWrap}
-          >
-            <div className={styles.srOnly}>Mira Design</div>
-            <h1 className={styles.srOnly}>
-              Designing clarity
-              <br />
-              for complex
-              <br />
-              digital systems
-            </h1>
-          </motion.div>
-
-          <div className={styles.heroMeta}>
-            <div>
-              <div className={styles.metaLabel}>Based in Shanghai</div>
-              <div className={styles.metaText}>
-                Product designer with service and platform focus
-              </div>
-            </div>
-            <div>
-              <div className={styles.metaLabel}>Current practice</div>
-              <div className={styles.metaText}>
-                Enterprise UX, operational interfaces, future-living concepts
-              </div>
-            </div>
-            <div>
-              <div className={styles.metaLabel}>Approach</div>
-              <div className={styles.metaText}>
-                Editorial restraint, interaction rhythm, strong information
-                hierarchy
-              </div>
-            </div>
+          <div className={styles.heroScene}>
+            <HeroShaderBackground
+              className={styles.heroCanvas}
+              reducedMotion={shouldReduceMotion}
+            />
+            <div className={styles.heroVignette} />
           </div>
 
-          <Link href="#recent-work" className={styles.scrollLink}>
-            <span>Scroll down</span>
-            <ArrowDownIcon width={16} height={16} />
-          </Link>
-        </div>
-      </section>
+          <div className={styles.heroContent}>
+            <motion.div
+              initial={shouldReduceMotion ? false : { opacity: 0, y: 36 }}
+              animate={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
+              transition={{
+                duration: 0.85,
+                ease: 'easeOut',
+                delay: shouldReduceMotion ? 0 : 0.12,
+              }}
+              className={styles.heroTitleWrap}
+            >
+              <div className={styles.srOnly}>Mira Design</div>
+              <h1 className={styles.srOnly}>
+                Designing clarity
+                <br />
+                for complex
+                <br />
+                digital systems
+              </h1>
+            </motion.div>
 
-      <main className={styles.mainShell}>
-        <section id="recent-work" className={styles.workSection}>
-          <div className={styles.sectionHead}>
-            <div className={styles.sectionLabel}>Recent work</div>
-            <Link href="/projects" className={styles.sectionLink}>
-              Discover all projects <ArrowTopRightIcon width={14} height={14} />
+            <div className={styles.heroMeta}>
+              <div>
+                <div className={styles.metaLabel}>Based in Shanghai</div>
+                <div className={styles.metaText}>
+                  Product designer with service and platform focus
+                </div>
+              </div>
+              <div>
+                <div className={styles.metaLabel}>Current practice</div>
+                <div className={styles.metaText}>
+                  Enterprise UX, operational interfaces, future-living concepts
+                </div>
+              </div>
+              <div>
+                <div className={styles.metaLabel}>Approach</div>
+                <div className={styles.metaText}>
+                  Editorial restraint, interaction rhythm, strong information
+                  hierarchy
+                </div>
+              </div>
+            </div>
+
+            <Link href="#recent-work" className={styles.scrollLink}>
+              <span>Scroll down</span>
+              <ArrowDownIcon width={16} height={16} />
             </Link>
           </div>
+        </section>
+
+        <main className={styles.mainShell}>
+          <section id="recent-work" className={styles.workSection}>
+            <div className={styles.sectionHead}>
+              <div className={styles.sectionLabel}>Recent work</div>
+              <Link href="/projects" className={styles.sectionLink}>
+                Discover all projects{' '}
+                <ArrowTopRightIcon width={14} height={14} />
+              </Link>
+            </div>
 
           <div className={styles.workGrid}>
             <div className={styles.workList}>
@@ -329,40 +403,43 @@ const Home: React.FC = () => {
               </motion.div>
             </div>
           </div>
-        </section>
+          </section>
 
-        <section className={styles.archiveSection}>
-          <div className={styles.sectionHead}>
-            <div className={styles.sectionLabel}>Discover more</div>
-          </div>
+          <section className={styles.archiveSection}>
+            <div className={styles.sectionHead}>
+              <div className={styles.sectionLabel}>Discover more</div>
+            </div>
 
-          <div className={styles.archiveGrid}>
-            {archiveProjects.map((project, index) => (
-              <Link
-                key={project.link}
-                href={project.link}
-                className={styles.archiveCard}
-              >
-                <div className={styles.archiveImageWrap}>
-                  <Image
-                    src={project.image}
-                    alt={project.title}
-                    width={900}
-                    height={680}
-                    className={styles.archiveImage}
-                    priority={index < 2}
-                  />
-                </div>
-                <div className={styles.archiveCategory}>{project.category}</div>
-                <h3 className={styles.archiveTitle}>{project.title}</h3>
-                <p className={styles.archiveSummary}>{project.summary}</p>
-              </Link>
-            ))}
-          </div>
-        </section>
-      </main>
+            <div className={styles.archiveGrid}>
+              {archiveProjects.map((project, index) => (
+                <Link
+                  key={project.link}
+                  href={project.link}
+                  className={styles.archiveCard}
+                >
+                  <div className={styles.archiveImageWrap}>
+                    <Image
+                      src={project.image}
+                      alt={project.title}
+                      width={900}
+                      height={680}
+                      className={styles.archiveImage}
+                      priority={index < 2}
+                    />
+                  </div>
+                  <div className={styles.archiveCategory}>
+                    {project.category}
+                  </div>
+                  <h3 className={styles.archiveTitle}>{project.title}</h3>
+                  <p className={styles.archiveSummary}>{project.summary}</p>
+                </Link>
+              ))}
+            </div>
+          </section>
+        </main>
 
-      <Footer theme="dark" />
+        <Footer theme="dark" />
+      </motion.div>
     </div>
   );
 };
