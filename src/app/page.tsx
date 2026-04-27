@@ -152,7 +152,7 @@ const Home: React.FC = () => {
 
     const introTimer = window.setTimeout(() => {
       setShowIntro(false);
-    }, 1900);
+    }, 2400);
 
     return () => {
       window.clearTimeout(introTimer);
@@ -303,106 +303,109 @@ const Home: React.FC = () => {
               </Link>
             </div>
 
-          <div className={styles.workGrid}>
-            <div className={styles.workList}>
-              {featuredProjects.map((project, index) => {
-                const isActive = index === activeIndex;
+            <div className={styles.workGrid}>
+              <div className={styles.workList}>
+                {featuredProjects.map((project, index) => {
+                  const isActive = index === activeIndex;
 
-                return (
-                  <Link
-                    key={project.link}
-                    href={project.link}
-                    onMouseEnter={() => setActiveIndex(index)}
-                    onFocus={() => setActiveIndex(index)}
-                    className={`${styles.workItem} ${isActive ? styles.workItemActive : ''}`}
-                  >
-                    <div className={styles.workItemCategory}>
-                      {project.category}
+                  return (
+                    <Link
+                      key={project.link}
+                      href={project.link}
+                      onMouseEnter={() => setActiveIndex(index)}
+                      onFocus={() => setActiveIndex(index)}
+                      className={`${styles.workItem} ${isActive ? styles.workItemActive : ''}`}
+                    >
+                      <div className={styles.workItemCategory}>
+                        {project.category}
+                      </div>
+                      <h2 className={styles.workItemTitle}>{project.title}</h2>
+                      <p className={styles.workItemSummary}>
+                        {project.summary}
+                      </p>
+                      <div className={styles.workItemTags}>
+                        {project.tags.map((tag) => (
+                          <span key={tag}>{tag}</span>
+                        ))}
+                      </div>
+                    </Link>
+                  );
+                })}
+              </div>
+
+              <div className={styles.previewColumn}>
+                <motion.div
+                  ref={previewRef}
+                  onMouseMove={(event) =>
+                    updatePreviewPointer(event, previewRef.current)
+                  }
+                  onMouseLeave={() => {
+                    previewX.set(0);
+                    previewY.set(0);
+                  }}
+                  className={styles.previewFrame}
+                  style={
+                    shouldReduceMotion
+                      ? undefined
+                      : { rotateX: previewRotateX, rotateY: previewRotateY }
+                  }
+                >
+                  <div className={styles.previewGlow} />
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={activeProject.link}
+                      initial={
+                        shouldReduceMotion
+                          ? false
+                          : { opacity: 0, scale: 0.96, y: 16 }
+                      }
+                      animate={
+                        shouldReduceMotion
+                          ? undefined
+                          : { opacity: 1, scale: 1, y: 0 }
+                      }
+                      exit={
+                        shouldReduceMotion
+                          ? undefined
+                          : { opacity: 0, scale: 1.02, y: -12 }
+                      }
+                      transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                      className={styles.previewInner}
+                      style={
+                        shouldReduceMotion
+                          ? undefined
+                          : { x: previewShiftX, y: previewShiftY }
+                      }
+                    >
+                      <Image
+                        src={activeProject.image}
+                        alt={activeProject.title}
+                        fill
+                        priority
+                        sizes="(max-width: 1200px) 45vw, 560px"
+                        className={styles.previewImage}
+                      />
+                    </motion.div>
+                  </AnimatePresence>
+
+                  <div className={styles.previewCaption}>
+                    <div className={styles.previewCategory}>
+                      {activeProject.category}
                     </div>
-                    <h2 className={styles.workItemTitle}>{project.title}</h2>
-                    <p className={styles.workItemSummary}>{project.summary}</p>
-                    <div className={styles.workItemTags}>
-                      {project.tags.map((tag) => (
-                        <span key={tag}>{tag}</span>
-                      ))}
+                    <div className={styles.previewTitle}>
+                      {activeProject.title}
                     </div>
-                  </Link>
-                );
-              })}
-            </div>
-
-            <div className={styles.previewColumn}>
-              <motion.div
-                ref={previewRef}
-                onMouseMove={(event) =>
-                  updatePreviewPointer(event, previewRef.current)
-                }
-                onMouseLeave={() => {
-                  previewX.set(0);
-                  previewY.set(0);
-                }}
-                className={styles.previewFrame}
-                style={
-                  shouldReduceMotion
-                    ? undefined
-                    : { rotateX: previewRotateX, rotateY: previewRotateY }
-                }
-              >
-                <div className={styles.previewGlow} />
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={activeProject.link}
-                    initial={
-                      shouldReduceMotion
-                        ? false
-                        : { opacity: 0, scale: 0.96, y: 16 }
-                    }
-                    animate={
-                      shouldReduceMotion
-                        ? undefined
-                        : { opacity: 1, scale: 1, y: 0 }
-                    }
-                    exit={
-                      shouldReduceMotion
-                        ? undefined
-                        : { opacity: 0, scale: 1.02, y: -12 }
-                    }
-                    transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-                    className={styles.previewInner}
-                    style={
-                      shouldReduceMotion
-                        ? undefined
-                        : { x: previewShiftX, y: previewShiftY }
-                    }
-                  >
-                    <Image
-                      src={activeProject.image}
-                      alt={activeProject.title}
-                      fill
-                      priority
-                      sizes="(max-width: 1200px) 45vw, 560px"
-                      className={styles.previewImage}
-                    />
-                  </motion.div>
-                </AnimatePresence>
-
-                <div className={styles.previewCaption}>
-                  <div className={styles.previewCategory}>
-                    {activeProject.category}
+                    <Link
+                      href={activeProject.link}
+                      className={styles.previewLink}
+                    >
+                      View case study{' '}
+                      <ArrowTopRightIcon width={16} height={16} />
+                    </Link>
                   </div>
-                  <div className={styles.previewTitle}>
-                    {activeProject.title}
-                  </div>
-                  <Link
-                    href={activeProject.link}
-                    className={styles.previewLink}
-                  >
-                    View case study <ArrowTopRightIcon width={16} height={16} />
-                  </Link>
-                </div>
-              </motion.div>
+                </motion.div>
+              </div>
             </div>
-          </div>
           </section>
 
           <section className={styles.archiveSection}>
