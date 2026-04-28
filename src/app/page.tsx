@@ -200,23 +200,114 @@ const Home: React.FC = () => {
             <div className={styles.introNoise} aria-hidden />
             <motion.div
               className={styles.introMark}
-              initial={{ opacity: 0, y: 12, scale: 0.985 }}
-              animate={{
-                opacity: 1,
-                y: 0,
-                scale: 1,
-                transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
-              }}
-              exit={{
-                opacity: 0,
-                y: -10,
-                scale: 0.985,
-                transition: { duration: 0.55, ease: [0.4, 0, 0.2, 1] },
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              variants={{
+                hidden: {},
+                visible: {
+                  transition: {
+                    staggerChildren: 0.08,
+                    delayChildren: 0.12,
+                  },
+                },
+                exit: {
+                  transition: {
+                    staggerChildren: 0.05,
+                    staggerDirection: -1,
+                  },
+                },
               }}
             >
-              <span className={styles.introBrand}>mira</span>
-              <span className={styles.introDivider} aria-hidden />
-              <span className={styles.introCity}>shanghai</span>
+              <motion.span
+                className={styles.introBrand}
+                variants={{
+                  hidden: {
+                    opacity: 0,
+                    x: -22,
+                    filter: 'blur(8px)',
+                    letterSpacing: '0.18em',
+                  },
+                  visible: {
+                    opacity: 1,
+                    x: 0,
+                    filter: 'blur(0px)',
+                    letterSpacing: '-0.04em',
+                    transition: {
+                      duration: 0.72,
+                      ease: [0.22, 1, 0.36, 1],
+                    },
+                  },
+                  exit: {
+                    opacity: 0,
+                    x: -18,
+                    filter: 'blur(7px)',
+                    letterSpacing: '0.08em',
+                    transition: {
+                      duration: 0.42,
+                      ease: [0.4, 0, 0.2, 1],
+                    },
+                  },
+                }}
+              >
+                mira
+              </motion.span>
+              <motion.span
+                className={styles.introDivider}
+                aria-hidden
+                variants={{
+                  hidden: { opacity: 0, scaleY: 0, transformOrigin: '50% 50%' },
+                  visible: {
+                    opacity: 1,
+                    scaleY: 1,
+                    transition: {
+                      duration: 0.5,
+                      ease: [0.22, 1, 0.36, 1],
+                    },
+                  },
+                  exit: {
+                    opacity: 0,
+                    scaleY: 0,
+                    transition: {
+                      duration: 0.28,
+                      ease: [0.4, 0, 0.2, 1],
+                    },
+                  },
+                }}
+              />
+              <motion.span
+                className={styles.introCity}
+                variants={{
+                  hidden: {
+                    opacity: 0,
+                    x: 22,
+                    filter: 'blur(8px)',
+                    letterSpacing: '0.16em',
+                  },
+                  visible: {
+                    opacity: 1,
+                    x: 0,
+                    filter: 'blur(0px)',
+                    letterSpacing: '-0.02em',
+                    transition: {
+                      duration: 0.72,
+                      ease: [0.22, 1, 0.36, 1],
+                    },
+                  },
+                  exit: {
+                    opacity: 0,
+                    x: 18,
+                    filter: 'blur(7px)',
+                    letterSpacing: '0.06em',
+                    transition: {
+                      duration: 0.42,
+                      ease: [0.4, 0, 0.2, 1],
+                    },
+                  },
+                }}
+              >
+                shanghai
+              </motion.span>
             </motion.div>
           </motion.div>
         ) : null}
