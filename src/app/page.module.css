@@ -26,6 +26,31 @@
   background: #040404;
 }
 
+.revealVeil {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 55;
+  background:
+    radial-gradient(
+      circle at 50% 52%,
+      rgba(255, 116, 56, 0.32),
+      transparent 24%
+    ),
+    radial-gradient(
+      circle at 50% 52%,
+      rgba(92, 126, 255, 0.24),
+      transparent 38%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(4, 4, 4, 0.98) 0%,
+      rgba(4, 4, 4, 0.88) 42%,
+      rgba(4, 4, 4, 0.38) 72%,
+      rgba(4, 4, 4, 0) 100%
+    );
+}
+
 .introNoise {
   position: absolute;
   inset: 0;

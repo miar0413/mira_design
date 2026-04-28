@@ -121,6 +121,7 @@ const archiveProjects: ShowcaseProject[] = [
 const Home: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [showIntro, setShowIntro] = useState(true);
+  const [showRevealVeil, setShowRevealVeil] = useState(false);
   const previewRef = useRef<HTMLDivElement | null>(null);
   const shouldReduceMotion = useReducedMotion();
 
@@ -166,6 +167,22 @@ const Home: React.FC = () => {
       document.body.style.overflow = '';
     };
   }, [showIntro]);
+
+  useEffect(() => {
+    if (showIntro || shouldReduceMotion) {
+      setShowRevealVeil(false);
+      return;
+    }
+
+    setShowRevealVeil(true);
+    const veilTimer = window.setTimeout(() => {
+      setShowRevealVeil(false);
+    }, 1300);
+
+    return () => {
+      window.clearTimeout(veilTimer);
+    };
+  }, [showIntro, shouldReduceMotion]);
 
   const updatePreviewPointer = (
     event: React.MouseEvent<HTMLDivElement>,
@@ -310,6 +327,23 @@ const Home: React.FC = () => {
               </motion.span>
             </motion.div>
           </motion.div>
+        ) : null}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {showRevealVeil ? (
+          <motion.div
+            key="reveal-veil"
+            className={styles.revealVeil}
+            initial={{ opacity: 1, scale: 1.03, filter: 'blur(14px)' }}
+            animate={{
+              opacity: 0,
+              scale: 1,
+              filter: 'blur(0px)',
+              transition: { duration: 1.05, ease: [0.22, 1, 0.36, 1] },
+            }}
+            exit={{ opacity: 0 }}
+          />
         ) : null}
       </AnimatePresence>
 
