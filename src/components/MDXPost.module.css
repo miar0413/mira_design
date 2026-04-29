@@ -1,0 +1,35 @@
+.content :global(article > p:first-of-type) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  max-width: none;
+  margin-bottom: 2.5rem;
+  line-height: 1.2;
+}
+
+.content :global(article > p:first-of-type code) {
+  display: inline-flex;
+  align-items: center;
+  margin: 0;
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .content :global(article h1) {
+    font-size: clamp(3.4rem, 15vw, 4.8rem) !important;
+    line-height: 0.94 !important;
+  }
+
+  .content :global(article h2) {
+    margin-top: 4rem;
+  }
+
+  .content :global(article > p:first-of-type) {
+    gap: 0.45rem;
+    margin-bottom: 2rem;
+  }
+
+  .content :global(article > p:first-of-type code) {
+    font-size: 0.95rem;
+  }
+}

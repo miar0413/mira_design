@@ -19,22 +19,24 @@ export default function Header(props: {
   const isDark = props.theme === 'dark';
 
   const headClassname = isDark
-    ? 'absolute top-0 left-0 right-0 z-40 bg-transparent text-white'
+    ? props?.isDetailPage
+      ? 'sticky top-0 z-[70] border-b border-white/10 bg-[#040404]/[0.78] text-white backdrop-blur-xl'
+      : 'absolute top-0 left-0 right-0 z-[70] bg-transparent text-white'
     : props?.isDetailPage
       ? 'sticky top-0 z-40 border-b border-black/5 bg-[#f6f4ef]/80 backdrop-blur-xl'
       : 'sticky top-0 z-40 border-b border-black/5 bg-[#f6f4ef]/72 backdrop-blur-xl';
 
   const desktopTextClass = isDark
-    ? 'group relative rounded-lg py-2 font-medium text-white/88 transition-colors hover:text-white'
+    ? 'group relative rounded-lg py-2 font-medium text-white/[0.88] transition-colors hover:text-white'
     : 'group relative rounded-lg py-2 font-medium transition-colors hover:text-black/45';
 
   const underlineClass = isDark ? 'bg-white' : 'bg-black';
   const mobilePanelClass = isDark
-    ? 'absolute left-0 right-0 top-20 border-b border-white/10 bg-black/92 shadow-lg backdrop-blur-xl md:hidden'
+    ? 'fixed left-0 right-0 top-20 z-[60] border-b border-white/10 bg-[#050505]/[0.96] shadow-[0_30px_90px_rgba(0,0,0,0.46)] backdrop-blur-2xl md:hidden'
     : 'absolute left-0 right-0 top-20 border-b border-black/10 bg-[#f6f4ef]/95 shadow-lg backdrop-blur-xl md:hidden';
 
   const mobileItemClass = isDark
-    ? 'block rounded-2xl px-4 py-3 text-white/82 transition-colors hover:bg-white/8'
+    ? 'block rounded-2xl border border-white/0 bg-white/[0.02] px-4 py-4 font-Quark text-[2rem] uppercase leading-none tracking-[-0.03em] text-white/[0.86] transition-colors hover:border-white/10 hover:bg-white/[0.08] hover:text-white'
     : 'block rounded-2xl px-4 py-3 text-gray-700 transition-colors hover:bg-white/80';
 
   return (
@@ -130,7 +132,7 @@ export default function Header(props: {
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className={`rounded-full border p-2 transition-colors md:hidden ${
               isDark
-                ? 'border-white/18 text-white hover:bg-white/10'
+                ? 'border-white/[0.18] text-white hover:bg-white/10'
                 : 'border-black/10 text-gray-700 hover:bg-white/70'
             }`}
             aria-label="Toggle menu"

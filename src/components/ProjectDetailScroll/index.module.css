@@ -1,0 +1,99 @@
+.shell {
+  height: 100vh;
+  min-height: 100vh;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      circle at 50% -10%,
+      rgba(38, 88, 255, 0.2),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 42% 118%,
+      rgba(255, 99, 36, 0.22),
+      transparent 36%
+    ),
+    #040404;
+  color: #f3f3ee;
+}
+
+.scrollRoot {
+  height: 100vh;
+}
+
+.scrollRoot :global(.simplebar-content-wrapper) {
+  scroll-behavior: smooth;
+}
+
+.scrollRoot :global(.simplebar-track.simplebar-vertical) {
+  top: 5.75rem;
+  right: 0.55rem;
+  bottom: 0.95rem;
+  width: 0.42rem;
+  z-index: 5;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(16px);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.08),
+    0 18px 48px rgba(0, 0, 0, 0.36);
+}
+
+.scrollRoot :global(.simplebar-scrollbar::before) {
+  inset: 0;
+  border-radius: 999px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.78),
+    rgba(255, 116, 56, 0.62),
+    rgba(91, 130, 255, 0.58),
+    rgba(255, 255, 255, 0.42)
+  );
+  opacity: 0.78;
+  box-shadow: 0 10px 32px rgba(91, 130, 255, 0.28);
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease;
+}
+
+.scrollRoot
+  :global(
+    .simplebar-track.simplebar-vertical:hover .simplebar-scrollbar::before
+  ) {
+  opacity: 0.95;
+}
+
+.scrollRoot :global(.simplebar-track.simplebar-horizontal) {
+  display: none;
+}
+
+.scrollContent {
+  position: relative;
+  min-height: 100vh;
+  isolation: isolate;
+  background:
+    radial-gradient(
+      circle at 18% 14%,
+      rgba(255, 116, 56, 0.08),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 86% 10%,
+      rgba(91, 130, 255, 0.1),
+      transparent 30%
+    );
+}
+
+@media (max-width: 768px) {
+  .scrollRoot :global(.simplebar-track.simplebar-vertical) {
+    top: 5.55rem;
+    right: 0.32rem;
+    bottom: 0.7rem;
+    width: 0.28rem;
+    background: rgba(255, 255, 255, 0.035);
+  }
+
+  .scrollRoot :global(.simplebar-scrollbar::before) {
+    opacity: 0.68;
+  }
+}

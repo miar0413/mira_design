@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { EnvelopeClosedIcon, InstagramLogoIcon } from '@radix-ui/react-icons';
 import Image from 'next/image';
@@ -45,7 +47,7 @@ const Footer: React.FC<{ theme?: 'light' | 'dark' }> = ({
           <AlertDialog>
             <AlertDialogTrigger asChild>
               <Image
-                className="cursor-pointer"
+                className={`cursor-pointer ${isDark ? 'invert' : ''}`}
                 src="/wechat.svg"
                 height={30}
                 width={30}

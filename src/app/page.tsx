@@ -126,6 +126,7 @@ const Home: React.FC = () => {
   const previewRef = useRef<HTMLDivElement | null>(null);
   const scrollableNodeRef = useRef<HTMLDivElement | null>(null);
   const shouldReduceMotion = useReducedMotion();
+  const prefersReducedMotion = shouldReduceMotion === true;
 
   const previewX = useMotionValue(0);
   const previewY = useMotionValue(0);
@@ -148,7 +149,7 @@ const Home: React.FC = () => {
   const activeProject = featuredProjects[activeIndex];
 
   useEffect(() => {
-    if (shouldReduceMotion) {
+    if (prefersReducedMotion) {
       setShowIntro(false);
       return;
     }
@@ -160,7 +161,7 @@ const Home: React.FC = () => {
     return () => {
       window.clearTimeout(introTimer);
     };
-  }, [shouldReduceMotion]);
+  }, [prefersReducedMotion]);
 
   useEffect(() => {
     document.body.style.overflow = showIntro ? 'hidden' : '';
@@ -171,7 +172,7 @@ const Home: React.FC = () => {
   }, [showIntro]);
 
   useEffect(() => {
-    if (showIntro || shouldReduceMotion) {
+    if (showIntro || prefersReducedMotion) {
       setShowRevealVeil(false);
       return;
     }
@@ -184,13 +185,13 @@ const Home: React.FC = () => {
     return () => {
       window.clearTimeout(veilTimer);
     };
-  }, [showIntro, shouldReduceMotion]);
+  }, [showIntro, prefersReducedMotion]);
 
   const updatePreviewPointer = (
     event: React.MouseEvent<HTMLDivElement>,
     element: HTMLDivElement | null
   ) => {
-    if (shouldReduceMotion || !element) {
+    if (prefersReducedMotion || !element) {
       return;
     }
 
@@ -217,7 +218,7 @@ const Home: React.FC = () => {
 
     scrollableNode.scrollTo({
       top: scrollableNode.scrollTop + targetRect.top - scrollableRect.top,
-      behavior: shouldReduceMotion ? 'auto' : 'smooth',
+      behavior: prefersReducedMotion ? 'auto' : 'smooth',
     });
   };
 
@@ -388,7 +389,7 @@ const Home: React.FC = () => {
         scrollableNodeProps={{ ref: scrollableNodeRef }}
       >
         <motion.div
-          initial={shouldReduceMotion ? false : { opacity: 0, scale: 1.015 }}
+          initial={prefersReducedMotion ? false : { opacity: 0, scale: 1.015 }}
           animate={{
             opacity: showIntro ? 0 : 1,
             scale: showIntro ? 1.015 : 1,
@@ -401,19 +402,21 @@ const Home: React.FC = () => {
             <div className={styles.heroScene}>
               <HeroShaderBackground
                 className={styles.heroCanvas}
-                reducedMotion={shouldReduceMotion}
+                reducedMotion={prefersReducedMotion}
               />
               <div className={styles.heroVignette} />
             </div>
 
             <div className={styles.heroContent}>
               <motion.div
-                initial={shouldReduceMotion ? false : { opacity: 0, y: 36 }}
-                animate={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
+                initial={prefersReducedMotion ? false : { opacity: 0, y: 36 }}
+                animate={
+                  prefersReducedMotion ? undefined : { opacity: 1, y: 0 }
+                }
                 transition={{
                   duration: 0.85,
                   ease: 'easeOut',
-                  delay: shouldReduceMotion ? 0 : 0.12,
+                  delay: prefersReducedMotion ? 0 : 0.12,
                 }}
                 className={styles.heroTitleWrap}
               >
@@ -515,7 +518,7 @@ const Home: React.FC = () => {
                     }}
                     className={styles.previewFrame}
                     style={
-                      shouldReduceMotion
+                      prefersReducedMotion
                         ? undefined
                         : { rotateX: previewRotateX, rotateY: previewRotateY }
                     }
@@ -525,17 +528,17 @@ const Home: React.FC = () => {
                       <motion.div
                         key={activeProject.link}
                         initial={
-                          shouldReduceMotion
+                          prefersReducedMotion
                             ? false
                             : { opacity: 0, scale: 0.96, y: 16 }
                         }
                         animate={
-                          shouldReduceMotion
+                          prefersReducedMotion
                             ? undefined
                             : { opacity: 1, scale: 1, y: 0 }
                         }
                         exit={
-                          shouldReduceMotion
+                          prefersReducedMotion
                             ? undefined
                             : { opacity: 0, scale: 1.02, y: -12 }
                         }
@@ -545,7 +548,7 @@ const Home: React.FC = () => {
                         }}
                         className={styles.previewInner}
                         style={
-                          shouldReduceMotion
+                          prefersReducedMotion
                             ? undefined
                             : { x: previewShiftX, y: previewShiftY }
                         }

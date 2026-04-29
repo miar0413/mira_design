@@ -9,6 +9,9 @@ import { ArrowLeftIcon } from '@radix-ui/react-icons';
 import { getMDXPost, getPostNavigation } from '@/lib/mdx';
 import { MDXPost as MDXPostComponent } from '@/components/MDXPost';
 import Header from '@/components/Header';
+import ProjectDetailScroll from '@/components/ProjectDetailScroll';
+
+import styles from './page.module.css';
 
 interface PageProps {
   params: Promise<{
@@ -39,30 +42,41 @@ export default async function ProjectPage(props: PageProps) {
   const navigation = await getPostNavigation(params.slug);
 
   return (
-    <div className="mac-scrollbar mac-scrollbar-x mac-scrollbar-y h-screen">
-      <div className="top-0 bottom-0 left-0 right-0 opacity-30 z-[-1] flex items-center justify-center fixed">
+    <ProjectDetailScroll>
+      <div className={styles.bgLayer} aria-hidden="true">
         <Image
           src={'/cross_bg.svg'}
           width="1250"
           height={900}
           alt="bg"
-          className="w-full h-full"
+          className={styles.bgImage}
         />
       </div>
-      <Header isDetailPage={true} />
-      <div className={`bg-${post?.frontmatter?.bg || ''}`}>
-        <div className="flex mx-auto max-w-7xl box-border px-[60px] pt-[60px] gap-8 bg">
-          <div className="flex justify-center hover:text-[#c4c4c4] cursor-pointer">
-            <Link href="/" className="flex gap-1 font-bold font-Quark">
+      <Header isDetailPage={true} theme="dark" />
+      <main className={styles.frame}>
+        <div className={styles.grid}>
+          <aside className={styles.backRail}>
+            <Link href="/" className={styles.backLink}>
               <ArrowLeftIcon width={24} height={24} />
               Back
             </Link>
-          </div>
-          <div className="flex-1">
-            <MDXPostComponent post={post} navigation={navigation} />
+          </aside>
+          <div className={styles.articleColumn}>
+            <div className={styles.articlePanel}>
+              {post.frontmatter.readingTime ? (
+                <div className="mb-8 flex flex-wrap items-center gap-3 font-Quark text-[12px] uppercase leading-none tracking-[0.18em] text-white/[0.46]">
+                  <span>Mira project</span>
+                  <span className="h-px w-8 bg-white/[0.16]" />
+                  <span>
+                    {Math.ceil(post.frontmatter.readingTime.minutes)} min read
+                  </span>
+                </div>
+              ) : null}
+              <MDXPostComponent post={post} navigation={navigation} />
+            </div>
           </div>
         </div>
-      </div>
-    </div>
+      </main>
+    </ProjectDetailScroll>
   );
 }
