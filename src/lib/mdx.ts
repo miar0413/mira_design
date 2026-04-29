@@ -56,17 +56,13 @@ export async function getMDXPost(slug: string): Promise<MDXPost | null> {
     const { content, data } = matter(source);
 
     const mdxSource = await serialize(content, {
-      // 安全配置：禁用可能导致任意代码执行的特性
+      // 安全配置：使用 next-mdx-remote 内置的安全特性
+      // blockJS: 阻止 JavaScript 表达式（默认 true）
+      // blockDangerousJS: 阻止危险的 JavaScript 全局对象（默认 true）
       mdxOptions: {
-        // 禁用 exports 以防止服务器端代码执行
-        disableExports: true,
-        // 禁用 imports 以防止服务器端代码执行
-        disableImports: true,
-        // 其他安全相关的配置
         format: 'mdx',
       },
     });
-
     return {
       mdxSource,
       frontmatter: {
