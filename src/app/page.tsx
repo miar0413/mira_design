@@ -177,7 +177,7 @@ const Home: React.FC = () => {
     setShowRevealVeil(true);
     const veilTimer = window.setTimeout(() => {
       setShowRevealVeil(false);
-    }, 1300);
+    }, 1600);
 
     return () => {
       window.clearTimeout(veilTimer);
@@ -335,15 +335,26 @@ const Home: React.FC = () => {
           <motion.div
             key="reveal-veil"
             className={styles.revealVeil}
-            initial={{ opacity: 1, scale: 1.03, filter: 'blur(14px)' }}
+            initial={{
+              opacity: 1,
+              scale: 1.06,
+              filter: 'blur(18px)',
+            }}
             animate={{
-              opacity: 0,
-              scale: 1,
-              filter: 'blur(0px)',
-              transition: { duration: 1.05, ease: [0.22, 1, 0.36, 1] },
+              opacity: [1, 0.94, 0],
+              scale: [1.06, 1.015, 1],
+              filter: ['blur(18px)', 'blur(6px)', 'blur(0px)'],
+              transition: {
+                duration: 1.35,
+                times: [0, 0.42, 1],
+                ease: [0.22, 1, 0.36, 1],
+              },
             }}
             exit={{ opacity: 0 }}
-          />
+          >
+            <span className={styles.revealBloom} aria-hidden />
+            <span className={styles.revealSweep} aria-hidden />
+          </motion.div>
         ) : null}
       </AnimatePresence>
 

@@ -125,6 +125,8 @@ const textCutoutFragmentShader = `
 uniform sampler2D uTexture;
 uniform vec2 uMouse;
 uniform float uAspect;
+uniform float uLensRadius;
+uniform float uLensFeather;
 uniform bool uEnable;
 
 varying vec2 vUv;
@@ -137,7 +139,7 @@ float lensMask(vec2 mouse, vec2 uv, float aspect, float radius, float feather) {
 
 void main() {
   vec4 tex = texture2D(uTexture, vUv);
-  float mask = lensMask(uMouse, vUv, uAspect, 0.115, 0.004);
+  float mask = lensMask(uMouse, vUv, uAspect, uLensRadius, uLensFeather);
 
   if (uEnable) {
     tex.a *= 1.0 - mask;
@@ -151,6 +153,8 @@ const textLensFragmentShader = `
 uniform sampler2D uTexture;
 uniform vec2 uMouse;
 uniform float uAspect;
+uniform float uLensRadius;
+uniform float uLensFeather;
 uniform bool uEnable;
 
 varying vec2 vUv;
@@ -174,8 +178,8 @@ vec3 hueShift(vec3 color, float hue) {
 void main() {
   vec2 aspectRatio = vec2(uAspect, 1.0);
   float dist = distance(uMouse * aspectRatio, vUv * aspectRatio);
-  float radius = 0.115;
-  float d1 = smoothstep(radius * 0.975, radius, dist);
+  float radius = uLensRadius;
+  float d1 = smoothstep(radius - uLensFeather, radius + uLensFeather, dist);
   float d2 = smoothstep(radius * (1.0 - 0.036) * 0.975, radius * (1.0 - 0.036), dist) - d1;
 
   vec2 sub = (uMouse - vUv) * aspectRatio;
@@ -204,6 +208,8 @@ type HeroTextTextureOptions = {
   offsets: [number, number, number, number, number, number];
   opacity?: number;
   family?: string;
+  canvasWidth?: number;
+  canvasHeight?: number;
 };
 
 const createHeroTextTexture = ({
@@ -213,10 +219,12 @@ const createHeroTextTexture = ({
   offsets,
   opacity = 1,
   family = '"Lato", "Helvetica Neue", sans-serif',
+  canvasWidth = 2048,
+  canvasHeight = 1180,
 }: HeroTextTextureOptions) => {
   const canvas = document.createElement('canvas');
-  canvas.width = 2048;
-  canvas.height = 1180;
+  canvas.width = canvasWidth;
+  canvas.height = canvasHeight;
 
   const ctx = canvas.getContext('2d');
 
@@ -319,14 +327,14 @@ const HeroShaderBackground: React.FC<HeroShaderBackgroundProps> = ({
     backgroundMesh.position.z = 0.0;
     scene.add(backgroundMesh);
 
-    const englishTexture = createHeroTextTexture({
+    let englishTexture = createHeroTextTexture({
       lines: ['Designing clarity', 'for complex', 'digital systems'],
       fontSize: 122,
       lineHeight: 24,
       offsets: [-0.01, 0.04, -0.03, 0.02, 0, -0.01],
       family: '"Lato", "Helvetica Neue", sans-serif',
     });
-    const accentTexture = createHeroTextTexture({
+    let accentTexture = createHeroTextTexture({
       lines: ['为复杂系统', '设计更清晰的', '数字体验'],
       fontSize: 96,
       lineHeight: 22,
@@ -340,6 +348,8 @@ const HeroShaderBackground: React.FC<HeroShaderBackgroundProps> = ({
         uTexture: { value: englishTexture },
         uMouse: { value: new Vector2(0.5, 0.5) },
         uAspect: { value: 1 },
+        uLensRadius: { value: 0.115 },
+        uLensFeather: { value: 0.004 },
         uEnable: { value: false },
       },
       vertexShader: textVertexShader,
@@ -352,6 +362,8 @@ const HeroShaderBackground: React.FC<HeroShaderBackgroundProps> = ({
         uTexture: { value: accentTexture },
         uMouse: { value: new Vector2(0.5, 0.5) },
         uAspect: { value: 1 },
+        uLensRadius: { value: 0.115 },
+        uLensFeather: { value: 0.004 },
         uEnable: { value: false },
       },
       vertexShader: textVertexShader,
@@ -388,14 +400,55 @@ const HeroShaderBackground: React.FC<HeroShaderBackgroundProps> = ({
     let animationFrame = 0;
     let resizeObserver: ResizeObserver | null = null;
     let pointerInside = false;
+    let isMobileText: boolean | null = null;
+
+    const setTextTextures = (isMobile: boolean) => {
+      if (isMobile === isMobileText) {
+        return;
+      }
+
+      const nextEnglishTexture = createHeroTextTexture({
+        lines: ['Designing clarity', 'for complex', 'digital systems'],
+        fontSize: isMobile ? 82 : 122,
+        lineHeight: isMobile ? 22 : 24,
+        offsets: isMobile
+          ? [0, 0, 0, -0.86, -0.86, -0.86]
+          : [-0.01, 0.04, -0.03, 0.02, 0, -0.01],
+        family: '"Lato", "Helvetica Neue", sans-serif',
+        canvasWidth: isMobile ? 900 : 2048,
+        canvasHeight: isMobile ? 1947 : 1180,
+      });
+      const nextAccentTexture = createHeroTextTexture({
+        lines: ['为复杂系统', '设计更清晰的', '数字体验'],
+        fontSize: isMobile ? 36 : 96,
+        lineHeight: isMobile ? 12 : 22,
+        offsets: isMobile
+          ? [0, 0, 0, -0.9, -0.84, -0.78]
+          : [-0.1, 0.04, -0.02, -0.03, 0.01, 0.06],
+        opacity: 0.98,
+        family: '"Noto Sans SC", "PingFang SC", "Hiragino Sans GB", sans-serif',
+        canvasWidth: isMobile ? 900 : 2048,
+        canvasHeight: isMobile ? 1947 : 1180,
+      });
+
+      englishTexture.dispose();
+      accentTexture.dispose();
+      englishTexture = nextEnglishTexture;
+      accentTexture = nextAccentTexture;
+      textCutoutMaterial.uniforms.uTexture.value = englishTexture;
+      textLensMaterial.uniforms.uTexture.value = accentTexture;
+      isMobileText = isMobile;
+    };
 
     const resize = () => {
       const width = container.clientWidth;
       const height = container.clientHeight;
       const aspect = width / height;
+      const isMobile = width < 768;
 
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
       renderer.setSize(width, height, false);
+      setTextTextures(isMobile);
 
       camera.left = -1;
       camera.right = 1;
@@ -403,9 +456,15 @@ const HeroShaderBackground: React.FC<HeroShaderBackgroundProps> = ({
       camera.bottom = -1;
       camera.updateProjectionMatrix();
 
-      lensMesh.scale.set(1 / aspect, 1, 1);
+      const lensScale = isMobile ? 0.38 : 1;
+
+      lensMesh.scale.set(lensScale / aspect, lensScale, 1);
       textCutoutMaterial.uniforms.uAspect.value = aspect;
       textLensMaterial.uniforms.uAspect.value = aspect;
+      textCutoutMaterial.uniforms.uLensRadius.value = isMobile ? 0.062 : 0.115;
+      textLensMaterial.uniforms.uLensRadius.value = isMobile ? 0.062 : 0.115;
+      textCutoutMaterial.uniforms.uLensFeather.value = isMobile ? 0.018 : 0.004;
+      textLensMaterial.uniforms.uLensFeather.value = isMobile ? 0.018 : 0.004;
     };
 
     const onPointerMove = (event: PointerEvent) => {
@@ -455,7 +514,7 @@ const HeroShaderBackground: React.FC<HeroShaderBackgroundProps> = ({
       lensTarget.set(mouseCurrent.x, mouseCurrent.y, 0.003);
       lensMesh.position.lerp(lensTarget, reducedMotion ? 0.2 : 0.1);
       lensMaterial.opacity +=
-        (((pointerInside ? 0.86 : 0) as number) - lensMaterial.opacity) *
+        (((pointerInside ? 0.62 : 0) as number) - lensMaterial.opacity) *
         (reducedMotion ? 0.2 : 0.12);
 
       raycaster.setFromCamera(mouseCurrent, camera);

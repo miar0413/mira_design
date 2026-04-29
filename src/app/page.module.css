@@ -31,24 +31,76 @@
   position: fixed;
   inset: 0;
   z-index: 55;
+  overflow: hidden;
+  background: #040404;
+}
+
+.revealBloom,
+.revealSweep {
+  position: absolute;
+  inset: 0;
+}
+
+.revealBloom {
   background:
     radial-gradient(
-      circle at 50% 52%,
-      rgba(255, 116, 56, 0.32),
-      transparent 24%
-    ),
-    radial-gradient(
-      circle at 50% 52%,
-      rgba(92, 126, 255, 0.24),
+      ellipse at 50% 52%,
+      rgba(255, 116, 56, 0.38) 0%,
+      rgba(255, 116, 56, 0.2) 18%,
       transparent 38%
     ),
-    linear-gradient(
-      180deg,
-      rgba(4, 4, 4, 0.98) 0%,
-      rgba(4, 4, 4, 0.88) 42%,
-      rgba(4, 4, 4, 0.38) 72%,
-      rgba(4, 4, 4, 0) 100%
+    radial-gradient(
+      ellipse at 50% 52%,
+      rgba(91, 130, 255, 0.34) 0%,
+      rgba(91, 130, 255, 0.18) 28%,
+      transparent 56%
     );
+  opacity: 0;
+  transform: scale(0.72);
+  animation: revealBloom 1.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.revealSweep {
+  background: linear-gradient(
+    180deg,
+    rgba(4, 4, 4, 1) 0%,
+    rgba(4, 4, 4, 0.96) 36%,
+    rgba(4, 4, 4, 0.62) 58%,
+    rgba(4, 4, 4, 0) 78%
+  );
+  transform: translateY(0);
+  animation: revealSweep 1.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes revealBloom {
+  0% {
+    opacity: 0;
+    transform: scale(0.72);
+  }
+
+  34% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1.26);
+  }
+}
+
+@keyframes revealSweep {
+  0% {
+    transform: translateY(0);
+  }
+
+  38% {
+    transform: translateY(-12%);
+  }
+
+  100% {
+    transform: translateY(-105%);
+  }
 }
 
 .introNoise {
@@ -513,18 +565,36 @@
   }
 
   .heroContent {
+    justify-content: flex-end;
     padding-top: 7rem;
+    padding-bottom: 2rem;
   }
 
   .heroMeta {
-    position: static;
+    position: absolute;
+    right: 1.2rem;
+    bottom: 6.25rem;
+    left: 1.2rem;
     grid-template-columns: 1fr;
-    margin-top: 2rem;
+    gap: 1rem;
   }
 
   .scrollLink {
-    position: static;
-    margin-top: 2rem;
+    right: 1.2rem;
+    bottom: 3rem;
+    left: auto;
+    margin-top: 0;
+    font-size: 0.68rem;
+  }
+
+  .metaLabel {
+    font-size: 0.82rem;
+  }
+
+  .metaText {
+    max-width: 18rem;
+    font-size: 0.78rem;
+    line-height: 1.4;
   }
 
   .sectionHead {
