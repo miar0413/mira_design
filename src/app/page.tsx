@@ -12,6 +12,7 @@ import {
   useSpring,
   useTransform,
 } from 'framer-motion';
+import SimpleBar from 'simplebar-react';
 
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
@@ -123,6 +124,7 @@ const Home: React.FC = () => {
   const [showIntro, setShowIntro] = useState(true);
   const [showRevealVeil, setShowRevealVeil] = useState(false);
   const previewRef = useRef<HTMLDivElement | null>(null);
+  const scrollableNodeRef = useRef<HTMLDivElement | null>(null);
   const shouldReduceMotion = useReducedMotion();
 
   const previewX = useMotionValue(0);
@@ -198,6 +200,22 @@ const Home: React.FC = () => {
 
     previewX.set(x * 2 - 1);
     previewY.set(y * 2 - 1);
+  };
+
+  const scrollToRecentWork = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault();
+
+    const scrollableNode = scrollableNodeRef.current;
+    const target = document.getElementById('recent-work');
+
+    if (!scrollableNode || !target) {
+      return;
+    }
+
+    scrollableNode.scrollTo({
+      top: target.offsetTop,
+      behavior: shouldReduceMotion ? 'auto' : 'smooth',
+    });
   };
 
   return (
@@ -360,225 +378,242 @@ const Home: React.FC = () => {
 
       <div className={styles.noiseOverlay} aria-hidden />
 
-      <motion.div
-        initial={shouldReduceMotion ? false : { opacity: 0, scale: 1.015 }}
-        animate={{
-          opacity: showIntro ? 0 : 1,
-          scale: showIntro ? 1.015 : 1,
-        }}
-        transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+      <SimpleBar
+        className={`${styles.scrollShell} ${showIntro ? styles.scrollLocked : ''}`}
+        autoHide={false}
+        forceVisible="y"
+        scrollableNodeProps={{ ref: scrollableNodeRef }}
       >
-        <section className={styles.heroSection}>
-          <Header theme="dark" />
+        <motion.div
+          initial={shouldReduceMotion ? false : { opacity: 0, scale: 1.015 }}
+          animate={{
+            opacity: showIntro ? 0 : 1,
+            scale: showIntro ? 1.015 : 1,
+          }}
+          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <section className={styles.heroSection}>
+            <Header theme="dark" />
 
-          <div className={styles.heroScene}>
-            <HeroShaderBackground
-              className={styles.heroCanvas}
-              reducedMotion={shouldReduceMotion}
-            />
-            <div className={styles.heroVignette} />
-          </div>
-
-          <div className={styles.heroContent}>
-            <motion.div
-              initial={shouldReduceMotion ? false : { opacity: 0, y: 36 }}
-              animate={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
-              transition={{
-                duration: 0.85,
-                ease: 'easeOut',
-                delay: shouldReduceMotion ? 0 : 0.12,
-              }}
-              className={styles.heroTitleWrap}
-            >
-              <div className={styles.srOnly}>Mira Design</div>
-              <h1 className={styles.srOnly}>
-                Designing clarity
-                <br />
-                for complex
-                <br />
-                digital systems
-              </h1>
-            </motion.div>
-
-            <div className={styles.heroMeta}>
-              <div>
-                <div className={styles.metaLabel}>Based in Shanghai</div>
-                <div className={styles.metaText}>
-                  Product designer with service and platform focus
-                </div>
-              </div>
-              <div>
-                <div className={styles.metaLabel}>Current practice</div>
-                <div className={styles.metaText}>
-                  Enterprise UX, operational interfaces, future-living concepts
-                </div>
-              </div>
-              <div>
-                <div className={styles.metaLabel}>Approach</div>
-                <div className={styles.metaText}>
-                  Editorial restraint, interaction rhythm, strong information
-                  hierarchy
-                </div>
-              </div>
+            <div className={styles.heroScene}>
+              <HeroShaderBackground
+                className={styles.heroCanvas}
+                reducedMotion={shouldReduceMotion}
+              />
+              <div className={styles.heroVignette} />
             </div>
 
-            <Link href="#recent-work" className={styles.scrollLink}>
-              <span>Scroll down</span>
-              <ArrowDownIcon width={16} height={16} />
-            </Link>
-          </div>
-        </section>
+            <div className={styles.heroContent}>
+              <motion.div
+                initial={shouldReduceMotion ? false : { opacity: 0, y: 36 }}
+                animate={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
+                transition={{
+                  duration: 0.85,
+                  ease: 'easeOut',
+                  delay: shouldReduceMotion ? 0 : 0.12,
+                }}
+                className={styles.heroTitleWrap}
+              >
+                <div className={styles.srOnly}>Mira Design</div>
+                <h1 className={styles.srOnly}>
+                  Designing clarity
+                  <br />
+                  for complex
+                  <br />
+                  digital systems
+                </h1>
+              </motion.div>
 
-        <main className={styles.mainShell}>
-          <section id="recent-work" className={styles.workSection}>
-            <div className={styles.sectionHead}>
-              <div className={styles.sectionLabel}>Recent work</div>
-              <Link href="/projects" className={styles.sectionLink}>
-                Discover all projects{' '}
-                <ArrowTopRightIcon width={14} height={14} />
+              <div className={styles.heroMeta}>
+                <div>
+                  <div className={styles.metaLabel}>Based in Shanghai</div>
+                  <div className={styles.metaText}>
+                    Product designer with service and platform focus
+                  </div>
+                </div>
+                <div>
+                  <div className={styles.metaLabel}>Current practice</div>
+                  <div className={styles.metaText}>
+                    Enterprise UX, operational interfaces, future-living
+                    concepts
+                  </div>
+                </div>
+                <div>
+                  <div className={styles.metaLabel}>Approach</div>
+                  <div className={styles.metaText}>
+                    Editorial restraint, interaction rhythm, strong information
+                    hierarchy
+                  </div>
+                </div>
+              </div>
+
+              <Link
+                href="#recent-work"
+                className={styles.scrollLink}
+                onClick={scrollToRecentWork}
+              >
+                <span>Scroll down</span>
+                <ArrowDownIcon width={16} height={16} />
               </Link>
             </div>
-
-            <div className={styles.workGrid}>
-              <div className={styles.workList}>
-                {featuredProjects.map((project, index) => {
-                  const isActive = index === activeIndex;
-
-                  return (
-                    <Link
-                      key={project.link}
-                      href={project.link}
-                      onMouseEnter={() => setActiveIndex(index)}
-                      onFocus={() => setActiveIndex(index)}
-                      className={`${styles.workItem} ${isActive ? styles.workItemActive : ''}`}
-                    >
-                      <div className={styles.workItemCategory}>
-                        {project.category}
-                      </div>
-                      <h2 className={styles.workItemTitle}>{project.title}</h2>
-                      <p className={styles.workItemSummary}>
-                        {project.summary}
-                      </p>
-                      <div className={styles.workItemTags}>
-                        {project.tags.map((tag) => (
-                          <span key={tag}>{tag}</span>
-                        ))}
-                      </div>
-                    </Link>
-                  );
-                })}
-              </div>
-
-              <div className={styles.previewColumn}>
-                <motion.div
-                  ref={previewRef}
-                  onMouseMove={(event) =>
-                    updatePreviewPointer(event, previewRef.current)
-                  }
-                  onMouseLeave={() => {
-                    previewX.set(0);
-                    previewY.set(0);
-                  }}
-                  className={styles.previewFrame}
-                  style={
-                    shouldReduceMotion
-                      ? undefined
-                      : { rotateX: previewRotateX, rotateY: previewRotateY }
-                  }
-                >
-                  <div className={styles.previewGlow} />
-                  <AnimatePresence mode="wait">
-                    <motion.div
-                      key={activeProject.link}
-                      initial={
-                        shouldReduceMotion
-                          ? false
-                          : { opacity: 0, scale: 0.96, y: 16 }
-                      }
-                      animate={
-                        shouldReduceMotion
-                          ? undefined
-                          : { opacity: 1, scale: 1, y: 0 }
-                      }
-                      exit={
-                        shouldReduceMotion
-                          ? undefined
-                          : { opacity: 0, scale: 1.02, y: -12 }
-                      }
-                      transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-                      className={styles.previewInner}
-                      style={
-                        shouldReduceMotion
-                          ? undefined
-                          : { x: previewShiftX, y: previewShiftY }
-                      }
-                    >
-                      <Image
-                        src={activeProject.image}
-                        alt={activeProject.title}
-                        fill
-                        priority
-                        sizes="(max-width: 1200px) 45vw, 560px"
-                        className={styles.previewImage}
-                      />
-                    </motion.div>
-                  </AnimatePresence>
-
-                  <div className={styles.previewCaption}>
-                    <div className={styles.previewCategory}>
-                      {activeProject.category}
-                    </div>
-                    <div className={styles.previewTitle}>
-                      {activeProject.title}
-                    </div>
-                    <Link
-                      href={activeProject.link}
-                      className={styles.previewLink}
-                    >
-                      View case study{' '}
-                      <ArrowTopRightIcon width={16} height={16} />
-                    </Link>
-                  </div>
-                </motion.div>
-              </div>
-            </div>
           </section>
 
-          <section className={styles.archiveSection}>
-            <div className={styles.sectionHead}>
-              <div className={styles.sectionLabel}>Discover more</div>
-            </div>
-
-            <div className={styles.archiveGrid}>
-              {archiveProjects.map((project, index) => (
-                <Link
-                  key={project.link}
-                  href={project.link}
-                  className={styles.archiveCard}
-                >
-                  <div className={styles.archiveImageWrap}>
-                    <Image
-                      src={project.image}
-                      alt={project.title}
-                      width={900}
-                      height={680}
-                      className={styles.archiveImage}
-                      priority={index < 2}
-                    />
-                  </div>
-                  <div className={styles.archiveCategory}>
-                    {project.category}
-                  </div>
-                  <h3 className={styles.archiveTitle}>{project.title}</h3>
-                  <p className={styles.archiveSummary}>{project.summary}</p>
+          <main className={styles.mainShell}>
+            <section id="recent-work" className={styles.workSection}>
+              <div className={styles.sectionHead}>
+                <div className={styles.sectionLabel}>Recent work</div>
+                <Link href="/projects" className={styles.sectionLink}>
+                  Discover all projects{' '}
+                  <ArrowTopRightIcon width={14} height={14} />
                 </Link>
-              ))}
-            </div>
-          </section>
-        </main>
+              </div>
 
-        <Footer theme="dark" />
-      </motion.div>
+              <div className={styles.workGrid}>
+                <div className={styles.workList}>
+                  {featuredProjects.map((project, index) => {
+                    const isActive = index === activeIndex;
+
+                    return (
+                      <Link
+                        key={project.link}
+                        href={project.link}
+                        onMouseEnter={() => setActiveIndex(index)}
+                        onFocus={() => setActiveIndex(index)}
+                        className={`${styles.workItem} ${isActive ? styles.workItemActive : ''}`}
+                      >
+                        <div className={styles.workItemCategory}>
+                          {project.category}
+                        </div>
+                        <h2 className={styles.workItemTitle}>
+                          {project.title}
+                        </h2>
+                        <p className={styles.workItemSummary}>
+                          {project.summary}
+                        </p>
+                        <div className={styles.workItemTags}>
+                          {project.tags.map((tag) => (
+                            <span key={tag}>{tag}</span>
+                          ))}
+                        </div>
+                      </Link>
+                    );
+                  })}
+                </div>
+
+                <div className={styles.previewColumn}>
+                  <motion.div
+                    ref={previewRef}
+                    onMouseMove={(event) =>
+                      updatePreviewPointer(event, previewRef.current)
+                    }
+                    onMouseLeave={() => {
+                      previewX.set(0);
+                      previewY.set(0);
+                    }}
+                    className={styles.previewFrame}
+                    style={
+                      shouldReduceMotion
+                        ? undefined
+                        : { rotateX: previewRotateX, rotateY: previewRotateY }
+                    }
+                  >
+                    <div className={styles.previewGlow} />
+                    <AnimatePresence mode="wait">
+                      <motion.div
+                        key={activeProject.link}
+                        initial={
+                          shouldReduceMotion
+                            ? false
+                            : { opacity: 0, scale: 0.96, y: 16 }
+                        }
+                        animate={
+                          shouldReduceMotion
+                            ? undefined
+                            : { opacity: 1, scale: 1, y: 0 }
+                        }
+                        exit={
+                          shouldReduceMotion
+                            ? undefined
+                            : { opacity: 0, scale: 1.02, y: -12 }
+                        }
+                        transition={{
+                          duration: 0.45,
+                          ease: [0.22, 1, 0.36, 1],
+                        }}
+                        className={styles.previewInner}
+                        style={
+                          shouldReduceMotion
+                            ? undefined
+                            : { x: previewShiftX, y: previewShiftY }
+                        }
+                      >
+                        <Image
+                          src={activeProject.image}
+                          alt={activeProject.title}
+                          fill
+                          priority
+                          sizes="(max-width: 1200px) 45vw, 560px"
+                          className={styles.previewImage}
+                        />
+                      </motion.div>
+                    </AnimatePresence>
+
+                    <div className={styles.previewCaption}>
+                      <div className={styles.previewCategory}>
+                        {activeProject.category}
+                      </div>
+                      <div className={styles.previewTitle}>
+                        {activeProject.title}
+                      </div>
+                      <Link
+                        href={activeProject.link}
+                        className={styles.previewLink}
+                      >
+                        View case study{' '}
+                        <ArrowTopRightIcon width={16} height={16} />
+                      </Link>
+                    </div>
+                  </motion.div>
+                </div>
+              </div>
+            </section>
+
+            <section className={styles.archiveSection}>
+              <div className={styles.sectionHead}>
+                <div className={styles.sectionLabel}>Discover more</div>
+              </div>
+
+              <div className={styles.archiveGrid}>
+                {archiveProjects.map((project, index) => (
+                  <Link
+                    key={project.link}
+                    href={project.link}
+                    className={styles.archiveCard}
+                  >
+                    <div className={styles.archiveImageWrap}>
+                      <Image
+                        src={project.image}
+                        alt={project.title}
+                        width={900}
+                        height={680}
+                        className={styles.archiveImage}
+                        priority={index < 2}
+                      />
+                    </div>
+                    <div className={styles.archiveCategory}>
+                      {project.category}
+                    </div>
+                    <h3 className={styles.archiveTitle}>{project.title}</h3>
+                    <p className={styles.archiveSummary}>{project.summary}</p>
+                  </Link>
+                ))}
+              </div>
+            </section>
+          </main>
+
+          <Footer theme="dark" />
+        </motion.div>
+      </SimpleBar>
     </div>
   );
 };

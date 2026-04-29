@@ -1,5 +1,6 @@
 'use client';
 import 'normalize.css/normalize.css';
+import 'simplebar-react/dist/simplebar.min.css';
 import { useEffect } from 'react';
 
 import { ThemeProvider } from '@/components/ThemeProvider';

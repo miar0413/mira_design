@@ -1,5 +1,7 @@
 .pageShell {
+  height: 100vh;
   min-height: 100vh;
+  overflow: hidden;
   background:
     radial-gradient(
       circle at 50% -10%,
@@ -13,6 +15,54 @@
     ),
     #040404;
   color: #f3f3ee;
+}
+
+.scrollShell {
+  height: 100vh;
+}
+
+.scrollShell :global(.simplebar-content-wrapper) {
+  scroll-behavior: smooth;
+}
+
+.scrollLocked :global(.simplebar-content-wrapper) {
+  overflow: hidden !important;
+}
+
+.scrollShell :global(.simplebar-track.simplebar-vertical) {
+  top: 0.75rem;
+  right: 0.45rem;
+  bottom: 0.75rem;
+  width: 0.42rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(16px);
+}
+
+.scrollShell :global(.simplebar-scrollbar::before) {
+  inset: 0;
+  border-radius: 999px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.72),
+    rgba(255, 116, 56, 0.54),
+    rgba(91, 130, 255, 0.5)
+  );
+  opacity: 0.72;
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease;
+}
+
+.scrollShell
+  :global(
+    .simplebar-track.simplebar-vertical:hover .simplebar-scrollbar::before
+  ) {
+  opacity: 0.94;
+}
+
+.scrollShell :global(.simplebar-track.simplebar-horizontal) {
+  display: none;
 }
 
 .introOverlay {
@@ -550,6 +600,16 @@
 }
 
 @media (max-width: 768px) {
+  .scrollShell :global(.simplebar-track.simplebar-vertical) {
+    right: 0.22rem;
+    width: 0.28rem;
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  .scrollShell :global(.simplebar-scrollbar::before) {
+    opacity: 0.58;
+  }
+
   .introMark {
     gap: 0.75rem;
   }
