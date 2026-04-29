@@ -212,8 +212,11 @@ const Home: React.FC = () => {
       return;
     }
 
+    const scrollableRect = scrollableNode.getBoundingClientRect();
+    const targetRect = target.getBoundingClientRect();
+
     scrollableNode.scrollTo({
-      top: target.offsetTop,
+      top: scrollableNode.scrollTop + targetRect.top - scrollableRect.top,
       behavior: shouldReduceMotion ? 'auto' : 'smooth',
     });
   };
