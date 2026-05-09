@@ -1,23 +1,24 @@
 .pageShell {
+  position: relative;
   height: 100vh;
   min-height: 100vh;
   overflow: hidden;
-  background:
-    radial-gradient(
-      circle at 50% -10%,
-      rgba(38, 88, 255, 0.22),
-      transparent 30%
-    ),
-    radial-gradient(
-      circle at 50% 120%,
-      rgba(255, 99, 36, 0.24),
-      transparent 34%
-    ),
-    #040404;
+  background: #050505;
   color: #f3f3ee;
 }
 
+.fullscreenGradient {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  contain: paint;
+}
+
 .scrollShell {
+  position: relative;
+  z-index: 2;
   height: 100vh;
 }
 
@@ -210,8 +211,17 @@
 
 .heroSection {
   position: relative;
+  z-index: 1;
   min-height: 100vh;
   overflow: hidden;
+  background: transparent;
+}
+
+.heroLensText {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 2;
 }
 
 .heroScene {
@@ -243,6 +253,20 @@
   align-items: center;
   text-align: center;
   pointer-events: none;
+}
+
+.heroTitle {
+  margin: 0;
+  max-width: 8.8em;
+  font-family: 'Lato', sans-serif;
+  font-size: clamp(4rem, 8.4vw, 8.4rem);
+  font-weight: 400;
+  line-height: 0.96;
+  letter-spacing: -0.065em;
+  color: rgba(244, 241, 234, 0.72);
+  text-shadow:
+    0 0 34px rgba(0, 0, 0, 0.36),
+    0 2px 80px rgba(0, 0, 0, 0.32);
 }
 
 .srOnly {
@@ -321,6 +345,344 @@
 .archiveSection {
   margin: 0 auto;
   max-width: 1440px;
+}
+
+/* ----------------------------------------------------------------- */
+/* SECOND PAGE - Recent Work slideshow (monopo.london style)         */
+/* ----------------------------------------------------------------- */
+
+.slideshowSection {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  /* height set inline based on number of slides */
+  background: transparent;
+}
+
+.slideshowInner {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  min-height: 720px;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.slideBackdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.slideGradient {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  will-change: opacity;
+}
+
+/* Wide colour-stop radial gradients already feather softly without a
+   CSS blur. We avoid `filter: blur()` and continuous transforms because
+   they are GPU-expensive on viewport-sized elements (especially when
+   the Three.js hero shader is still rendering offscreen). The colour
+   palette change between slides is what carries the "alive" feeling. */
+.slideRibbonLayer {
+  position: absolute;
+  inset: 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.slideGrain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.4;
+  mix-blend-mode: overlay;
+  background-image:
+    radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+    radial-gradient(rgba(0, 0, 0, 0.22) 1px, transparent 1px);
+  background-size:
+    2px 2px,
+    3px 3px;
+  background-position:
+    0 0,
+    1px 1px;
+}
+
+/* monopo.london uses a strong dark vignette that lets the ribbon glow
+   show through but pushes the corners well into pure black. */
+.slideVignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      ellipse 70% 90% at 50% 55%,
+      transparent 0%,
+      rgba(6, 6, 6, 0) 25%,
+      rgba(6, 6, 6, 0.55) 70%,
+      rgba(6, 6, 6, 0.92) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(6, 6, 6, 0.12) 0%,
+      transparent 25%,
+      transparent 75%,
+      rgba(6, 6, 6, 0.4) 100%
+    );
+}
+
+.slideTimeline {
+  position: absolute;
+  top: 50%;
+  left: 3.2rem;
+  z-index: 4;
+  height: 60vh;
+  min-height: 360px;
+  max-height: 560px;
+  width: 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.slideTick {
+  display: block;
+  width: 8px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.45);
+  transition: background-color 220ms ease;
+}
+
+.slideTickActive {
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.slideMarker {
+  position: absolute;
+  left: -9px;
+  width: 14px;
+  height: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  pointer-events: none;
+  transition: top 380ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.slideMarkerArrow {
+  font-size: 0.95rem;
+  line-height: 1;
+  color: #f4f1ea;
+  transform: translateY(-1px);
+  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.35));
+}
+
+.slideContent {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 100%;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 22vh 2rem 0 6.5rem;
+  gap: 1.4rem;
+}
+
+.slideLabel {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.slideCopyStack {
+  position: relative;
+  width: 100%;
+  max-width: 60rem;
+  min-height: clamp(7rem, 14vw, 13rem);
+}
+
+.slideCopy {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  max-width: 60rem;
+  will-change: opacity;
+}
+
+.slideTitleLink {
+  color: inherit;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.slideTitle {
+  margin: 0;
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  font-size: clamp(2.4rem, 4.6vw, 4rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: #f4f1ea;
+  text-shadow: 0 2px 30px rgba(0, 0, 0, 0.35);
+}
+
+.slideTitleArrow {
+  display: inline;
+  color: #f4f1ea;
+  font-weight: 300;
+}
+
+.slideCategory {
+  display: inline;
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  font-size: clamp(2.4rem, 4.6vw, 4rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: #f4f1ea;
+}
+
+.slideTags {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.slideTagsDot {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.slideViewLensWrap {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 6;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.slideViewLens {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: auto;
+  width: clamp(120px, 13vw, 168px);
+  height: clamp(120px, 13vw, 168px);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.94);
+  color: #0a0a0a;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  text-decoration: none;
+  line-height: 1.55;
+  transform: translate(-50%, -50%);
+  transition:
+    background-color 240ms ease,
+    transform 320ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 240ms ease;
+  box-shadow: 0 14px 70px rgba(0, 0, 0, 0.32);
+  backdrop-filter: blur(8px);
+}
+
+.slideViewLens:hover {
+  background: #ffffff;
+  transform: translate(-50%, -50%) scale(1.05);
+  box-shadow: 0 22px 90px rgba(0, 0, 0, 0.42);
+}
+
+.slideViewLensArrow {
+  display: inline-block;
+  margin-top: 0.25rem;
+  font-size: 0.95rem;
+  letter-spacing: 0;
+}
+
+.slideCounter {
+  position: absolute;
+  top: 6.5rem;
+  right: 2rem;
+  z-index: 6;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.26em;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.slideCounterCurrent {
+  color: #f4f1ea;
+  font-weight: 500;
+}
+
+.slideCounterDivider {
+  display: inline-block;
+  width: 18px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.45);
+}
+
+.slideCounterTotal {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.slideDiscoverButton {
+  position: absolute;
+  bottom: 4rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 6;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.95rem 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 999px;
+  background: transparent;
+  color: #f4f1ea;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition:
+    background-color 220ms ease,
+    color 220ms ease;
+}
+
+.slideDiscoverButton:hover {
+  background: rgba(255, 255, 255, 0.92);
+  color: #060606;
 }
 
 .sectionHead {
