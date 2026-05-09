@@ -53,13 +53,14 @@ const featuredProjects: FeaturedProject[] = [
     category: 'SERVICE PLATFORM',
     link: '/projects/byte_hi',
     tags: ['workflow redesign', 'support tooling', 'data clarity'],
-    // NKORA-inspired: olive-cream field with a burnt-orange ribbon
-    // and deep brown voids carving the corners.
+    // NKORA-inspired: cream-yellow ribbon highlights flowing
+    // through a burnt-sienna field, framed by pure black voids —
+    // matches monopo.london's actual NKORA recent-work background.
     palette: {
-      a: '#1a0d08',
-      b: '#cdb96a',
-      c: '#d4571f',
-      d: '#050505',
+      a: '#000000',
+      b: '#974420',
+      c: '#dccb6c',
+      d: '#000000',
     },
   },
   {
@@ -67,13 +68,14 @@ const featuredProjects: FeaturedProject[] = [
     category: 'RISK OPERATIONS',
     link: '/projects/risk_management',
     tags: ['risk response', 'signal hierarchy', 'decision support'],
-    // ONITSUKA-inspired: deep oxblood field with bright crimson
-    // ribbons cutting through pure black voids.
+    // ONITSUKA-inspired: bright crimson ribbons over a deep
+    // oxblood mid tone, dissolving into pure black voids — the
+    // mono-warm look monopo uses for ONITSUKA TIGER.
     palette: {
-      a: '#070304',
-      b: '#5a1414',
-      c: '#ee5942',
-      d: '#050505',
+      a: '#000000',
+      b: '#5a0c0c',
+      c: '#ee2424',
+      d: '#000000',
     },
   },
   {
@@ -81,14 +83,13 @@ const featuredProjects: FeaturedProject[] = [
     category: 'SERVICE CONSULTING',
     link: '/projects/digital_innovation',
     tags: ['mobility future', 'cloud ecosystem', 'scenario design'],
-    // YONEX players-lounge-inspired: silver-steel field with a
-    // chrome highlight ribbon and deep navy voids — mirrors the
-    // monopo demo's default blue/cyan/navy stack.
+    // YONEX players-lounge-inspired: pale icy highlights over a
+    // mid-steel field, fading into pure black voids.
     palette: {
-      a: '#06083a',
-      b: '#3a8a8a',
-      c: '#a8c4dc',
-      d: '#040420',
+      a: '#000000',
+      b: '#7c98b6',
+      c: '#dde9f2',
+      d: '#000000',
     },
   },
   {
@@ -96,13 +97,14 @@ const featuredProjects: FeaturedProject[] = [
     category: 'SPECULATIVE PRODUCT',
     link: '/projects/life_design',
     tags: ['storytelling UX', 'community care', 'lifestyle systems'],
-    // OUTFRY-inspired: burnt-amber field with peach ribbons and
-    // deep wine voids framing the corners.
+    // OUTFRY-inspired: orange-red field with sky-blue ribbon
+    // highlights and pure black voids — a vibrant warm/cool
+    // duotone matching monopo.london's OUTFRY mood.
     palette: {
-      a: '#1a0612',
-      b: '#c8521e',
-      c: '#f6c290',
-      d: '#050505',
+      a: '#000000',
+      b: '#dd4520',
+      c: '#5cb0e0',
+      d: '#000000',
     },
   },
 ];
@@ -160,14 +162,15 @@ const BACKGROUND_TRANSITION_DISTANCE = 0.92;
 const SLIDE_TRANSITION_ZONE = 0.32;
 const INTRO_ENABLED = false;
 
-// Hero opener mirrors monopo's landing — a near-black field warmed
-// by a single oxblood mid-tone with subtle peach ribbons drifting
-// through it. Designed to bleed seamlessly into the first project.
+// Hero opener mirrors monopo.london's landing precisely — a
+// vibrant orange field with cobalt-blue ribbon highlights and
+// pure black voids framing the corners. The signature warm/cool
+// duotone that defines the brand's homepage.
 const heroPalette: FeaturedProject['palette'] = {
-  a: '#040303',
-  b: '#2c0e0a',
-  c: '#c25a2a',
-  d: '#040404',
+  a: '#000000',
+  b: '#dc5418',
+  c: '#1f6cc8',
+  d: '#000000',
 };
 
 const clamp01 = (value: number) => Math.min(1, Math.max(0, value));

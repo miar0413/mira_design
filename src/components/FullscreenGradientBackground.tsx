@@ -75,13 +75,19 @@ float cnoise2(vec2 P){
 }
 `;
 
-// Faithful port of the monopo.london background shader, mirroring
-// gotohiroki/three-monopo-london's reference fragment.glsl: three
-// perlin samples bilinearly mixed by the cursor drive a sin-based
-// "lines" pattern that produces monopo's signature flowing ribbons.
-// The only additions on top are uSeed (for per-project pattern
-// reshuffles) and uScrollProgress (for slow vertical drift between
-// the hero and the recent-work slots).
+// Background shader tuned to match monopo.london's actual look —
+// three perlin samples are bilinearly mixed by the cursor (just
+// like gotohiroki/three-monopo-london's reference) but the colour
+// mapping is a 3-stop smooth ramp on the noise field instead of
+// the reference's lines() pattern. That swap is what produces
+// monopo's regional duotone blobs (large orange / blue regions
+// framed by pure black voids) rather than narrow striped ribbons.
+//
+// Stop layout, with col1 = accent ribbon, col2 = dominant field,
+// col3 = pure void:
+//   nFinal < ~-0.05  -> col3 (void)
+//   nFinal ~  0.20   -> col2 (field, occupies most of the screen)
+//   nFinal >  ~0.55  -> col1 (accent regions where noise peaks)
 const fragmentShader = `
 uniform vec3 uColor1;
 uniform vec3 uColor2;
@@ -89,11 +95,9 @@ uniform vec3 uColor3;
 uniform vec3 uColorAccent;
 uniform vec2 uPlaneRes;
 uniform vec2 uMouse2D;
-uniform float uLinesBlur;
 uniform float uNoise;
 uniform float uOffsetX;
 uniform float uOffsetY;
-uniform float uLinesAmount;
 uniform float uBackgroundScale;
 uniform float uTime;
 uniform float uSeed;
@@ -103,37 +107,42 @@ varying vec2 vUv;
 
 ${classic2d}
 
-float lines(vec2 uv, float offset) {
-  float a = abs(0.5 * sin(uv.y * uLinesAmount) + offset * uLinesBlur);
-  return smoothstep(0.0, uLinesBlur + offset * uLinesBlur, a);
-}
-
 float random(vec2 p) {
   vec2 k1 = vec2(23.14069263277926, 2.665144142690225);
   return fract(cos(dot(p, k1)) * 12345.6789);
 }
 
-// Three noise samples mixed by the cursor bilinearly — the topology
-// reshapes as the mouse moves, not just shifts. Time and per-slot
-// seed offsets give the field a slow living drift.
-vec3 fadeLine(vec2 uv, vec2 mouse2D, vec3 col1, vec3 col2, vec3 col3) {
+// Three perlin samples, bilinearly mixed by the cursor — this is
+// the same mouse pipeline as the reference repo so the gradient
+// reshapes (not just shifts) as the mouse moves. nFinal is then
+// fed into a 3-stop colour ramp that mirrors monopo.london's
+// regional blob look.
+vec3 fadeRegion(vec2 uv, vec2 mouse2D, vec3 col1, vec3 col2, vec3 col3) {
   mouse2D = (mouse2D + 1.0) * 0.5;
 
   float t = uTime * 0.04;
   float seed = uSeed * 0.21;
 
-  float n1 = cnoise2(uv + vec2(t, -t * 0.5) + seed);
-  float n2 = cnoise2(uv + uOffsetX * 20.0 + vec2(seed * 1.7, t));
-  float n3 = cnoise2(uv * 0.3 + uOffsetY * 10.0 + vec2(t * 0.4, seed));
+  // Pull the field gently toward the cursor so the bright accent
+  // (col1) tracks the pointer like monopo's hero does.
+  vec2 nuv = uv * uBackgroundScale + (mouse2D - 0.5) * 0.6;
+
+  float n1 = cnoise2(nuv * 1.05 + vec2(t, -t * 0.5) + seed);
+  float n2 = cnoise2(nuv * 0.55 + vec2(-t * 0.4 + 4.7, t * 0.32) + seed * 1.7);
+  float n3 = cnoise2(nuv * 1.85 + vec2(t * 0.2 + 9.3, t * 0.18 - 3.4));
   float nFinal = mix(mix(n1, n2, mouse2D.x), n3, mouse2D.y);
 
-  vec2 baseUv = vec2(nFinal + 2.05) * uBackgroundScale;
+  // 3-stop ramp tuned for monopo.london's actual hero balance —
+  // roughly a third black voids, half dominant field, the rest
+  // accent blobs. Symmetric thresholds around 0 keep the field
+  // colour at the centre of the noise distribution (where pixels
+  // cluster most densely) while col1 and col3 occupy the tails.
+  float toField = smoothstep(-0.32, 0.02, nFinal);
+  float toAccent = smoothstep(0.10, 0.40, nFinal);
 
-  float basePattern = lines(baseUv, 0.1);
-  float secondPattern = lines(baseUv, 1.0);
-
-  vec3 baseColor = mix(col1, col2, basePattern);
-  return mix(baseColor, col3, secondPattern);
+  vec3 color = mix(col3, col2, toField);
+  color = mix(color, col1, toAccent);
+  return color;
 }
 
 void main() {
@@ -142,11 +151,22 @@ void main() {
   uv.x += uOffsetX + uSeed * 0.05;
   uv.x *= uPlaneRes.x / uPlaneRes.y;
 
-  vec3 finalCol = fadeLine(uv, uMouse2D, uColor1, uColor2, uColor3);
+  vec3 finalCol = fadeRegion(uv, uMouse2D, uColor1, uColor2, uColor3);
 
   vec2 uvRandom = vUv;
   uvRandom.y *= random(vec2(uvRandom.y, 0.5));
   finalCol.rgb += random(uvRandom) * uNoise;
+
+  // Three.js Color() linearises hex inputs but the renderer in
+  // this setup writes the linear value straight to the canvas
+  // (no automatic sRGB encoding), so the displayed colours come
+  // out roughly two stops darker than the palette intends.
+  // Encoding linear -> sRGB here restores the source palette.
+  finalCol = mix(
+    finalCol * 12.92,
+    1.055 * pow(max(finalCol, vec3(0.0)), vec3(1.0 / 2.4)) - 0.055,
+    step(vec3(0.0031308), finalCol)
+  );
 
   gl_FragColor = vec4(finalCol, 1.0);
 }
@@ -217,13 +237,9 @@ const FullscreenGradientBackground: React.FC<
         uColorAccent: { value: new Color(heroPalette.d) },
         uPlaneRes: { value: new Vector2(1, 1) },
         uMouse2D: { value: new Vector2(0, 0) },
-        // Defaults mirror gotohiroki/three-monopo-london exactly so
-        // the ribbon density, blur and grain match monopo.london.
-        uLinesBlur: { value: 0.25 },
         uNoise: { value: 0.075 },
         uOffsetX: { value: 0.34 },
         uOffsetY: { value: 0.0 },
-        uLinesAmount: { value: 5.0 },
         uBackgroundScale: { value: 1.0 },
         uSeed: { value: 0 },
         uScrollProgress: { value: 0 },
@@ -246,13 +262,11 @@ const FullscreenGradientBackground: React.FC<
       renderer.setSize(width, height, false);
       material.uniforms.uPlaneRes.value.set(width, height);
 
-      // Mirrors monopo's mobile breakpoint scaling — denser ribbons
-      // on phones (×3.8) so the pattern stays readable below tablet.
+      // Tighter noise scale on phones so the regional blobs stay
+      // varied across the smaller viewport and don't smear into
+      // a single tone.
       const isMobile = width < 768;
-      material.uniforms.uLinesAmount.value = isMobile ? 5.0 * 3.8 : 5.0;
-      material.uniforms.uBackgroundScale.value = isMobile
-        ? width * 0.001 * 1.45
-        : 1.0;
+      material.uniforms.uBackgroundScale.value = isMobile ? 1.45 : 1.0;
     };
 
     const onPointerMove = (event: PointerEvent) => {
